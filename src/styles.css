@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --main-color: #01204e;
+  --secound-color: #028391;
+  --third-color: #f6dcac;
+  --forth-color: #feae6f;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: 0.25s;
+}
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+.cartona {
+  width: 85%;
+  margin: 0 auto;
+}

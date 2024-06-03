@@ -1,0 +1,155 @@
+nav {
+  box-shadow: 0 0px 15px #00000040;
+  background-color: white;
+  position: relative;
+}
+.cartona {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 60px;
+}
+.cartona .logo {
+  flex: 1;
+}
+.cartona .logo img {
+  width: 80px;
+  vertical-align: middle;
+}
+.cartona .wrap {
+  flex: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.cartona .links {
+  flex: 8;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+}
+.cartona .links li {
+}
+.cartona .links a {
+  text-decoration: none;
+  color: var(--main-color);
+  padding: 1.2rem;
+  width: 100%;
+}
+.cartona .links a:hover {
+  background-color: #eee;
+}
+.cartona .profile {
+  flex: 3;
+  position: relative;
+}
+.cartona .profile button {
+  padding: 1.5rem 1.6rem;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cartona .profile .SignIn {
+  background-color: var(--main-color);
+  color: white;
+}
+.close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: none;
+}
+.Showlist {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 13px;
+  right: 60px;
+  display: none;
+  cursor: pointer;
+}
+@media (max-width: 1170px) {
+  .cartona .links {
+    flex: 5;
+  }
+  .cartona .profile {
+    flex: 3;
+  }
+}
+
+@media (max-width: 992px) {
+  .cartona .wrap {
+    display: none;
+    transform: translateX(-500px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 3rem 0;
+    transition: 0s !important;
+  }
+  .cartona .links {
+    width: 100%;
+    flex: 0;
+    display: flex;
+    flex-flow: column;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .cartona .links li {
+    width: 100%;
+  }
+  .cartona .links a {
+    text-decoration: none;
+    color: var(--main-color);
+    padding: 1.2rem;
+    width: 100%;
+    display: block;
+  }
+  .cartona .links a:hover {
+    background-color: #eee;
+  }
+  .cartona .profile {
+    flex: 0;
+    width: 100%;
+    display: flex;
+
+    flex-flow: column;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .cartona .profile button {
+    width: 100%;
+    text-align: center;
+  }
+  .close {
+    display: block;
+  }
+  .Showlist {
+    display: block;
+  }
+}
+.cartona .wrap.active {
+  display: flex;
+  transform: translateX(0px);
+  transition: 0.25s !important;
+}
