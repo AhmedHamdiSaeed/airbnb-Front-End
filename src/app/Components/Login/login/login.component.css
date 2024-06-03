@@ -1,0 +1,140 @@
+/* ----------------------------- log in section */
+.sign {
+  padding: 80px 0;
+}
+.sign .cartona {
+  position: relative;
+}
+.sign .cartona .content {
+  width: 550px;
+  padding: 2rem;
+  border-radius: 4px;
+  border: 2px solid #2b34991a;
+  box-shadow: 0 0 20px -3px rgba(98, 98, 98, 0.164);
+  background-color: #eee;
+  margin: 0 auto;
+}
+.sign .cartona .content h2 {
+  color: var(--main-color);
+  margin-bottom: 8px;
+}
+.sign .cartona .content p {
+  margin-bottom: 0.8rem;
+}
+.sign .cartona .content .LetsGo {
+  margin: 10px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.sign .cartona .content .LetsGo::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: var(--main-color);
+  position: absolute;
+  top: 52%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.sign .cartona .content .LetsGo span {
+  position: relative;
+  z-index: 1;
+  padding: 6px;
+  border-radius: 20px;
+  background-color: #eee;
+}
+
+.sign .cartona .content form {
+  margin-top: 0.8rem;
+}
+.sign .cartona .content form .div-sec {
+  margin-bottom: 0.8rem;
+}
+.sign .cartona .content form .div-sec label {
+  margin-bottom: 8px;
+  display: block;
+}
+.sign .cartona .content form .div-sec input {
+  width: 100%;
+  border-radius: 4px;
+  padding: 0.8rem;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  border-radius: 4px;
+}
+.sign .cartona .content form .div-sec input:focus::placeholder {
+  opacity: 0;
+}
+.sign .cartona .content form .div-two {
+  display: flex;
+  align-items: Center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.sign .cartona .content form input[type="submit"] {
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 4px;
+  background-color: var(--main-color);
+  color: white;
+  font-weight: 600;
+  border: none;
+  outline: none;
+
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+}
+.sign .cartona .content form input[type="submit"]:active {
+  box-shadow: 6px 6px 0 #a2a2a2;
+}
+.sign .cartona .content form .sign-up {
+  text-align: center;
+}
+.div-sec span {
+  font-size: 0.8rem;
+  margin-left: 12px;
+}
+@media (max-width: 600px) {
+  .cartona {
+    width: 95%;
+  }
+  .sign .cartona .content {
+    width: 100%;
+  }
+}
+
+/* ---------------- pop up */
+.popUpNew {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #2b349981;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: none;
+  opacity: 0.7;
+  transform: scale(0.5);
+  animation: popUp 0.5s linear forwards;
+}
+.popUpNew .content {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes popUp {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

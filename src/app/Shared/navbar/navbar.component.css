@@ -2,6 +2,7 @@ nav {
   box-shadow: 0 0px 15px #00000040;
   background-color: white;
   position: relative;
+  z-index: 1000;
 }
 .cartona {
   display: flex;
@@ -46,6 +47,26 @@ nav {
   flex: 3;
   position: relative;
 }
+.cartona .Welcome {
+  flex: 6;
+  position: relative;
+  display: flex;
+  text-align: left;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
+}
+.cartona .Welcome button {
+  padding: 1.2rem;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  background-color: var(--main-color);
+}
 .cartona .profile button {
   padding: 1.5rem 1.6rem;
   border-radius: 4px;
@@ -80,14 +101,17 @@ nav {
 }
 @media (max-width: 1170px) {
   .cartona .links {
-    flex: 5;
+    flex: 6;
   }
   .cartona .profile {
     flex: 3;
   }
+  .cartona .Welcome {
+    flex: 5;
+  }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1000px) {
   .cartona .wrap {
     display: none;
     transform: translateX(-500px);
@@ -97,13 +121,11 @@ nav {
     width: 300px;
     background-color: white;
     height: 100vh;
-    display: flex;
     flex-flow: column;
     text-align: left;
     align-items: flex-start;
     justify-content: flex-start;
     padding: 3rem 0;
-    transition: 0s !important;
   }
   .cartona .links {
     width: 100%;
@@ -137,7 +159,21 @@ nav {
     align-items: flex-start;
     justify-content: flex-start;
   }
+  .cartona .Welcome {
+    flex: 0;
+    width: 100%;
+    display: flex;
+
+    flex-flow: column;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
   .cartona .profile button {
+    width: 100%;
+    text-align: center;
+  }
+  .cartona .Welcome button {
     width: 100%;
     text-align: center;
   }
@@ -148,8 +184,8 @@ nav {
     display: block;
   }
 }
+
 .cartona .wrap.active {
   display: flex;
   transform: translateX(0px);
-  transition: 0.25s !important;
 }

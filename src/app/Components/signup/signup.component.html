@@ -1,1 +1,99 @@
-<p>signup works!</p>
+<div class="signup-form sign">
+  <div class="cartona">
+    <div class="content">
+      <h2>Welcome, You Are In Right Place</h2>
+      <p>Please make sure that all data entered is correct</p>
+      <div class="LetsGo">
+        <span>Go</span>
+      </div>
+
+      <!-- Form ------------- -->
+      <form [formGroup]="signUpForm" (ngSubmit)="OnSubmit()" novalidate>
+        <div class="username">
+          <div class="div-sec">
+            <label for="firstName">First Name</label>
+            <input
+              formControlName="firstName"
+              type="text"
+              id="firstName"
+              name="firstName"
+              placeholder="Mustafa Abdulrahman"
+            />
+            <span></span>
+          </div>
+          <div class="div-sec">
+            <label for="lastName">Last Name</label>
+            <input
+              formControlName="lastName"
+              type="text"
+              id="lastName"
+              name="lastName"
+              placeholder="Mustafa Abdulrahman"
+            />
+            <span></span>
+          </div>
+        </div>
+        <div class="div-sec">
+          <label for="email">Email</label>
+          <input
+            formControlName="email"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+          />
+          <span></span>
+        </div>
+        <div class="div-sec firstPass">
+          <label for="pass">Password</label>
+          <input
+            formControlName="password"
+            type="password"
+            id="pass"
+            name="pass"
+            placeholder="Password"
+            #pass
+          />
+          <span></span>
+        </div>
+        <div class="div-sec secoundPass">
+          <label for="pass">Confirm Password</label>
+          <input
+            type="password"
+            id="RePass"
+            name="RePass"
+            placeholder="Password"
+            #confirmpass
+          /><span></span>
+        </div>
+        <div class="div-sec role">
+          <div class="sec">
+            <label for="role">Host</label>
+            <input
+              formControlName="role"
+              type="radio"
+              name="role"
+              id="role"
+              value="1"
+            />
+          </div>
+          <div class="sec">
+            <label for="role">Guest</label>
+            <input
+              formControlName="role"
+              type="radio"
+              name="role"
+              id="role"
+              value="0"
+            />
+          </div>
+        </div>
+        <input type="submit" value="Sign Up" />
+        <div class="sign-up">
+          <span>Already have an account? </span
+          ><a routerLink="/signin">Sign In Now</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
