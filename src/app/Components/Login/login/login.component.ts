@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileservicesService } from '../../../Services/UserServices/profileservices.service';
 import { userLogin, userRegister } from '../../../Models/User';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,27 +15,36 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
-  ngOnInit(): void {
-    this.CreateLoginForm();
-  }
   //-------------------------- Login Form
   loginForm: FormGroup;
   returnUrl: string;
+
   /**
    *
    */
   constructor(
     private service: ProfileservicesService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    this.returnUrl =
+      this.activatedRoute.snapshot.queryParams['returnUrl'] || '/properties';
+    this.CreateLoginForm();
+  }
   //--------------------------
   CreateLoginForm() {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$'),
-      ]),
-      password: new FormControl('', Validators.required),
+    this.loginForm = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$'),
+        ],
+      ],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -39,7 +53,12 @@ export class LoginComponent implements OnInit {
       console.log(result);
     });
   }
-
+  get _email() {
+    return this.loginForm.get('email');
+  }
+  get _password() {
+    return this.loginForm.get('password');
+  }
   OnSubmit() {
     this.service.Login(this.loginForm.value).subscribe({
       next: () => {

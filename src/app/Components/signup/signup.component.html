@@ -1,7 +1,7 @@
 <div class="signup-form sign">
   <div class="cartona">
     <div class="content">
-      <h2>Welcome, You Are In Right Place</h2>
+      <h3>Welcome, You Are In Right Place</h3>
       <p>Please make sure that all data entered is correct</p>
       <div class="LetsGo">
         <span>Go</span>
@@ -16,10 +16,25 @@
               formControlName="firstName"
               type="text"
               id="firstName"
-              name="firstName"
-              placeholder="Mustafa Abdulrahman"
+              placeholder="Mustafa"
+              class="form-control"
+              [class.is-invalid]="_firstname.invalid && _firstname.touched"
+              [class.is-valid]="_firstname.valid"
             />
-            <span></span>
+            <!--  -->
+            <div *ngIf="_firstname.invalid && _firstname.touched">
+              <small
+                class="text-danger"
+                *ngIf="_firstname?.errors?.['required']"
+                >* Reqired First Name!</small
+              >
+              <small
+                class="text-danger"
+                *ngIf="_firstname?.errors?.['minlength']"
+                >* Min Length Must Be 3!</small
+              >
+            </div>
+            <!--  -->
           </div>
           <div class="div-sec">
             <label for="lastName">Last Name</label>
@@ -27,44 +42,99 @@
               formControlName="lastName"
               type="text"
               id="lastName"
-              name="lastName"
-              placeholder="Mustafa Abdulrahman"
+              placeholder="Abdulrahman"
+              class="form-control"
+              [class.is-invalid]="_lastname.invalid && _firstname.touched"
+              [class.is-valid]="_lastname.valid"
             />
-            <span></span>
+            <!--  -->
+            <div *ngIf="_lastname.invalid && _lastname.touched">
+              <small
+                class="text-danger"
+                style="font-weight: bold"
+                *ngIf="_lastname?.errors?.['required']"
+                >* Reqired Last Name!</small
+              >
+              <small
+                class="text-danger"
+                *ngIf="_lastname?.errors?.['minlength']"
+                >* Min Length Must Be 3!</small
+              >
+            </div>
+            <!--  -->
           </div>
         </div>
         <div class="div-sec">
           <label for="email">Email</label>
           <input
-            formControlName="email"
             type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
+            placeholder="mu@mu.com"
+            formControlName="email"
+            class="form-control"
+            [class.is-invalid]="_email.invalid && _email.touched || _email?.errors?.['emailExists']"
+            [class.is-valid]="_email.valid"
           />
-          <span></span>
+          <!--  -->
+          <div
+            *ngIf="_email.invalid && _email.touched || _email?.errors?.['emailExists']"
+          >
+            <small class="text-danger" *ngIf="_email?.errors?.['required']"
+              >* Reqired Last Name!</small
+            >
+            <small class="text-danger" *ngIf="_email?.errors?.['pattern']"
+              >* Please Enter Right Email!</small
+            >
+            <small class="text-danger" *ngIf="_email?.errors?.['emailExists']"
+              >* Email Already Token!</small
+            >
+          </div>
+          <!--  -->
         </div>
+
         <div class="div-sec firstPass">
           <label for="pass">Password</label>
           <input
             formControlName="password"
             type="password"
-            id="pass"
-            name="pass"
+            class="form-control"
             placeholder="Password"
-            #pass
+            [class.is-invalid]="_pass.invalid && _pass.touched"
+            [class.is-valid]="_pass.valid"
           />
-          <span></span>
+          <!--  -->
+          <div *ngIf="_pass.invalid && _pass.touched">
+            <small class="text-danger" *ngIf="_pass?.errors?.['required']"
+              >* Reqired Last Name!</small
+            >
+            <small class="text-danger" *ngIf="_pass?.errors?.['pattern']"
+              >* Pass Must Have Capital & Small Letters, Numbers, 6
+              Length!</small
+            >
+          </div>
+          <!--  -->
         </div>
         <div class="div-sec secoundPass">
           <label for="pass">Confirm Password</label>
           <input
             type="password"
             id="RePass"
-            name="RePass"
+            class="form-control"
             placeholder="Password"
-            #confirmpass
-          /><span></span>
+            formControlName="confirmpassword"
+            [class.is-invalid]="signUpForm.errors?.['misMatch']"
+            [class.is-valid]="!signUpForm.errors?.['misMatch'] && _confirmpass.touched &&_confirmpass.dirty"
+          />
+          <!--  -->
+
+          <small
+            class="text-danger"
+            style="font-weight: bold"
+            *ngIf="signUpForm.errors?.['misMatch']"
+          >
+            *Confirm Password Not Identical !</small
+          >
+
+          <!--  -->
         </div>
         <div class="div-sec role">
           <div class="sec">

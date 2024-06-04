@@ -49,7 +49,7 @@
   margin-top: 0.8rem;
 }
 .sign .cartona .content form .div-sec {
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.2rem;
 }
 .sign .cartona .content form .div-sec label {
   margin-bottom: 8px;
@@ -168,4 +168,13 @@
 .role .sec input {
   width: 30px !important;
   height: 30px !important;
+}
+.div-sec {
+  position: relative;
+}
+small {
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  bottom: -21px;
 }

@@ -45,7 +45,9 @@
         <button class="SignIn" routerLink="signin">Sign In</button>
       </div>
       <div class="Welcome" *ngIf="currentUser$ | async">
-        <p>Welcome, {{ username }}</p>
+        <p style="margin: 0; text-align: center; width: 100%">
+          Welcome, {{ username }}
+        </p>
         <button (click)="LogOut()">Log Out</button>
       </div>
     </div>

@@ -58,7 +58,9 @@ export class ProfileservicesService {
   }
 
   checkEmailExist(email: string) {
-    return this.http.get(`${this.baseUrl}check-email-exist?email=${email}`);
+    return this.http.get(
+      `${this.baseUrl}User/check-email-exist?email=${email}`
+    );
   }
   loaddata() {
     return this.http.get(`${this.baseUrl}Booking/GetAllUserBooking`);

@@ -10,15 +10,14 @@
         <span>Go</span>
       </div>
       <!-- Form -->
-      <form [formGroup]="loginForm" (ngSubmit)="OnSubmit()" novalidate>
+      <form [formGroup]="loginForm" novalidate (ngSubmit)="OnSubmit()">
         <div class="div-sec">
           <label for="email">Email</label>
           <input
-            formControlName="email"
             type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
+            class="form-control"
+            placeholder="name@example.com"
+            formControlName="email"
           />
         </div>
         <div class="div-sec">
