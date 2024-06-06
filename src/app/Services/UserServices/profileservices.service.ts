@@ -9,10 +9,17 @@ import { Router, RouterModule } from '@angular/router';
   providedIn: 'root',
 })
 export class ProfileservicesService {
-  constructor(private http: HttpClient, private router: Router) {}
+  get token() {
+    return localStorage.getItem('token');
+  }
   baseUrl = environment.baseUrl;
   private currentUser = new ReplaySubject<userToken>(1);
   currentUser$ = this.currentUser.asObservable();
+
+  constructor(private http: HttpClient, private router: Router) {
+    this.CurrentUser();
+  }
+
   // ------------------------------------------------
 
   // Load Current User
@@ -22,20 +29,32 @@ export class ProfileservicesService {
 
       return of(null);
     }
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http
-      .get(`${this.baseUrl}User/get-current-user`, { headers })
-      .pipe(
-        map((user: userToken) => {
-          localStorage.setItem('token', token);
-          this.currentUser.next(user);
-        })
-      );
+    return this.http.get(`${this.baseUrl}User/get-current-user`).pipe(
+      map((user: userToken) => {
+        localStorage.setItem('token', token);
+        this.currentUser.next(user);
+      })
+    );
   }
   // Load Current User
+  sendCurrentUser: userToken;
+  getCurrentUser() {
+    return this.sendCurrentUser;
+  }
 
+  isAuthenticated(): boolean {
+    return !!this.sendCurrentUser;
+  }
+  // Load Current User
+  CurrentUser() {
+    return this.http.get(`${this.baseUrl}User/get-current-user`).pipe(
+      map((user: userToken) => {
+        this.sendCurrentUser = user;
+      })
+    );
+  }
+  // Load Current User
   Register(userInfo: userRegister) {
     return this.http.post(`${this.baseUrl}User/Register`, userInfo);
   }

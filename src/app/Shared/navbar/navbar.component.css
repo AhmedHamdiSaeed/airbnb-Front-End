@@ -57,7 +57,8 @@ nav {
   gap: 0.4rem;
 }
 .cartona .Welcome button {
-  padding: 1.2rem;
+  padding: 1rem;
+  width: 30%;
   border-radius: 4px;
   outline: none;
   border: none;

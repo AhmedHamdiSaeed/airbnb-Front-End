@@ -1,38 +1,38 @@
+import { Injectable } from '@angular/core';
 import {
-  CanActivateFn,
   CanActivate,
-  Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
+  UrlTree,
+  Router,
 } from '@angular/router';
-import { Observable, map } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProfileservicesService } from '../Services/UserServices/profileservices.service';
 
-// export const authGuard: CanActivateFn = (route, state) => {
-//   return true;
-// };
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private accountServices: ProfileservicesService,
+    private authService: ProfileservicesService,
     private router: Router
   ) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return this.accountServices.currentUser$.pipe(
-      map((auth) => {
-        if (auth) {
-          return true;
-        }
-        this.router.navigate(['account/login'], {
-          queryParams: { returnUrl: state.url },
-        });
-      })
-    );
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    const user = this.authService.getCurrentUser(); // Get the current user
+
+    if (user && user.role === route.data['role']) {
+      return true;
+    } else {
+      this.router.navigate(['/not-authorized']); // Redirect to a not-authorized page or login
+      return false;
+    }
   }
 }

@@ -11,12 +11,5 @@ export class NotfoundComponent implements OnInit {
    *
    */
   constructor(private service: ProfileservicesService) {}
-  ngOnInit(): void {
-    this.loaddata();
-  }
-  loaddata() {
-    this.service.loaddata().subscribe((res) => {
-      console.log(res);
-    });
-  }
+  ngOnInit(): void {}
 }
