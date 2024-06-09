@@ -17,7 +17,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './Shared/Footer/footer/footer.component';
 import { AuthInterceptor } from './Shared/interceptors/auth.interceptor';
 import { BookingComponent } from './Components/booking/booking.component';
+import { LoadingInterceptor } from './Shared/interceptors/loading.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,9 +42,22 @@ import { BookingComponent } from './Components/booking/booking.component';
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['https://localhost:7116/'], // Replace with your API domain
+        disallowedRoutes: [
+          'https://localhost:7116/api/User/Register',
+          'https://localhost:7116/api/User/login',
+
+          'https://localhost:7116/api/User/get-current-user',
+        ], // Replace with your auth route
+      },
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -6,6 +6,7 @@ import { NotfoundComponent } from './Components/notFound/notfound/notfound.compo
 import { UserprofileComponent } from './Components/user-profile/userprofile/userprofile.component';
 import { BookingComponent } from './Components/booking/booking.component';
 import { AuthGuard } from './Guard/auth.guard';
+import { HeaderComponent } from './Components/Header/header/header.component';
 
 const routes: Routes = [
   { path: 'signin', component: LoginComponent },
@@ -14,8 +15,14 @@ const routes: Routes = [
   {
     path: 'Booking',
     component: BookingComponent,
-    //canActivate: [AuthGuard],
-    //data: { role: 'admin' },
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
+  {
+    path: 'Header',
+    component: HeaderComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Host'] },
   },
   { path: '**', component: NotfoundComponent, pathMatch: 'full' },
 ];

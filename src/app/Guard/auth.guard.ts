@@ -8,30 +8,32 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProfileservicesService } from '../Services/UserServices/profileservices.service';
+import { AuthService } from '../Services/UserServices/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authService: ProfileservicesService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    const user = this.authService.getCurrentUser(); // Get the current user
+  ): boolean {
+    const userRole = this.authService.getUserRole();
 
-    if (user && user.role === route.data['role']) {
+    if (this.authService.isAuthenticated() && userRole) {
+      const requiredRoles = route.data['roles'] as Array<string>;
+      if (requiredRoles) {
+        const hasRole = requiredRoles.includes(userRole);
+        if (!hasRole) {
+          this.router.navigate(['unauthorized']);
+          return false;
+        }
+      }
       return true;
     } else {
-      this.router.navigate(['/not-authorized']); // Redirect to a not-authorized page or login
+      this.router.navigate(['login']);
       return false;
     }
   }
