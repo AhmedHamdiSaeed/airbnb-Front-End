@@ -1,0 +1,68 @@
+<section class="filtration">
+  <div class="cartona">
+    <select
+      name="FilterByCity"
+      id="FilterByCity"
+      class="sameStyleFilter"
+      (change)="selectCity($event)"
+    >
+      <option *ngFor="let city of allCeties" [value]="city.id">
+        {{ city.name }}
+      </option>
+    </select>
+    <select
+      class="sameStyleFilter"
+      name="FilterByCategory"
+      id="FilterByCategory"
+      (change)="selectCategory($event)"
+    >
+      <option *ngFor="let cate of allCategories" [value]="cate.id">
+        {{ cate.name }}
+      </option>
+    </select>
+    <input
+      class="sameStyleFilter"
+      type="text"
+      (input)="SearchByName($event)"
+      placeholder="Search"
+      #search
+    />
+    <button (click)="clearFilter()" class="clear sameStyleFilter">Clear</button>
+  </div>
+</section>
+
+<section class="property">
+  <div class="container">
+    <div class="contain active" id="sofa">
+      <div class="box" *ngFor="let item of properties">
+        <div class="icons">
+          <i class="fa-solid fa-heart"></i
+          ><i
+            [routerLink]="['/PropDetails', item.id]"
+            class="fa-solid fa-eye"
+          ></i>
+        </div>
+        <div class="img">
+          <img [src]="item.displayedImage" alt="" />
+        </div>
+        <div class="text">
+          <h1>{{ item.name }}</h1>
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="numberOfPages">
+  <div>
+    <ul class="paggination-buttons">
+      <li
+        *ngFor="let item of counter(numberOfPages); let i = index"
+        (click)="selectPageNumber($event); setActive(i)"
+        [class.active]="i === activeIndex"
+      >
+        {{ i + 1 }}
+      </li>
+    </ul>
+  </div>
+</section>

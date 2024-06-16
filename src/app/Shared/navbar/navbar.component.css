@@ -26,7 +26,7 @@ nav {
   gap: 1rem;
 }
 .cartona .links {
-  flex: 8;
+  flex: 6;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -70,7 +70,7 @@ nav {
 }
 .cartona .profile button {
   padding: 1.1rem 1.6rem;
-  border-radius: 4px;
+  border-radius: 0;
   outline: none;
   border: none;
   background-color: transparent;
@@ -81,6 +81,12 @@ nav {
 .cartona .profile .SignIn {
   background-color: var(--main-color);
   color: white;
+}
+.cartona .profile .SignIn:hover {
+  background-color: var(--hover-main-color);
+}
+.cartona .Welcome .logout:hover {
+  background-color: var(--hover-main-color);
 }
 .close {
   position: absolute;
@@ -102,7 +108,7 @@ nav {
 }
 @media (max-width: 1170px) {
   .cartona .links {
-    flex: 6;
+    flex: 4;
   }
   .cartona .profile {
     flex: 3;
@@ -128,6 +134,11 @@ nav {
     justify-content: flex-start;
     padding: 3rem 0;
   }
+  ul {
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
   .cartona .links {
     width: 100%;
     flex: 0;
@@ -137,6 +148,7 @@ nav {
     align-items: flex-start;
     justify-content: flex-start;
   }
+
   .cartona .links li {
     width: 100%;
   }
@@ -192,4 +204,11 @@ nav {
 .cartona .wrap.active {
   display: flex;
   transform: translateX(0px);
+}
+ul {
+  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
 }

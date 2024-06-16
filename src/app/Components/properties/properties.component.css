@@ -1,0 +1,244 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  font-size: 16px;
+
+  background-color: white;
+}
+::before,
+::after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+.container {
+  margin: auto;
+  padding: 0;
+}
+section {
+  padding: 3em 1em;
+}
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+/* --------------------- filtration ----------------- */
+section.filtration {
+  padding-bottom: 0 !important;
+}
+.filtration .cartona {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.filtration .cartona .sameStyleFilter {
+  padding: 0.8rem 1.2rem;
+}
+.filtration .cartona select {
+  flex: 2;
+  background-color: var(--secound-color);
+}
+.filtration .cartona input {
+  flex: 2;
+  background-color: var(--secound-color);
+}
+.filtration .cartona .clear {
+  flex: 1;
+  background-color: var(--main-color);
+  color: var(--secound-color);
+  font-weight: 600;
+}
+.filtration .cartona .clear:hover {
+  background-color: var(--hover-main-color);
+}
+
+/* start product */
+.property .contain {
+  display: none;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2em;
+  margin: 0 auto;
+}
+.property .contain.active {
+  display: grid;
+}
+.property .contain .box {
+  padding: 1em;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.property .contain .box .icons {
+  position: absolute;
+  width: 100%;
+  height: 61%;
+  background-color: rgba(0, 0, 0, 0.007);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  transition: 0.4s;
+  left: 0;
+  transform: translatey(-100%);
+}
+.property .contain .box:hover .icons {
+  transform: translatey(15%);
+}
+.property .contain .box .icons i {
+  padding: 0.8em;
+  font-size: 1em;
+  background-color: white;
+  color: var(--main-color);
+  transition: 0.4s;
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+.property .contain .box .icons i:hover {
+  color: white;
+  background-color: var(--main-color);
+}
+.property .contain .box .img {
+  overflow: hidden;
+  min-height: 70%;
+}
+.property .contain .box .img img {
+  transition: 0.4s;
+}
+.property .contain .box:hover .img img {
+  transform: scale(1.1);
+}
+.property .contain .box .text {
+  margin-top: 1em;
+}
+.property .contain .box .text p {
+  font-weight: 400;
+}
+.property .contain .box .text h1 {
+  font-size: 1.2em;
+  color: var(--main-color);
+  margin: 0.5em 0;
+  font-weight: bold;
+}
+.property .contain .box .text i {
+  color: gold;
+}
+/* end product */
+/* start paggination-buttons  */
+.numberOfPages {
+  padding-top: 0 !important;
+  text-align: center;
+}
+.numberOfPages div {
+  width: fit-content;
+  margin: 0 auto;
+}
+.paggination-buttons {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+.paggination-buttons li {
+  text-align: center;
+  padding: 1rem 1.7rem;
+  color: var(--secound-color);
+  font-weight: bold;
+  background-color: var(--main-color);
+  cursor: pointer;
+}
+.paggination-buttons li:hover {
+  background-color: var(--hover-main-color);
+}
+.paggination-buttons li.active {
+  color: var(--main-color);
+  background-color: var(--secound-color);
+}
+/* End paggination-buttons  */
+@media (min-width: 768px) {
+  .property .container {
+    width: 100%;
+  }
+  .filtration .cartona .sameStyleFilter {
+    padding: 0.5rem 0.9rem;
+    width: 100%;
+  }
+  .paggination-buttons {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .filtration .cartona {
+    flex-flow: column;
+    width: 100%;
+  }
+  .filtration .cartona .sameStyleFilter {
+    width: 100%;
+  }
+  .paggination-buttons {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .property .container {
+    width: 960px;
+  }
+  .filtration .cartona {
+    width: 960px;
+  }
+  .paggination-buttons {
+    width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .property .container {
+    width: 1140px;
+  }
+  .filtration .cartona {
+    width: 1140px;
+  }
+  .paggination-buttons {
+    width: 1140px;
+  }
+}
