@@ -7,6 +7,9 @@ import { UserprofileComponent } from './Components/user-profile/userprofile/user
 import { BookingComponent } from './Components/booking/booking.component';
 import { AuthGuard } from './Guard/auth.guard';
 import { HeaderComponent } from './Components/Header/header/header.component';
+import { PropertiesComponent } from './Components/properties/properties.component';
+import { PropertyDetailsComponent } from './Components/properties/property-details/property-details.component';
+import { HomeComponent } from './Components/home/home.component';
 import { HomeComponent } from './Components/Home/home/home.component';
 import { CategoryComponent } from './Components/category/category.component';
 
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'userprofile', component: UserprofileComponent },
+  { path: 'Home', component: HomeComponent },
+  { path: 'property', component: PropertiesComponent },
+  { path: 'PropDetails/:id', component: PropertyDetailsComponent },
   {
     path: 'Booking',
     component: BookingComponent,

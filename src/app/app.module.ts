@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './Components/Header/header/header.component';
 
 import { NotfoundComponent } from './Components/notFound/notfound/notfound.component';
@@ -11,14 +12,16 @@ import { LoginComponent } from './Components/Login/login/login.component';
 import { UserprofileComponent } from './Components/user-profile/userprofile/userprofile.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { NavbarComponent } from './Shared/navbar/navbar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
 import { FooterComponent } from './Shared/Footer/footer/footer.component';
 import { AuthInterceptor } from './Shared/interceptors/auth.interceptor';
 import { BookingComponent } from './Components/booking/booking.component';
 import { LoadingInterceptor } from './Shared/interceptors/loading.interceptor';
+import { PropertiesComponent } from './Components/properties/properties.component';
+import { PropertyDetailsComponent } from './Components/properties/property-details/property-details.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './Components/home/home.component';
 import { HomeComponent } from './Components/Home/home/home.component';
 import { CategoryComponent } from './Components/category/category.component';
 
@@ -36,6 +39,9 @@ export function tokenGetter() {
     UserprofileComponent,
     NavbarComponent,
     BookingComponent,
+    PropertiesComponent,
+    PropertyDetailsComponent,
+    HomeComponent,
     HomeComponent,
     CategoryComponent,
   ],

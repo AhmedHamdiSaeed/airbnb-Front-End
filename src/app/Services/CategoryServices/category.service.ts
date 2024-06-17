@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Category } from '../../Models/Category';
 import { Observable } from 'rxjs';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
   baseUrl = environment.baseUrl;
@@ -32,5 +32,4 @@ export class CategoryService {
   DeleteCategory(categoryId: string): Observable<Object> {
     return this.httpclient.delete<Object>(`${this.baseUrl}Categories/DeleteCategory/${categoryId}`);
   }
-
 }
