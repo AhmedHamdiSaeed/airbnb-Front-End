@@ -19,6 +19,8 @@ import { AuthInterceptor } from './Shared/interceptors/auth.interceptor';
 import { BookingComponent } from './Components/booking/booking.component';
 import { LoadingInterceptor } from './Shared/interceptors/loading.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HomeComponent } from './Components/Home/home/home.component';
+import { CategoryComponent } from './Components/category/category.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -34,6 +36,8 @@ export function tokenGetter() {
     UserprofileComponent,
     NavbarComponent,
     BookingComponent,
+    HomeComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
