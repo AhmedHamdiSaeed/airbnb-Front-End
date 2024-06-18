@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
   styleUrl: './property-details.component.css',
+  providers: [ProperiesService, ActivatedRoute],
 })
 export class PropertyDetailsComponent implements OnInit {
   /**

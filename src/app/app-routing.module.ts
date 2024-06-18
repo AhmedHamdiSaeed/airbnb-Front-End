@@ -27,8 +27,8 @@ const routes: Routes = [
   {
     path: 'Header',
     component: HeaderComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['Host'] },
+    // canActivate: [AuthGuard],
+    // data: { roles: ['Host'] },
   },
   { path: '**', component: NotfoundComponent, pathMatch: 'full' },
 ];
