@@ -17,7 +17,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 30px;
   cursor: pointer;
 }
 
@@ -33,8 +33,9 @@
 
 .scroll-btn {
   background: white;
-  color: black;
+  color: rgb(140, 139, 139);
   border-radius: 50px;
+  border: solid;
   width: 30px;
   height: 30px;
   cursor: pointer;

@@ -1,35 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Category } from '../../Models/Category';
 import { Observable } from 'rxjs';
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CategoryService {
   baseUrl = environment.baseUrl;
 
-  constructor(private httpclient : HttpClient) { }
+  constructor(private httpclient: HttpClient) {}
 
-//observables represent a stream of data in asynchronous way
-  GetAllCategories():Observable<Category[]>
-  {
-    return this.httpclient.get<Category[]>(`${this.baseUrl}Categories/GetAllCategories`);
+  GetAllCategories(pageNumber: number, pageSize: number): Observable<Category[]>{
+    return this.httpclient.get<Category[]>(`${this.baseUrl}Categories/GetAllCategories`, {
+      params: {
+        PageNumber: pageNumber.toString(),
+        PageSize: pageSize.toString()
+      }
+    });
+  }
+
+  GetAllCategs():Observable<Category[]>{
+    return this.httpclient.get<Category[]>(`${this.baseUrl}Categories/GetAll`);
   }
 
   GetCategoryById(categoryId: string): Observable<Category> {
-    return this.httpclient.get<Category>(`${this.baseUrl}Categories/GetCategoryDetails/${categoryId}`);
+    return this.httpclient.get<Category>(`${this.baseUrl}Categories/GetCategoryById/${categoryId}`);
   }
 
   CreateCategory(category: FormData): Observable<Category> {
-    return this.httpclient.post<Category>(`${this.baseUrl}Categories/AddCategory`, category);
+    return this.httpclient.post<Category>(this.baseUrl, category);
   }
 
   UpdateCategory(categoryId: string, category: FormData): Observable<Category> {
-    return this.httpclient.patch<Category>(`${this.baseUrl}Categories/UpdateCategory/${categoryId}`, category);
+    return this.httpclient.patch<Category>(`${this.baseUrl}/${categoryId}`, category);
   }
 
   DeleteCategory(categoryId: string): Observable<Object> {
-    return this.httpclient.delete<Object>(`${this.baseUrl}Categories/DeleteCategory/${categoryId}`);
+    return this.httpclient.delete<Object>(`${this.baseUrl}/${categoryId}`);
   }
 }
