@@ -1,1 +1,268 @@
-<p>property-details works!</p>
+<div *ngIf="dataDetails" class="container">
+    <div class="row">
+      <h1 class="col-sm-12">{{ dataDetails.name }}</h1>
+      <div>
+        <i class="fas fa-star" style="display: inline; font-size: 1.1rem"></i>
+        <!-- <mat-icon style="display: inline; font-size: 1.1rem">star</mat-icon> -->
+        <p
+          *ngIf="dataDetails.ratingOverroll === 0.0; else topNotZero"
+          class="fs-6 colo-sm-12"
+          style="display: inline"
+        >
+          N/A | <a>No reviews yet</a> | {{ dataDetails.cityName }},
+          {{ dataDetails.adress }}
+        </p>
+        <ng-template #topNotZero>
+          <p class="fs-6 colo-sm-12" style="display: inline">
+            {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
+            <a>{{ dataDetails.numOfReview }} Reviews</a> |
+            {{ dataDetails.cityName }},
+            {{ dataDetails.adress }},
+          </p>
+        </ng-template>
+      </div>
+    </div>
+  
+    <div class="row mt-3">
+      <div class="col" *ngFor="let i of dataDetails.imageUrl">
+        <div class="d-flex justify-content-center flex-wrap m-2">
+          <img
+            src="{{ i }}"
+            class="rounded"
+            style="height: 15rem; width: 25rem"
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
+  
+    <div class="row">
+      <div class="col-lg-8 colo-sm-12">
+        <div class="row mb-4">
+          <div class="colo-sm-12 mb-3 d-flex justify-content-between">
+            <div>
+              <h1>Hosted by: {{ dataDetails.userName }}</h1>
+              <p class="fs-6" style="display: inline">
+                Maximum of {{ dataDetails.numberOfGuest }} Guests |
+                {{ dataDetails.numberOfBedrooms }} BedRooms |
+                {{ dataDetails.numberOfBathrooms }} BathRooms
+              </p>
+            </div>
+            <img
+              src="{{ dataDetails.userImage }}"
+              class="rounded-circle"
+              style="height: 4rem; width: 4rem"
+            />
+          </div>
+          <hr />
+        </div>
+  
+        <div class="row">
+          <div class="col-1">
+            <i style="display: block" class="fas fa-user-circle fs-2"></i>
+            <i style="display: block" class="fas fa-map-marker-alt fs-2"></i>
+            <i style="display: block"  class="fas fa-key fs-2"></i></div>
+          <div class="col-11">
+            <h4 style="display: inline; font-weight: bold">
+              {{ dataDetails.userName }} is a Superhost
+            </h4>
+            <p style="margin-left: 0.2rem">
+              Superhosts are experienced, highly rated hosts who are committed to
+              providing great stays for guests.
+            </p>
+            <h4 style="display: inline; font-weight: bold">Great location</h4>
+            <p style="margin-left: 0.2rem">
+              100% of recent guests gave the location a 5-star rating.
+            </p>
+            <h4 style="display: inline; font-weight: bold">
+              Great check-in experience
+            </h4>
+            <p style="margin-left: 0.2rem">
+              100% of recent guests gave the check-in process a 5-star rating.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div>
+          <h1 class="fs-2"><span style="color: red">air</span>cover</h1>
+          <p>
+            Every booking includes free protection from Host cancellations,
+            listing inaccuracies, and other issues like trouble checking in.
+          </p>
+        </div>
+        <hr />
+        <div>
+          <p class="fs-6">
+            Westin Kaanapali Ocean Resort Villas North timeshare - Pay resort:
+            $14-20/day, stays under 7 night $38/res - Inquire about availability,
+            I review then offer/approve if available :) - READ "The Space" for
+            cleaning/etc AND brief explanation about timeshare reservations - Want
+            guaranteed view for additional cost? Must be weekly rental, other
+            restrictions - Wheelchair accessible / ADA, call resort directly to
+            ensure U receive. If U need ADA U MUST inform us BEFORE booking.
+          </p>
+        </div>
+        <hr />
+  
+        <h2 class="fw-bold">What this place offers</h2>
+        <div *ngFor="let a of dataDetails.amentities">
+          <p style="display: inline" class="fs-3">{{ a.name }}</p>
+        </div>
+        <div class=""></div>
+        <hr />
+        <div>
+            <i class="fas fa-star fs-5"></i>
+             <p
+            *ngIf="dataDetails.ratingOverroll === 0.0; else notZero"
+            class="fs-5"
+            style="display: inline"
+          >
+            N/A | No reviews yet
+          </p>
+          <ng-template #notZero>
+            <p class="fs-5" style="display: inline">
+              {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
+              {{ dataDetails.numOfReview }} Reviews
+            </p>
+          </ng-template>
+        </div>
+        <div class="row d-flex justify-content-start flex-wrap">
+          <div class="col-6 mt-3" *ngFor="let i of dataDetails.reviews">
+            <div class="row">
+              <div class="col-2">
+                <img
+                  src="{{ i.Userimage }}"
+                  class="rounded-circle"
+                  style="height: 3rem; width: 3rem"
+                />
+              </div>
+              <div class="col-6">
+                <h3 class="fw-bold" style="display: inline">{{ i.UserName }}</h3>
+               </div>
+              <div class="col-4 d-flex">
+                <!-- <h1 class="star" [appStarRating]="i.Rate"></h1> -->
+              </div>
+            </div>
+            <div class="row">
+              <p>{{ i.reviewComment }}</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- <div *ngIf="propReview.hasreview">
+            <div class="row mb-3">
+              <h2>You have reserved this property before!</h2>
+              <h3>Tell us about your experience..</h3>
+            </div>
+          
+            <div class="row mb-3">
+              <div class="col-4">
+                <p>Choose your rating:</p>
+              </div>
+              <div class="col-8 d-flex align-items-center">
+                0
+                <input type="range" class="form-range mx-3" min="0" max="5" step="1" [(ngModel)]="rate" />
+                5
+              </div>
+            </div>
+          
+            <div class="row mb-3">
+              <div class="col">
+                <div class="form-floating">
+                  <textarea class="form-control" id="commentTextarea" [(ngModel)]="comment" placeholder="Add your comment.."></textarea>
+                  <label for="commentTextarea">Add your comment..</label>
+                </div>
+              </div>
+            </div>
+          
+            <div class="row mb-3">
+              <div class="col text-center">
+                <button class="btn btn-warning" style="width: 30%" (click)="sendReview()">Send your review</button>
+              </div>
+            </div>
+          </div> -->
+          
+      </div>
+  
+      <div class="col-lg-4 col-sm-12">
+        <div
+          class="row"
+          style="
+            position: sticky;
+            top: 6rem;
+            left: 12rem;
+            border: lightgray solid 1px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2),
+              0 6px 20px 0 rgba(0, 0, 0, 0.2);
+            margin-left: 4rem;
+            margin-top: 2rem;
+          "
+        >
+          <div class="row">
+            <div class="d-flex">
+              <h2 class="me-auto" style="display: inline">
+                ${{ dataDetails.appoinmentAvaiable[0]?.pricePerNight }} <span style="font-size: small">per night</span>
+              </h2>
+              <i style="display: inline" class="fas fa-star fs-5 fs-6 mt-2"></i>
+          
+  
+              <p
+                *ngIf="dataDetails.ratingOverroll === 0.0; else reserveNotZero"
+                class="fs-6 mt-2"
+                style="display: inline"
+              >
+                N/A |
+                <a>No reviews yet</a>
+              </p>
+              <ng-template #reserveNotZero>
+                <p class="fs-6 mt-2" style="display: inline">
+                  {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
+                  {{ dataDetails.numOfReview }} Reviews
+                </p>
+              </ng-template>
+            </div>
+          </div>
+          <div class="row" style="margin: auto;">
+            <div class="col-md-6">
+              <label for="checkInDate" class="form-label">Check-In Date:</label>
+              <input id="checkInDate" type="date" class="form-control" [min]="minCheckInDate" [max]="maxCheckInDate" (change)="onCheckInDateChange($event)" [(ngModel)]="startDateString">
+            </div>
+            <div class="col-md-6">
+              <label for="checkOutDate" class="form-label">Check-Out Date:</label>
+              <input id="checkOutDate" type="date" class="form-control" [min]="minCheckOutDate" [max]="maxCheckOutDate" (change)="onCheckOutDateChange($event)" [(ngModel)]="endDateString">
+            </div>
+          </div>
+          
+  
+          <div class="row" style="margin: auto; margin-top: 2rem">
+            <div class="d-flex" style="border: black solid 1px; border-radius: 5px ; padding: 5px;">
+                <h4 class="me-auto mb-0">Guests</h4>
+                <button class="btn btn-primary me-2" [disabled]="isPDisabled" (click)="plusButton()">+</button>
+                <h4 class="mb-0 numogguest">{{ numOfGuests }}</h4>
+                <button class="btn btn-primary ms-2" [disabled]="isMDisabled" (click)="minusButton()">-</button>
+              </div>
+          </div>
+          <div class="row" style="margin: auto; margin-top: 1rem">
+            <button class="btn btn-color" (click)="openPopup()">Reserve</button>
+          </div>
+  
+          <div class="row">
+            <h6  class="m-2" >You won't be charged yet.</h6>
+            <p>
+              Price shown is the total trip price, including additional fees and
+              taxes.
+            </p>
+            <hr class="m-2" />
+          </div>
+          <div class="row">
+             <div class="d-flex">
+              <h2 class="me-auto">Total</h2>
+              <h3>${{ totalPrice }}</h3>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,3 +1,5 @@
+import { Data } from "@angular/router";
+
 export interface RootDetails {
   name: string;
   description: string;
@@ -17,8 +19,23 @@ export interface RootDetails {
   imageUrl: ImageUrl[];
   amentities: Amentity[];
   appoinmentAvaiable: AppoinmentAvaiable[];
+  reviews:Reviews[];
+  ratingOverroll:number;
+  numOfReview:number;
+  userImage:string;
+  bookingDates:Booking[];
 }
-
+export interface Booking{
+  CheckInDate:Data;
+  CheckOutDate:Data;
+}
+export interface Reviews {
+  id: number;
+  reviewComment: string;
+  Rate: number;
+  UserName: string;
+  Userimage: string;
+}
 export interface ImageUrl {
   id: number;
   propertyId: number;
