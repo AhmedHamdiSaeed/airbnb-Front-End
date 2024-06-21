@@ -1,23 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Category } from '../../Models/Category';
+import { Observable } from 'rxjs';
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CategoryService {
   baseUrl = environment.baseUrl;
+
   constructor(private httpclient: HttpClient) {}
 
-  GetAllCategories() {
-    //should be added an observable it's an interface that just define the category datatype
-    return this.httpclient.get<string[]>(this.baseUrl);
+  GetAllCategories(pageNumber: number, pageSize: number): Observable<Category[]>{
+    return this.httpclient.get<Category[]>(`${this.baseUrl}Categories/GetAllCategories`, {
+      params: {
+        PageNumber: pageNumber.toString(),
+        PageSize: pageSize.toString()
+      }
+    });
   }
 
-  GetCategoryById(categoryid: string) {
-    return this.httpclient.get<string>(`${this.baseUrl}/${categoryid}`);
+  GetAllCategs():Observable<Category[]>{
+    return this.httpclient.get<Category[]>(`${this.baseUrl}Categories/GetAll`);
   }
 
-  PostCategory(category: FormData) {
-    return this.httpclient.post<string>(this.baseUrl, category);
+  GetCategoryById(categoryId: string): Observable<Category> {
+    return this.httpclient.get<Category>(`${this.baseUrl}Categories/GetCategoryById/${categoryId}`);
+  }
+
+  CreateCategory(category: FormData): Observable<Category> {
+    return this.httpclient.post<Category>(this.baseUrl, category);
+  }
+
+  UpdateCategory(categoryId: string, category: FormData): Observable<Category> {
+    return this.httpclient.patch<Category>(`${this.baseUrl}/${categoryId}`, category);
+  }
+
+  DeleteCategory(categoryId: string): Observable<Object> {
+    return this.httpclient.delete<Object>(`${this.baseUrl}/${categoryId}`);
   }
 }

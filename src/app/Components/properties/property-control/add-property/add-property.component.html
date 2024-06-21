@@ -1,0 +1,55 @@
+<div class="cartona">
+  <form
+    [formGroup]="AddNewPropertyForm"
+    (ngSubmit)="OnSubmit()"
+    class="property-form"
+  >
+    <div class="form-group">
+      <input formControlName="name" placeholder="Name" />
+      <input formControlName="description" placeholder="Description" />
+    </div>
+    <div class="form-group">
+      <input formControlName="adress" placeholder="Address" /><input
+        formControlName="numberOfBedrooms"
+        placeholder="Number of Bedrooms"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        formControlName="numberOfBathrooms"
+        placeholder="Number of Bathrooms"
+      />
+      <input formControlName="beds" placeholder="Number Of Beds" />
+    </div>
+    <div class="form-group"></div>
+    <div class="form-group">
+      <input formControlName="cityId" placeholder="City ID" />
+      <input formControlName="categoryId" placeholder="Category ID" />
+    </div>
+    <div class="form-group">
+      <input formControlName="checkOut" placeholder="Check-Out" />
+      <input formControlName="checkIn" placeholder="Check-In" />
+    </div>
+    <div class="form-group">
+      <input formControlName="numberOfGuest" placeholder="Number of Guests" />
+    </div>
+    <div class="form-group">
+      <select formControlName="pets" placeholder="Pets">
+        <option value="1">Allow</option>
+        <option value="0">Not Allow</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select formControlName="takePhotos">
+        <option value="1">Allow</option>
+        <option value="0">Not Allow</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    <div class="form-group">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>

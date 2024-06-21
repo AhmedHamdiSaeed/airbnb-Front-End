@@ -1,0 +1,27 @@
+<section>
+  <div class="cartona">
+    <button class="addProp" routerLink="/addProperty">Add New Property</button>
+    <div class="boxContainer">
+      <div class="box" *ngFor="let item of hosterProperties">
+        <div class="img">
+          <img [src]="item.displayedImage" [alt]="item.name" />
+        </div>
+        <ul>
+          <li>{{ item.id }}</li>
+          <li>{{ item.name }}</li>
+          <li>{{ item.description }}</li>
+          <li>
+            <button
+              class="update"
+              routerLink="/propertyControl/updateProperty"
+              (click)="selectProperty(item)"
+            >
+              Update
+            </button>
+          </li>
+          <li><button class="delete">Delete</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

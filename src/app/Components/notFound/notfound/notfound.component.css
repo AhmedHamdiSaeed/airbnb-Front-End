@@ -1,0 +1,32 @@
+
+*{
+  color: rgb(88, 88, 88);
+}
+#opps{
+  font-size: 10rem;
+  font-weight: bold;
+}
+
+.error-container {
+  margin-top: 50px;
+}
+.error-container img {
+  max-width: 400px;
+  margin-top: 2%;
+}
+.error-container p {
+  font-size: 15px;
+  font-weight: bold;
+}
+.error-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.error-container ul li a {
+  color: #3c20ca;
+  text-decoration: none;
+}
+.error-container ul li a:hover {
+  text-decoration: underline;
+}

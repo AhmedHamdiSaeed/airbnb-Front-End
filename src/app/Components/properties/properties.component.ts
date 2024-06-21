@@ -25,7 +25,7 @@ export class PropertiesComponent implements OnInit {
    */
   constructor(private service: ProperiesService) {}
   pageNumber: number;
-  pageSize: number = 2;
+  pageSize: number = 4;
   cityId: number;
   cateId: number;
   Quantity: number;
@@ -39,6 +39,7 @@ export class PropertiesComponent implements OnInit {
         this.properties = result.properties;
         this.Quantity = result.quantity;
         this.numberOfPages = Math.floor(this.Quantity / pageSize);
+        if (this.numberOfPages == 0) this.numberOfPages = 1;
         console.log(this.numberOfPages);
         console.log(result);
       });
@@ -82,7 +83,7 @@ export class PropertiesComponent implements OnInit {
   @ViewChild('search') searchInput;
 
   clearFilter() {
-    this.cateId = null;
+    this.cityId = null;
     this.cateId = null;
     this.searchInput.nativeElement.value = '';
     this.GetAllPropertyForAllUsers(

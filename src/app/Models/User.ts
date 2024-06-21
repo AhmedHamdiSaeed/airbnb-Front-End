@@ -2,6 +2,7 @@ export interface userRegister {
   email: string;
   password: string;
   firstName: string;
+  confirmpassword: string;
   lastName: string;
   role: number;
 }

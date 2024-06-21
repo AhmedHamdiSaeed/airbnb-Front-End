@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ProperiesService } from '../../../Services/PropertyServices/properies.service';
 import { RootDetails } from '../../../Models/PropertyDetials';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-details',

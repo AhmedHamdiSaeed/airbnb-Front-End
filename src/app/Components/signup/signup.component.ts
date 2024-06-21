@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfileservicesService } from '../../Services/UserServices/profileservices.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -14,10 +14,10 @@ import { timer, switchMap, of, map } from 'rxjs';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
+  providers: [ProfileservicesService],
 })
 export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
-  returnUrl: string;
 
   /**
    *
@@ -25,7 +25,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private service: ProfileservicesService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) {}
   ngOnInit(): void {
     this.CreateLoginForm();
@@ -86,14 +87,21 @@ export class SignupComponent implements OnInit {
   }
   //
   OnSubmit() {
-    this.service.Register(this.signUpForm.value).subscribe({
-      next: () => {
-        this.router.navigateByUrl(this.returnUrl);
-      },
-      error: (err) => {
-        console.log(err.message);
-      },
-    });
+    if (this.signUpForm.valid) {
+      this.service.Register(this.signUpForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['/signin']);
+        },
+        error: (err) => {
+          this.router.navigate(['/signin']);
+          console.log(err.message);
+        },
+      });
+    } else {
+      alert('Form is invalid');
+      console.log('Form is invalid');
+      this.signUpForm.markAllAsTouched(); // Optionally mark all fields as touched to trigger validation messages
+    }
   }
 
   // Confirm Password

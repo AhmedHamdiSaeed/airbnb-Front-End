@@ -21,7 +21,17 @@ import { PropertiesComponent } from './Components/properties/properties.componen
 import { PropertyDetailsComponent } from './Components/properties/property-details/property-details.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
 import { HomeComponent } from './Components/home/home.component';
+import { CategoryComponent } from './Components/category/category.component';
+
+import { PropertyControlComponent } from './Components/properties/property-control/property-control.component';
+import { AddPropertyComponent } from './Components/properties/property-control/add-property/add-property.component';
+import { AddPropimagesComponent } from './Components/properties/property-control/add-propimages/add-propimages.component';
+import { AddAppoinmentavailableComponent } from './Components/properties/property-control/add-appoinmentavailable/add-appoinmentavailable.component';
+import { AddAmentityComponent } from './Components/properties/property-control/add-amentity/add-amentity.component';
+import { HosterPropertyComponent } from './Components/properties/property-control/hoster-property/hoster-property.component';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -39,6 +49,13 @@ export function tokenGetter() {
     PropertiesComponent,
     PropertyDetailsComponent,
     HomeComponent,
+    CategoryComponent,
+    PropertyControlComponent,
+    AddPropertyComponent,
+    AddPropimagesComponent,
+    AddAppoinmentavailableComponent,
+    AddAmentityComponent,
+    HosterPropertyComponent,
   ],
   imports: [
     BrowserModule,
