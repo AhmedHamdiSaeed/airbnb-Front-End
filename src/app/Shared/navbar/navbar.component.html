@@ -36,17 +36,40 @@
         ></path>
       </svg>
       <ul class="links">
-        <li><a routerLink="Home">Home</a></li>
-        <li><a href="property">Discover</a></li>
-        <li><a href="#">Online Experience</a></li>
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/property"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Discover</a
+          >
+        </li>
+        <li *ngIf="userRole === 'Host'">
+          <a
+            routerLink="/hosterPropereties"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >My Properties</a
+          >
+        </li>
+        <li *ngIf="userRole === 'User'">
+          <a href="#" routerLinkActive="active">Online Experience</a>
+        </li>
       </ul>
       <div class="profile" *ngIf="!(currentUser$ | async)">
-        <button class="addProperty">Add Property</button>
         <button class="SignIn" routerLink="signin">Sign In</button>
       </div>
       <div class="Welcome" *ngIf="currentUser$ | async">
         <p style="margin: 0; text-align: center; width: 100%">
-          Welcome, {{ username }}
+          Welcome, {{ userName }}
         </p>
         <button (click)="LogOut()" class="logout">Log Out</button>
       </div>

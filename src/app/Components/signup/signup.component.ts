@@ -87,17 +87,21 @@ export class SignupComponent implements OnInit {
   }
   //
   OnSubmit() {
-    this.service.Register(this.signUpForm.value).subscribe({
-      next: () => {
-        this.router.navigate(['/signin']);
-      },
-      error: (err) => {
-        if (this.signUpForm.valid) {
+    if (this.signUpForm.valid) {
+      this.service.Register(this.signUpForm.value).subscribe({
+        next: () => {
           this.router.navigate(['/signin']);
-        }
-        console.log(err.message);
-      },
-    });
+        },
+        error: (err) => {
+          this.router.navigate(['/signin']);
+          console.log(err.message);
+        },
+      });
+    } else {
+      alert('Form is invalid');
+      console.log('Form is invalid');
+      this.signUpForm.markAllAsTouched(); // Optionally mark all fields as touched to trigger validation messages
+    }
   }
 
   // Confirm Password

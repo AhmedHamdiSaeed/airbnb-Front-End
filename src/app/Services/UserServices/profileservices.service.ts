@@ -81,7 +81,4 @@ export class ProfileservicesService {
       `${this.baseUrl}User/check-email-exist?email=${email}`
     );
   }
-  loaddata() {
-    return this.http.get(`${this.baseUrl}Booking/GetAllUserBooking`);
-  }
 }

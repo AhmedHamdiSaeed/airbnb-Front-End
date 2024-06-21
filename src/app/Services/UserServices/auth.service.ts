@@ -22,9 +22,6 @@ export class AuthService {
   public getUserRole(): string | null {
     const claims = this.getUserClaims();
     if (claims) {
-      console.log(
-        claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-      );
       return (
         claims[
           'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
@@ -33,7 +30,16 @@ export class AuthService {
     }
     return null;
   }
-
+  public getUserName(): string | null {
+    const claims = this.getUserClaims();
+    if (claims) {
+      return (
+        claims['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] ||
+        null
+      );
+    }
+    return null;
+  }
   public getUserEmail(): string | null {
     const claims = this.getUserClaims();
     if (claims) {

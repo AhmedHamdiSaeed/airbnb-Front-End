@@ -1,0 +1,76 @@
+<div class="cartona">
+  <form
+    [formGroup]="AppoinmentAvailableData"
+    (ngSubmit)="OnSubmit()"
+    class="property-form"
+  >
+    <div class="form-group">
+      <input
+        type="text"
+        formControlName="propertyId"
+        placeholder="PropertyId"
+      />
+    </div>
+    <div class="form-group">
+      <input type="date" formControlName="from" placeholder="from" />
+    </div>
+    <div class="form-group">
+      <input type="date" formControlName="to" placeholder="to" />
+    </div>
+    <div class="form-group">
+      <input
+        type="number"
+        formControlName="pricePerNight"
+        placeholder="Price Per Night"
+      />
+    </div>
+    <div class="form-group">
+      <select formControlName="isAvailable">
+        <option value="1">Available</option>
+        <option value="0">Not Available</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+<section>
+  <div class="cartona">
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>propertyId</th>
+          <th>from</th>
+          <th>to</th>
+          <th>pricePerNight</th>
+          <th>totalProice</th>
+          <th>isAvailable</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of allAppoinmentAvailable">
+          <td>{{ item.id }}</td>
+          <td>{{ item.propertyId }}</td>
+          <td>{{ item.from }}</td>
+          <td>{{ item.to }}</td>
+          <td>{{ item.pricePerNight }}</td>
+          <td>{{ item.totalProice }}</td>
+          <td>{{ item.isAvailable }}</td>
+          <td><button class="update">Update</button></td>
+          <td>
+            <button
+              (click)="DeletePropAppoinemtnAvaialbe(item.id)"
+              class="delete"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

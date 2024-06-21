@@ -1,0 +1,34 @@
+<div class="cartona">
+  <form
+    [formGroup]="PropertyImage"
+    (ngSubmit)="OnSubmit()"
+    class="property-form"
+  >
+    <div class="form-group">
+      <input type="text" formControlName="propertyId" />
+    </div>
+    <div class="form-group">
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    <div class="form-group">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+<section>
+  <div class="cartona">
+    <div class="box" *ngFor="let item of allPropImages">
+      <div class="img">
+        <img [src]="item.imageUrl" [alt]="item.id" />
+      </div>
+      <ul>
+        <li><button class="update">Update</button></li>
+        <li>
+          <button class="delete" (click)="DeletePropImage(item.id)">
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
