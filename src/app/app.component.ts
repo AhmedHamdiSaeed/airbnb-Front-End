@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileservicesService } from './Services/UserServices/profileservices.service';
 import { Observable } from 'rxjs';
 import { userToken } from './Models/User';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,17 @@ import { userToken } from './Models/User';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  constructor(private accoutService: ProfileservicesService) {}
-
+  constructor(private router:Router,private accoutService: ProfileservicesService) {}
+  showFooter=true;
   ngOnInit(): void {
     this.currentUser$ = this.accoutService.currentUser$;
     this.loadCurrentUser();
+    this.router.events.subscribe(e=>{
+      if(e instanceof NavigationEnd)
+        {
+          this.showFooter=!e.url.includes("/admin");
+        }
+    })
   }
   /**
    *

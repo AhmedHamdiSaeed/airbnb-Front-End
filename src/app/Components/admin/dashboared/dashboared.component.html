@@ -1,0 +1,24 @@
+
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <mat-toolbar class="mat-elevation-z3">
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-sidenav-container>
+      <mat-sidenav opened mode="side" [style.width]="'250px'">        <app-sidebar></app-sidebar>
+      </mat-sidenav>
+      <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+ </body>
+ </html>

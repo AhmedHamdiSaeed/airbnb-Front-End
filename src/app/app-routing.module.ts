@@ -24,6 +24,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['User'] },
   },
+  {path:'admin',loadChildren:()=>import('./Components/admin/admin.module').then(e=>e.adminModule)},
   {
     path: 'Header',
     component: HeaderComponent,
