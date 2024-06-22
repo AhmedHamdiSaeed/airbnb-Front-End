@@ -1,0 +1,29 @@
+.cartona {
+  padding: 3rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cartona .navigator {
+  flex: 1;
+}
+.cartona .navigator ul {
+}
+.cartona .navigator ul li {
+  padding: 1rem;
+  background-color: var(--secound-color);
+  width: 100%;
+  cursor: pointer;
+}
+.cartona .navigator ul li:hover {
+  background-color: white;
+}
+.cartona .navigator ul li.active {
+  background-color: var(--main-color);
+  color: white;
+}
+.cartona .content {
+  flex: 4;
+}

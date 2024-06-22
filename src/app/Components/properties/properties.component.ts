@@ -8,7 +8,6 @@ import { Categories } from '../../Models/CategoryModel';
   selector: 'app-properties',
   templateUrl: './properties.component.html',
   styleUrl: './properties.component.css',
-  providers: [ProperiesService],
 })
 export class PropertiesComponent implements OnInit {
   ngOnInit(): void {

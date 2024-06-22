@@ -1,0 +1,20 @@
+<div class="category-nav-container">
+  <button class="scroll-btn left" (click)="scrollLeft() ">
+    &#11164;
+  </button>
+  <div #categoryNav class="category-nav">
+    <div *ngFor="let category of categories" class="category-item" (click)="selectCategory(category)">
+      <img [src]="category.iconURL"  alt="{{ category.name }}">
+      <p>{{ category.name }}</p>
+    </div>
+  </div>
+  <button class="scroll-btn right" (click)="scrollRight()">
+    &#11166;
+  </button>
+</div>
+
+<div *ngIf="selectedCategory" class="selected-category">
+  <h2>{{ selectedCategory.name }}</h2>
+</div>
+
+

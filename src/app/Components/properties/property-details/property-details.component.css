@@ -1,0 +1,25 @@
+.property .image-gallery {
+    margin-top: 20px;
+  }
+  
+  .property .gallery-item {
+    display: inline-block;
+    margin: 10px;
+  }
+  
+  .property .gallery-item img {
+    max-width: 100px;
+    max-height: 100px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background-color: #fff;
+  }
+  .btn-color{
+    background-color: #fa325b;
+    font-size: 25px;
+    color:#fff !important;
+  }
+  .numogguest{
+    padding-top: 10px;
+    font-size: 20px !important;
+  }

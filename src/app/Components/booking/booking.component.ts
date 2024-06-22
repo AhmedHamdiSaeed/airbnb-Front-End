@@ -7,14 +7,7 @@ import { ProfileservicesService } from '../../Services/UserServices/profileservi
   styleUrl: './booking.component.css',
 })
 export class BookingComponent implements OnInit {
-  constructor(private service: ProfileservicesService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.LoadData();
-  }
-  LoadData() {
-    this.service.loaddata().subscribe((result) => {
-      console.log(result);
-    });
-  }
+  ngOnInit(): void {}
 }

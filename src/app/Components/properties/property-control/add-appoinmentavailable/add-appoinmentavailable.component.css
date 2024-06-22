@@ -1,0 +1,70 @@
+.property-form {
+  width: 80%;
+  padding: 2rem;
+  border-radius: 4px;
+  border: 2px solid #2b34991a;
+  box-shadow: 0 0 20px -3px rgba(98, 98, 98, 0.164);
+  margin: 0 auto;
+  background-color: var(--secound-color);
+}
+.property-form .form-group {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.property-form .form-group input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+}
+.property-form .form-group button {
+  padding: 0.6rem 1.2rem;
+  margin: 0 auto;
+}
+.property-form .form-group:last-of-type {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .cartona {
+    padding: 1rem;
+  }
+  .property-form {
+    width: 85%;
+  }
+}
+@media (max-width: 500px) {
+  .cartona {
+    padding: 2rem 0.2rem;
+  }
+  .property-form {
+    width: 100%;
+  }
+}
+
+.cartona table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.cartona table td,
+.cartona table th {
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+}
+.cartona table td button {
+  padding: 0.6rem 1.2rem;
+}
+.cartona table td button.delete {
+  background-color: red;
+  color: white;
+}
+.cartona table td button.update {
+  background-color: green;
+  color: white;
+}
