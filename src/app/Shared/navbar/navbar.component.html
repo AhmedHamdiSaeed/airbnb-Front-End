@@ -16,7 +16,7 @@
     </svg>
     <!--  -->
     <div class="logo">
-      <a href="#">
+      <a routerLink="/">
         <img src="../../../assets/Airbnb-logo-2048x1152.png" alt=""
       /></a>
     </div>
@@ -68,10 +68,21 @@
         <button class="SignIn" routerLink="signin">Sign In</button>
       </div>
       <div class="Welcome" *ngIf="currentUser$ | async">
-        <p style="margin: 0; text-align: center; width: 100%">
-          Welcome, {{ userName }}
+        <p
+          style="margin: 0; text-align: center; width: 100%"
+          (click)="profileStatus = !profileStatus"
+        >
+          Welcome, {{ userName }} &nbsp;
+          <span><i class="fa-solid fa-bars"></i></span>
         </p>
-        <button (click)="LogOut()" class="logout">Log Out</button>
+        <ul class="userControl" [ngClass]="{ active: profileStatus }">
+          <li routerLink="/profile" (click)="profileStatus = !profileStatus">
+            Profile
+          </li>
+          <li (click)="LogOut()" (click)="profileStatus = !profileStatus">
+            Log Out
+          </li>
+        </ul>
       </div>
     </div>
   </div>

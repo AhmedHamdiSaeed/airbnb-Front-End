@@ -17,3 +17,17 @@ export interface userToken {
   userName: string;
   expiration: string;
 }
+export interface userProfile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  phoneNumber: string;
+  image: string;
+}
+export interface currentUserModel {
+  displayName: string;
+  image: string;
+  email: string;
+  token: string;
+}

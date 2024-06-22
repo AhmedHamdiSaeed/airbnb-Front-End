@@ -53,4 +53,11 @@ export class NavbarComponent implements OnInit, DoCheck {
     this.userName = null;
     this.userRole = null;
   }
+
+  // ------------- Profile Status
+  profileStatus: boolean = false;
+  changeProfileStatus() {
+    this.profileStatus = !this.profileStatus;
+    console.log(this.profileStatus);
+  }
 }

@@ -25,7 +25,7 @@ export class PropertiesComponent implements OnInit {
    */
   constructor(private service: ProperiesService) {}
   pageNumber: number;
-  pageSize: number = 4;
+  pageSize: number = 8;
   cityId: number;
   cateId: number;
   Quantity: number;

@@ -31,23 +31,6 @@ select {
   margin-bottom: 0;
 }
 
-@media (max-width: 768px) {
-  .cartona {
-    padding: 1rem;
-  }
-  .property-form {
-    width: 85%;
-  }
-}
-@media (max-width: 500px) {
-  .cartona {
-    padding: 2rem 0.2rem;
-  }
-  .property-form {
-    width: 100%;
-  }
-}
-
 .cartona .box {
   display: flex;
   align-items: center;
@@ -75,4 +58,32 @@ select {
 .cartona ul li button.update {
   background-color: green;
   color: white;
+}
+@media (max-width: 992px) {
+  .cartona {
+    width: 100%;
+    padding: 1rem;
+  }
+  .property-form {
+    width: 85%;
+  }
+}
+@media (max-width: 768px) {
+  .cartona {
+    width: 100%;
+    padding: 1rem;
+  }
+  .property-form {
+    width: 85%;
+  }
+}
+@media (max-width: 500px) {
+  .cartona {
+    width: 100%;
+
+    padding: 2rem 0.2rem;
+  }
+  .property-form {
+    width: 100%;
+  }
 }

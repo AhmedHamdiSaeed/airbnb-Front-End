@@ -1,4 +1,7 @@
 <div class="cartona">
+  <h2 style="text-align: center; margin-bottom: 1rem">
+    {{ propertyStatus }} Property
+  </h2>
   <form
     [formGroup]="AddNewPropertyForm"
     (ngSubmit)="OnSubmit()"
@@ -27,8 +30,8 @@
       <input formControlName="categoryId" placeholder="Category ID" />
     </div>
     <div class="form-group">
-      <input formControlName="checkOut" placeholder="Check-Out" />
-      <input formControlName="checkIn" placeholder="Check-In" />
+      <input type="time" formControlName="checkOut" placeholder="Check-Out" />
+      <input type="time" formControlName="checkIn" placeholder="Check-In" />
     </div>
     <div class="form-group">
       <input formControlName="numberOfGuest" placeholder="Number of Guests" />
@@ -49,7 +52,31 @@
       <input type="file" (change)="onFileSelected($event)" />
     </div>
     <div class="form-group">
-      <button type="submit">Submit</button>
+      <button type="submit">{{ propertyStatus }}</button>
     </div>
   </form>
 </div>
+
+<!--  -->
+<section>
+  <div class="cartona">
+    <div class="boxContainer">
+      <div class="box" *ngFor="let item of hosterProperties">
+        <div class="img">
+          <img [src]="item.displayedImage" [alt]="item.name" />
+        </div>
+        <ul>
+          <li>{{ item.id }}</li>
+          <li>{{ item.name }}</li>
+          <li>{{ item.description }}</li>
+          <li>
+            <button class="update" (click)="SelectProperty(item.id)">
+              Update
+            </button>
+          </li>
+          <li><button class="delete">Delete</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

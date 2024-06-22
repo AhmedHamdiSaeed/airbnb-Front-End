@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'property', component: PropertiesComponent },
   { path: 'hosterPropereties', component: HosterPropertyComponent },
   { path: 'addProperty', component: AddPropertyComponent },
+  { path: 'profile', component: UserprofileComponent },
   {
     path: 'propertyControl',
     component: PropertyControlComponent,

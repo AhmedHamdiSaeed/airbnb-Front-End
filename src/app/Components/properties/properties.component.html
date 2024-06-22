@@ -6,6 +6,7 @@
       class="sameStyleFilter"
       (change)="selectCity($event)"
     >
+      <option value="" selected disabled>Select City</option>
       <option *ngFor="let city of allCeties" [value]="city.id">
         {{ city.name }}
       </option>

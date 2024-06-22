@@ -186,6 +186,7 @@ nav {
     align-items: flex-start;
     justify-content: flex-start;
   }
+
   .cartona .Welcome p {
     margin-bottom: 1rem !important;
   }
@@ -215,4 +216,45 @@ ul {
   margin-left: 0 !important;
   margin-bottom: 0 !important;
   margin-right: 0 !important;
+}
+.wrap .Welcome {
+  position: relative;
+}
+.wrap .Welcome .userControl {
+  position: absolute;
+  top: 42px;
+  left: 30%;
+  width: 60%;
+  background-color: white;
+  display: none;
+
+  overflow: hidden;
+}
+.wrap .Welcome .userControl li {
+  cursor: pointer;
+  padding: 1rem;
+}
+.wrap .Welcome .userControl li:hover {
+  background-color: var(--secound-color);
+}
+@media (max-width: 1000px) {
+  .wrap .Welcome .userControl {
+    top: -10px;
+    left: 100%;
+    width: 60%;
+  }
+}
+.wrap .Welcome .userControl.active {
+  animation: showNav 0.2s;
+  overflow: visible;
+
+  display: block;
+}
+@keyframes showNav {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

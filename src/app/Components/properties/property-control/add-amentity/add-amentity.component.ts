@@ -59,26 +59,57 @@ export class AddAmentityComponent implements OnInit, OnChanges {
     });
   }
 
+  // --------------------- Select Amentity To Update
+  amentityStatus = 'Add';
+  selectedAmentity: AmentityGet;
+  selectToUpdate(item: AmentityGet) {
+    this.selectedAmentity = item;
+    this.amentityStatus = 'Update';
+    this.AmentityData.reset({
+      propertyId: item.propertyId,
+      name: item.name,
+      description: item.description,
+    });
+  }
   // ----------- Submit Function
+
   OnSubmit() {
     if (this.AmentityData.valid) {
-      this.propertyControlService
-        .addNewAmentity(this.AmentityData.value)
-        .subscribe({
-          next: () => {
-            alert('Done');
-            this.getAllPropertyAmentity();
-            const propertyId = this.AmentityData.get('propertyId').value;
-            this.AmentityData.reset({
-              propertyId: propertyId,
-              name: '',
-              description: '',
-            });
-          },
-          error: (err) => {
-            alert(err);
-          },
-        });
+      if (this.amentityStatus === 'Add') {
+        this.propertyControlService
+          .addNewAmentity(this.AmentityData.value)
+          .subscribe({
+            next: () => {
+              alert('Done');
+              this.getAllPropertyAmentity();
+              const propertyId = this.AmentityData.get('propertyId').value;
+              this.AmentityData.reset({
+                propertyId: propertyId,
+                name: '',
+                description: '',
+              });
+            },
+            error: (err) => {
+              alert(err);
+            },
+          });
+      } else {
+        this.amentityStatus = 'Add';
+        this.propertyControlService
+          .updateAmentity(this.selectedAmentity.id, this.AmentityData.value)
+          .subscribe({
+            next: () => {
+              alert('Updated Done');
+              this.getAllPropertyAmentity();
+              const propertyId = this.AmentityData.get('propertyId').value;
+              this.AmentityData.reset({
+                propertyId: propertyId,
+                name: '',
+                description: '',
+              });
+            },
+          });
+      }
     } else {
       alert('Form is invalid');
     }

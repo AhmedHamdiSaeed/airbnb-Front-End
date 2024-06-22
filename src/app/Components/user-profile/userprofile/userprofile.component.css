@@ -1,0 +1,130 @@
+section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background-color: white;
+}
+section .sideBar {
+  flex: 3;
+  background-color: var(--secound-color);
+  border-right: 2px solid rgba(0, 0, 0, 0.167);
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: var(--secound-color);
+  height: 100vh;
+  padding: 1rem 2rem;
+}
+
+section .sideBar .user-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+section .sideBar .user-data .content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+section .sideBar .user-data .content img {
+  display: block;
+  width: 100px;
+  border-radius: 50px;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+section .sideBar .user-data .content p {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+section .sideBar .dashboard h2 {
+  font-weight: 500;
+  padding: 1rem;
+}
+section .sideBar .dashboard ul {
+  list-style: none;
+}
+section .sideBar .dashboard ul li {
+  cursor: pointer;
+  padding: 1rem;
+}
+section .sideBar .dashboard ul li.active {
+  background-color: black;
+  color: white;
+}
+section .sideBar .dashboard ul li i {
+  margin-right: 1rem;
+  /* -------------------------------------------------------------------------------------------- */
+}
+section .mainContent {
+  flex: 9;
+  padding: 2rem 0;
+}
+section .mainContent h2 {
+  padding: 1rem 3rem;
+  width: fit-content;
+  margin: 0 auto 2rem;
+  background-color: var(--main-color);
+  color: var(--secound-color);
+  text-align: center;
+  border-radius: 6px;
+}
+section .mainContent form {
+  width: 80%;
+
+  padding: 2rem;
+  margin: 0 auto;
+  background-color: var(--secound-color);
+  border: 2px solid rgba(0, 0, 0, 0.22);
+  border-radius: 6px;
+}
+section .mainContent form .box {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+section .mainContent form .box input {
+  flex: 1;
+  padding: 0.6rem 1.2rem;
+}
+input[type="submit"] {
+  padding: 0.7rem 2rem;
+  display: block;
+  margin: 3rem auto 0;
+}
+
+@media (max-width: 992px) {
+  section {
+    flex-direction: column;
+    align-items: center;
+  }
+  section .sideBar,
+  section .mainContent {
+    flex: 1;
+    position: initial;
+    width: 100%;
+  }
+  section .sideBar {
+    padding: 1rem;
+  }
+  section .mainContent form {
+    width: 100%;
+  }
+  section .mainContent form .box {
+    flex-flow: column;
+    gap: 1rem;
+  }
+  section .mainContent form .box input {
+    width: 100%;
+  }
+}
