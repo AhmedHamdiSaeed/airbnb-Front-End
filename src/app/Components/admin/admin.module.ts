@@ -5,7 +5,6 @@ import { CategoryComponent } from "./Categories/category/category.component";
 import { adminRoutingModule } from "./admin-routing.module";
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { BodyComponent } from "./body/body.component";
 import { UsersComponent } from './users/users.component';
 import {MatIconModule} from '@angular/material/icon'
 import {MatButtonModule} from '@angular/material/button'
@@ -17,7 +16,6 @@ declarations:[
     DashboaredComponent,
     SidebarComponent,
     CategoryComponent,
-    BodyComponent,
     UsersComponent
 ],
 imports:[
