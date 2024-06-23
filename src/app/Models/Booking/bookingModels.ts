@@ -16,6 +16,8 @@ export interface getAllBookingModel {
   checkOutDate: string;
   totalPrice: number;
   bookingStatus: number;
+  propImage: string;
+  propTitle: string;
 }
 export interface getPropertyBookingDetailsModel {
   id: number;

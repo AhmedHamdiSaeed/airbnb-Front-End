@@ -61,6 +61,14 @@
           >
         </li>
         <li *ngIf="userRole === 'User'">
+          <a
+            routerLink="/alluserBooking"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >My Booking</a
+          >
+        </li>
+        <li *ngIf="userRole === 'User'">
           <a href="#" routerLinkActive="active">Online Experience</a>
         </li>
       </ul>

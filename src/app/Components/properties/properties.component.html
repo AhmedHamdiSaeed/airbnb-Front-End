@@ -1,4 +1,28 @@
 <section class="filtration">
+  <div class="category-nav-container">
+    <button class="scroll-btn left" (click)="scrollLeft()">&#11164;</button>
+    <div #categoryNav class="category-nav">
+      <div
+        *ngFor="let category of allCategories"
+        class="category-item"
+        (click)="selectCategory(category.id)"
+      >
+        <img [src]="category.iconURL" alt="{{ category.name }}" />
+        <p>{{ category.name }}</p>
+      </div>
+    </div>
+    <button
+      class="scroll-btn right"
+      (click)="scrollRight()"
+      [ngClass]="{ end: ifEnd }"
+    >
+      &#11166;
+    </button>
+  </div>
+
+  <!-- --------------------------------------------- -->
+  <br />
+  <br />
   <div class="cartona">
     <select
       name="FilterByCity"
@@ -11,16 +35,16 @@
         {{ city.name }}
       </option>
     </select>
-    <select
+    <!-- <select
       class="sameStyleFilter"
       name="FilterByCategory"
       id="FilterByCategory"
       (change)="selectCategory($event)"
     >
-      <!-- <option *ngFor="let cate of allCategories" [value]="cate.id">
+    !-- <option *ngFor="let cate of allCategories" [value]="cate.id">
         {{ cate.name }}
-      </option> -->
-    </select>
+      </option> 
+    </select> -->
     <input
       class="sameStyleFilter"
       type="text"

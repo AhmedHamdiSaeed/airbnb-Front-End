@@ -19,6 +19,8 @@ import { AddPropertyComponent } from './Components/properties/property-control/a
 import { AddPropimagesComponent } from './Components/properties/property-control/add-propimages/add-propimages.component';
 import { HosterPropertyComponent } from './Components/properties/property-control/hoster-property/hoster-property.component';
 import { PropertyControlComponent } from './Components/properties/property-control/property-control.component';
+import { AlluserbookingComponent } from './Components/booking/alluserbooking/alluserbooking.component';
+import { UserBookingDetailsComponent } from './Components/booking/user-booking-details/user-booking-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -51,13 +53,20 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['User'] },
   },
-  {path:'admin',loadChildren:()=>import('./Components/admin/admin.module').then(e=>e.adminModule)},
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./Components/admin/admin.module').then((e) => e.adminModule),
+  },
   {
     path: 'Header',
     component: HeaderComponent,
     // canActivate: [AuthGuard],
     // data: { roles: ['Host'] },
   },
+  { path: 'alluserBooking', component: AlluserbookingComponent },
+  { path: 'userBookingDetails/:id', component: UserBookingDetailsComponent },
+
   { path: '**', component: NotfoundComponent, pathMatch: 'full' },
 ];
 

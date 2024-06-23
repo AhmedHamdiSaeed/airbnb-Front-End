@@ -52,7 +52,7 @@ nav {
   position: relative;
 }
 .cartona .Welcome {
-  flex: 6;
+  flex: 3;
   position: relative;
   display: flex;
   text-align: left;
@@ -89,6 +89,9 @@ nav {
 .cartona .profile .SignIn:hover {
   background-color: var(--hover-main-color);
 }
+.cartona .Welcome p {
+  text-align: right !important;
+}
 .cartona .Welcome .logout:hover {
   background-color: var(--hover-main-color);
 }
@@ -112,13 +115,11 @@ nav {
 }
 @media (max-width: 1170px) {
   .cartona .links {
-    flex: 4;
+    flex: 6;
   }
-  .cartona .profile {
-    flex: 3;
-  }
+
   .cartona .Welcome {
-    flex: 5;
+    flex: 3;
   }
 }
 
@@ -222,9 +223,9 @@ ul {
 }
 .wrap .Welcome .userControl {
   position: absolute;
-  top: 42px;
+  top: 41px;
   left: 30%;
-  width: 60%;
+  width: 80%;
   background-color: white;
   display: none;
 

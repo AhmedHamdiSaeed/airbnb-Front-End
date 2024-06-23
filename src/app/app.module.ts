@@ -32,6 +32,9 @@ import { AddPropimagesComponent } from './Components/properties/property-control
 import { AddAppoinmentavailableComponent } from './Components/properties/property-control/add-appoinmentavailable/add-appoinmentavailable.component';
 import { AddAmentityComponent } from './Components/properties/property-control/add-amentity/add-amentity.component';
 import { HosterPropertyComponent } from './Components/properties/property-control/hoster-property/hoster-property.component';
+import { AlluserbookingComponent } from './Components/booking/alluserbooking/alluserbooking.component';
+import { UserBookingDetailsComponent } from './Components/booking/user-booking-details/user-booking-details.component';
+import { HosterBookingDetailsComponent } from './Components/booking/hoster-booking-details/hoster-booking-details.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,6 +60,9 @@ export function tokenGetter() {
     AddAppoinmentavailableComponent,
     AddAmentityComponent,
     HosterPropertyComponent,
+    AlluserbookingComponent,
+    UserBookingDetailsComponent,
+    HosterBookingDetailsComponent,
   ],
   imports: [
     BrowserModule,

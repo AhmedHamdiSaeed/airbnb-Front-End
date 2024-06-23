@@ -50,14 +50,14 @@ export class BookingService implements OnInit {
   }
   // --------------------------------------- GetAllUserBooking
   GetAllUserBooking() {
-    this.http.get(`${this.baseUrl}GetAllUserBooking`).pipe(
+    return this.http.get(`${this.baseUrl}GetAllUserBooking`).pipe(
       map((result) => {
         return result;
       })
     );
   }
   // --------------------------------------- GetUserBookingetails
-  GetUserBookingetails(bookingId) {
+  GetUserBookingetails(bookingId: number) {
     return this.http
       .get(`${this.baseUrl}GetUserBookingetails/${bookingId}`)
       .pipe(
@@ -68,7 +68,7 @@ export class BookingService implements OnInit {
   }
   // --------------------------------------- AddBooking
   AddBooking(booking: addBookingModel) {
-    return this.http.post(`${this.baseUrl}AddBooking`, booking).pipe(
+    return this.http.post(`${this.baseUrl}AddBooking`, { booking }).pipe(
       map((result) => {
         return result;
       })
