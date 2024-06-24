@@ -23,6 +23,7 @@ export class PropertyDetailsComponent implements OnInit {
   constructor(
     private service: ProperiesService,
     private route: ActivatedRoute,
+    private router: Router,
     private el: ElementRef,
     private reviewService: ReviewService,
     private profileService: ProfileservicesService,
@@ -257,8 +258,8 @@ openDatePicker(id: string) {
   bookProperty(): void {
     const bookingAddDto: BookingAddDto = {
       PropertyId: this.IdNumber,
-      CheckInDate: this.startDate, // Convert Date to ISO string
-      CheckOutDate: this.endDate, // Convert Date to ISO string
+      CheckInDate: this.startDate, 
+      CheckOutDate: this.endDate, 
       TotalPrice: this.totalPrice
     };
 
@@ -267,10 +268,10 @@ openDatePicker(id: string) {
     this.bookingService.addBooking(userId, bookingAddDto).pipe(
       switchMap(response => {
         console.log('Booking successful:', response);
-        alert('Booking successful!');
+       
 
         // Calculate the new availability period dynamically
-        const newFrom = new Date(this.endDate); // Start from the day after CheckOutDate
+        const newFrom = new Date(this.endDate); 
         newFrom.setDate(newFrom.getDate() + 1);
 
         const newTo = new Date(this.dataDetails.appoinmentAvaiable[0].to); 
@@ -278,7 +279,7 @@ openDatePicker(id: string) {
         const availabilityUpdateDto: AvailabilityUpdateDto = {
           From: newFrom,
           To: newTo,
-          IsAvailable: isAvailable // Set availability as needed
+          IsAvailable: isAvailable 
         };
 
         return this.bookingService.updateAvailability(this.IdNumber, availabilityUpdateDto);
@@ -286,6 +287,7 @@ openDatePicker(id: string) {
     ).subscribe(
       (updateResponse) => {
         console.log('Availability updated successfully:', updateResponse);
+        this.router.navigate(['/alluserBooking'], { queryParams: { totalPrice: this.totalPrice } }); 
       },
       (error) => {
         console.error('Operation failed:', error);

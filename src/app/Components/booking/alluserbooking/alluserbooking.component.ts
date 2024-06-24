@@ -17,12 +17,17 @@ export class AlluserbookingComponent implements OnInit {
   constructor(
     private bookingService: BookingService,
     private router: Router,
+    private route: ActivatedRoute,
     private activateRouter: ActivatedRoute
   ) {}
   ngOnInit(): void {
     // Initialize dataSource with your data
     this.GetAllUserBooking();
     this.filteredData = this.dataSource;
+    this.route.queryParams.subscribe(params => {
+      const totalPrice = params['totalPrice'];
+      console.log('Total Price:', totalPrice);
+    });
   }
   // ---------------------------------- GetAllUserBooking
 
