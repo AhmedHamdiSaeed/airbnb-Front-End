@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div class="cartona">
     <div class="box" *ngFor="let item of allBooking">
       <div class="img">
@@ -33,4 +33,52 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<div class="container my-trips-container">
+  <div class="title text-center mb-4">MY TRIPS</div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th (click)="sortData('propertyName')">Property Name</th>
+          <th (click)="sortData('hostName')">Host Name</th>
+          <th (click)="sortData('checkInDate')">Check In Date</th>
+          <th (click)="sortData('checkOutDate')">Check Out Date</th>
+          <th (click)="sortData('totalPrice')">Total Price</th>
+          <th (click)="sortData('status')">Booking Status</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of allBooking | paginate: { itemsPerPage: 10, currentPage: p }">
+          <td>
+            <i class="fas fa-building icon-green"></i> {{ row.propTitle }}
+          </td>
+          <td>
+            <i class="fas fa-user-circle icon-blue"></i> {{ row.id }}
+          </td>
+          <td>
+            <i class="far fa-calendar-alt icon-checkin"></i> {{ row.checkInDate | date : "dd-MM-yyyy" }}
+          </td>
+          <td>
+            <i class="far fa-calendar-check icon-checkout"></i> {{ row.checkOutDate | date : "dd-MM-yyyy" }}
+          </td>
+          <td>
+            <i class="fa-solid fa-sack-dollar fs-5 icon-price" style="color: #006110"></i> {{ row.totalPrice }}
+          </td>
+          <td [style.color]="row.bookingStatus ? 'green' : 'red'">
+            <i [class]="row.bookingStatus ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i> 
+            {{ row.bookingStatus ? "Available" : "Not Available" }}
+          </td>
+         
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls class="d-flex justify-content-center pag" (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+

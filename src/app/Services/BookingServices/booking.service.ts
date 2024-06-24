@@ -36,7 +36,7 @@ export class BookingService {
   // --------------------------------------- GetAllBookingForProperty
   GetAllBookingForProperty(propertyId: number) {
     return this.http
-      .get(`${this.baseUrl}GetAllBookingForProperty/${propertyId}`)
+      .get(`${this.baseUrl}Booking/GetAllBookingForProperty/${propertyId}`)
       .pipe(
         map((response) => {
           return response;
@@ -47,7 +47,7 @@ export class BookingService {
   // --------------------------------------- GetPropertyBookingDetails
   GetPropertyBookingDetails(bookingId: number) {
     return this.http
-      .get(`${this.baseUrl}GetPropertyBookingDetails/${bookingId}`)
+      .get(`${this.baseUrl}Booking/GetPropertyBookingDetails/${bookingId}`)
       .pipe(
         map((result) => {
           return result;
@@ -57,7 +57,7 @@ export class BookingService {
   // --------------------------------------- UpdateBooking
   UpdateBooking(bookingId: number, selectedBooking: updateBookingModel) {
     return this.http
-      .put(`${this.baseUrl}UpdateBooking/${bookingId}`, selectedBooking)
+      .put(`${this.baseUrl}Booking/UpdateBooking/${bookingId}`, selectedBooking)
       .pipe(
         map((result) => {
           return result;
@@ -66,7 +66,7 @@ export class BookingService {
   }
   // --------------------------------------- GetAllUserBooking
   GetAllUserBooking() {
-    return this.http.get(`${this.baseUrl}GetAllUserBooking`).pipe(
+    return this.http.get(`${this.baseUrl}Booking/GetAllUserBooking`).pipe(
       map((result) => {
         return result;
       })
@@ -75,7 +75,7 @@ export class BookingService {
   // --------------------------------------- GetUserBookingetails
   GetUserBookingetails(bookingId: number) {
     return this.http
-      .get(`${this.baseUrl}GetUserBookingetails/${bookingId}`)
+      .get(`${this.baseUrl}BookingGetUserBookingetails/${bookingId}`)
       .pipe(
         map((result) => {
           return result;

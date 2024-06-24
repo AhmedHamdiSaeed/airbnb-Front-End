@@ -19,7 +19,11 @@ export class AlluserbookingComponent implements OnInit {
     private router: Router,
     private activateRouter: ActivatedRoute
   ) {}
-
+  ngOnInit(): void {
+    // Initialize dataSource with your data
+    this.GetAllUserBooking();
+    this.filteredData = this.dataSource;
+  }
   // ---------------------------------- GetAllUserBooking
 
   GetAllUserBooking() {
@@ -32,7 +36,35 @@ export class AlluserbookingComponent implements OnInit {
   }
 
   // ----------------------------------------
-  ngOnInit(): void {
-    this.GetAllUserBooking();
+ 
+  dataSource: any[] = []; // Populate this with your data
+  filteredData: any[] = [];
+  displayedColumns: string[] = ['propertyName', 'hostName', 'checkInDate', 'checkOutDate', 'totalPrice', 'status', 'Action'];
+  p: number = 1; // Current page number for pagination
+
+
+
+  applyFilter(event: any): void {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filteredData = this.dataSource.filter(item => 
+      item.propertyName.toLowerCase().includes(filterValue) ||
+      item.hostName.toLowerCase().includes(filterValue)
+    );
+  }
+
+  sortData(column: string): void {
+    const sortedData = this.filteredData.sort((a, b) => {
+      const isAsc = true; // Change this to handle ascending/descending order
+      return this.compare(a[column], b[column], isAsc);
+    });
+    this.filteredData = sortedData;
+  }
+
+  compare(a: number | string, b: number | string, isAsc: boolean): number {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  deleteBooking(bookId: number): void {
+   console.log("hello");
   }
 }
