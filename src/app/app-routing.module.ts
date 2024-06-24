@@ -21,11 +21,11 @@ import { HosterPropertyComponent } from './Components/properties/property-contro
 import { PropertyControlComponent } from './Components/properties/property-control/property-control.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent , pathMatch: 'full' },
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'userprofile', component: UserprofileComponent },
-
+   {path: 'home', component: HomeComponent},
   { path: 'property', component: PropertiesComponent },
   { path: 'hosterPropereties', component: HosterPropertyComponent },
   { path: 'addProperty', component: AddPropertyComponent },

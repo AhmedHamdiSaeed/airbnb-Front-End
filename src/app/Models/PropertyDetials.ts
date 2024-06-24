@@ -55,3 +55,20 @@ export interface AppoinmentAvaiable {
   pricePerNight: number;
   isAvailable: boolean;
 }
+export interface ReviewsAddDto {
+  propertyId: number;
+  rating: number;
+  comment: string;
+}
+export interface BookingAddDto {
+  PropertyId: number;
+  CheckInDate: Date;
+  CheckOutDate: Date;
+  TotalPrice: number;
+ 
+}
+export interface AvailabilityUpdateDto {
+  From: Date;
+  To: Date;
+  IsAvailable: boolean;
+}

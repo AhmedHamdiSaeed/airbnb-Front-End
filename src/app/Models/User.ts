@@ -16,4 +16,5 @@ export interface userToken {
   role: string;
   userName: string;
   expiration: string;
+  userId: string;
 }

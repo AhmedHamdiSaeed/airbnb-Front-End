@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { userLogin, userRegister, userToken } from '../../Models/User';
-import { BehaviorSubject, ReplaySubject, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, map, of } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 
 @Injectable({
@@ -40,6 +40,7 @@ export class ProfileservicesService {
   // Load Current User
   sendCurrentUser: userToken;
   getCurrentUser() {
+    
     return this.sendCurrentUser;
   }
 
@@ -64,11 +65,21 @@ export class ProfileservicesService {
       map((user: userToken) => {
         localStorage.setItem('token', user.token);
         localStorage.setItem('username', user.userName);
+        localStorage.setItem('userId', user.userId);
         this.currentUser.next(user);
+        this.router.navigateByUrl('/home'); 
       })
     );
   }
-
+  
+  getUserId(): string {
+    return localStorage.getItem('userId');
+  }
+  public getUserImage(): Observable<string> {
+    return this.http.get<any>(`${this.baseUrl}User/get-current-user`).pipe(
+      map(response => response.imageUrl as string)
+    );
+  }
   LogOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');

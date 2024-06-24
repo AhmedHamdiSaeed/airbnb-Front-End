@@ -1,22 +1,27 @@
 import { Component, ElementRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ProperiesService } from '../../../Services/PropertyServices/properies.service';
-import { RootDetails } from '../../../Models/PropertyDetials';
+import { ReviewsAddDto, RootDetails, Reviews,BookingAddDto, AvailabilityUpdateDto } from '../../../Models/PropertyDetials';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ReviewService } from '../../../Services/ReviewServies/review.service';
+import { AuthService } from '../../../Services/UserServices/auth.service';
+import { ProfileservicesService } from '../../../Services/UserServices/profileservices.service';
+import { BookingService } from '../../../Services/BookingServices/booking.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
-  styleUrl: './property-details.component.css',
+  styleUrls: ['./property-details.component.css'],
 })
-
 export class PropertyDetailsComponent implements OnInit {
-  /**
-   *
-   */
   constructor(
     private service: ProperiesService,
     private route: ActivatedRoute,
-    private el: ElementRef
+    private el: ElementRef,
+    private reviewService: ReviewService,
+    private profileService: ProfileservicesService,
+    private authService: AuthService,
+    private bookingService: BookingService
   ) {}
 
   dataDetails: RootDetails;
@@ -33,50 +38,22 @@ export class PropertyDetailsComponent implements OnInit {
   numOfGuests: number = 1;
   isPDisabled: boolean = false;
   isMDisabled: boolean = false;
-  totalPrice: number; 
+  totalPrice: number;
+  userId: string;
+  review: ReviewsAddDto = { propertyId: 0, rating: 0, comment: '' };
+  canReview: boolean = false;
+  userImageUrl: string; // Property to hold user image URL
+  propertyIsAvalable: boolean = false;
   @Input() appStarRating: number;
-  minDateString: string = this.minDate.toISOString().split('T')[0]; // Get the date string in YYYY-MM-DD format
- // Review-related properties
- rate: number = 0;
- comment: string = '';
- propReview = { hasreview: false };
- r//eviews: Reviews[] = [];
-  // GetPropertyDetailsById ------------------
-  GetPropertyDetailsById(IdNumber: number) {
-    this.service.GetPropertyDetailsById(IdNumber).subscribe(
-      (result: RootDetails) => {
-        this.dataDetails = result;
-        console.log('Property details:', result);
-
-        // Check if appointments are available
-        if (result && result.appoinmentAvaiable) {
-          console.log('Appointment data:', result.appoinmentAvaiable);
-          const availableDates = result.appoinmentAvaiable.filter(appointment => appointment.isAvailable);
-          console.log('Filtered available dates:', availableDates);
-
-          if (availableDates.length > 0) {
-            this.minCheckInDate = this.formatDate(availableDates[0].from);
-            this.maxCheckInDate = this.formatDate(availableDates[availableDates.length - 1].to);
-            this.minCheckOutDate = this.minCheckInDate;
-            this.maxCheckOutDate = this.maxCheckInDate;
-            console.log(`Available check-in range: ${this.minCheckInDate} to ${this.maxCheckInDate}`);
-          } else {
-            console.log('No available dates found.');
-          }
-        } else {
-          console.log('Appointment data is not available.');
-        }
-      },
-      (error) => {
-        console.error('Error fetching property details:', error);
-      }
-    );
-  }
+  minDateString: string = this.minDate.toISOString().split('T')[0];
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.IdNumber = params['id'];
     });
+    this.userId = this.profileService.getUserId();
+    this.review.propertyId = this.IdNumber;
+
     this.GetPropertyDetailsById(this.IdNumber);
   }
 
@@ -90,13 +67,46 @@ export class PropertyDetailsComponent implements OnInit {
     const stars = '&#9733;'.repeat(rating) + '&#9734;'.repeat(5 - rating);
     this.el.nativeElement.innerHTML = stars;
     this.el.nativeElement.style.fontSize = '1.5rem';
-    this.el.nativeElement.querySelectorAll('.star').forEach((star: { style: { color: string; }; }) => {
+    this.el.nativeElement.querySelectorAll('.star').forEach((star: { style: { color: string } }) => {
       star.style.color = 'yellow';
     });
   }
+
   formatDate(date: string): string {
     const d = new Date(date);
     return d.toISOString().split('T')[0];
+  }
+
+  GetPropertyDetailsById(IdNumber: number): void {
+    this.service.GetPropertyDetailsById(IdNumber).subscribe(
+      (result: RootDetails) => {
+        this.dataDetails = result;
+        this.checkEligibility();
+        console.log('Property details:', result);
+
+        if (result && result.appoinmentAvaiable) {
+          const availableDates = result.appoinmentAvaiable.filter((appointment) => appointment.isAvailable);
+
+          if (availableDates.length > 0) {
+            this.propertyIsAvalable = true;
+            this.minCheckInDate = this.formatDate(availableDates[0].from);
+            this.maxCheckInDate = this.formatDate(availableDates[availableDates.length - 1].to);
+            this.minCheckOutDate = this.minCheckInDate;
+            this.maxCheckOutDate = this.maxCheckInDate;
+            console.log(`Available check-in range: ${this.minCheckInDate} to ${this.maxCheckInDate}`);
+          } else {
+            this.propertyIsAvalable = false;
+            console.log('No available dates found.');
+          }
+        } else {
+          this.propertyIsAvalable = false;
+          console.log('Appointment data is not available.');
+        }
+      },
+      (error) => {
+        console.error('Error fetching property details:', error);
+      }
+    );
   }
 
   onCheckInDateChange(event: any): void {
@@ -104,7 +114,7 @@ export class PropertyDetailsComponent implements OnInit {
     console.log('Selected Check-in Date:', this.startDate);
 
     if (this.dataDetails && this.dataDetails.appoinmentAvaiable) {
-      const availableDates = this.dataDetails.appoinmentAvaiable.filter(appointment => {
+      const availableDates = this.dataDetails.appoinmentAvaiable.filter((appointment) => {
         const fromDate = new Date(appointment.from);
         const toDate = new Date(appointment.to);
         console.log('Comparing with:', fromDate, toDate);
@@ -124,6 +134,10 @@ export class PropertyDetailsComponent implements OnInit {
       console.log('Appointment data is not available.');
     }
   }
+
+openDatePicker(id: string) {
+  document.getElementById(id).focus();
+}
 
   onCheckOutDateChange(event: any): void {
     this.endDate = new Date(event.target.value);
@@ -145,8 +159,8 @@ export class PropertyDetailsComponent implements OnInit {
       console.log('Price could not be calculated due to missing data.');
     }
   }
-  
-  plusButton() {
+
+  plusButton(): void {
     this.numOfGuests++;
     this.isMDisabled = false;
     if (this.numOfGuests >= this.dataDetails.numberOfGuest) {
@@ -155,7 +169,7 @@ export class PropertyDetailsComponent implements OnInit {
     this.updateTotalPrice();
   }
 
-  minusButton() {
+  minusButton(): void {
     this.numOfGuests--;
     this.isPDisabled = false;
     if (this.numOfGuests <= 1) {
@@ -163,8 +177,98 @@ export class PropertyDetailsComponent implements OnInit {
     }
     this.updateTotalPrice();
   }
-  openPopup() {
+
+  openPopup(): void {
     console.log('Reserve button clicked!');
   }
- 
+
+  checkEligibility(): void {
+    this.reviewService.checkReviewEligibility(this.userId, this.review.propertyId).subscribe(
+      (result) => {
+        this.canReview = result;
+      },
+      (error) => {
+        console.error('Error checking eligibility:', error);
+      }
+    );
+  }
+
+  submitReview(): void {
+    if (!this.canReview) {
+      console.error('User is not eligible to add a review.');
+      return;
+    }
+
+    this.reviewService.addReview(this.userId, this.review).subscribe(
+      (result) => {
+        if (result) {
+          console.log('Review added successfully!');
+          this.profileService.getUserImage().subscribe(
+            (imageUrl) => {
+              this.dataDetails.reviews.push({
+                id: Date.now(),
+                reviewComment: this.review.comment,
+                Rate: this.review.rating,
+                UserName: this.authService.getUserName(),
+                Userimage: imageUrl
+              });
+            },
+            (error) => {
+              console.error('Error fetching user image:', error);
+              // Handle error fetching user image
+            }
+          );
+
+          // Reset the form
+          this.review.rating = 0;
+          this.review.comment = '';
+        } else {
+          console.error('Failed to add review.');
+        }
+      },
+      (error) => {
+        console.error('Error adding review:', error);
+      }
+    );
+  }
+  ////
+  bookProperty(): void {
+    const bookingAddDto: BookingAddDto = {
+      PropertyId: this.IdNumber,
+      CheckInDate: this.startDate, // Convert Date to ISO string
+      CheckOutDate: this.endDate, // Convert Date to ISO string
+      TotalPrice: this.totalPrice
+    };
+
+    const userId = this.profileService.getUserId();
+
+    this.bookingService.addBooking(userId, bookingAddDto).pipe(
+      switchMap(response => {
+        console.log('Booking successful:', response);
+        alert('Booking successful!');
+
+        // Calculate the new availability period dynamically
+        const newFrom = new Date(this.endDate); // Start from the day after CheckOutDate
+        newFrom.setDate(newFrom.getDate() + 1);
+
+        const newTo = new Date(this.dataDetails.appoinmentAvaiable[0].to); 
+        const isAvailable = newFrom <= newTo;
+        const availabilityUpdateDto: AvailabilityUpdateDto = {
+          From: newFrom,
+          To: newTo,
+          IsAvailable: isAvailable // Set availability as needed
+        };
+
+        return this.bookingService.updateAvailability(this.IdNumber, availabilityUpdateDto);
+      })
+    ).subscribe(
+      (updateResponse) => {
+        console.log('Availability updated successfully:', updateResponse);
+      },
+      (error) => {
+        console.error('Operation failed:', error);
+        alert('Operation failed. Please try again later.');
+      }
+    );
+  }
 }

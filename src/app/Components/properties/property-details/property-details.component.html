@@ -3,7 +3,6 @@
       <h1 class="col-sm-12">{{ dataDetails.name }}</h1>
       <div>
         <i class="fas fa-star" style="display: inline; font-size: 1.1rem"></i>
-        <!-- <mat-icon style="display: inline; font-size: 1.1rem">star</mat-icon> -->
         <p
           *ngIf="dataDetails.ratingOverroll === 0.0; else topNotZero"
           class="fs-6 colo-sm-12"
@@ -14,7 +13,7 @@
         </p>
         <ng-template #topNotZero>
           <p class="fs-6 colo-sm-12" style="display: inline">
-            {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
+            {{ dataDetails.ratingOverroll | number: '1.1-1' }} |
             <a>{{ dataDetails.numOfReview }} Reviews</a> |
             {{ dataDetails.cityName }},
             {{ dataDetails.adress }},
@@ -26,11 +25,7 @@
     <div class="row mt-3">
       <div class="col" *ngFor="let i of dataDetails.imageUrl">
         <div class="d-flex justify-content-center flex-wrap m-2">
-          <img
-            src="{{ i }}"
-            class="rounded"
-            style="height: 15rem; width: 25rem"
-          />
+          <img src="{{ i }}" class="rounded" style="height: 15rem; width: 25rem" />
         </div>
       </div>
     </div>
@@ -61,7 +56,8 @@
           <div class="col-1">
             <i style="display: block" class="fas fa-user-circle fs-2"></i>
             <i style="display: block" class="fas fa-map-marker-alt fs-2"></i>
-            <i style="display: block"  class="fas fa-key fs-2"></i></div>
+            <i style="display: block" class="fas fa-key fs-2"></i>
+          </div>
           <div class="col-11">
             <h4 style="display: inline; font-weight: bold">
               {{ dataDetails.userName }} is a Superhost
@@ -111,17 +107,13 @@
         <div class=""></div>
         <hr />
         <div>
-            <i class="fas fa-star fs-5"></i>
-             <p
-            *ngIf="dataDetails.ratingOverroll === 0.0; else notZero"
-            class="fs-5"
-            style="display: inline"
-          >
+          <i class="fas fa-star fs-5"></i>
+          <p *ngIf="dataDetails.ratingOverroll === 0.0; else notZero" class="fs-5" style="display: inline">
             N/A | No reviews yet
           </p>
           <ng-template #notZero>
             <p class="fs-5" style="display: inline">
-              {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
+              {{ dataDetails.ratingOverroll | number: '1.1-1' }} |
               {{ dataDetails.numOfReview }} Reviews
             </p>
           </ng-template>
@@ -130,15 +122,11 @@
           <div class="col-6 mt-3" *ngFor="let i of dataDetails.reviews">
             <div class="row">
               <div class="col-2">
-                <img
-                  src="{{ i.Userimage }}"
-                  class="rounded-circle"
-                  style="height: 3rem; width: 3rem"
-                />
+                <img src="{{ i.Userimage }}" class="rounded-circle" style="height: 3rem; width: 3rem" />
               </div>
               <div class="col-6">
                 <h3 class="fw-bold" style="display: inline">{{ i.UserName }}</h3>
-               </div>
+              </div>
               <div class="col-4 d-flex">
                 <!-- <h1 class="star" [appStarRating]="i.Rate"></h1> -->
               </div>
@@ -148,120 +136,152 @@
             </div>
           </div>
         </div>
+        <!-- Review Form -->
+        <div *ngIf="canReview; else notEligible">
+          <form (ngSubmit)="submitReview()">
+            <label for="rating">Rating:</label>
+            <input
+              id="rating"
+              type="number"
+              [(ngModel)]="review.rating"
+              name="rating"
+              min="1"
+              max="5"
+              required
+            />
   
-        <!-- <div *ngIf="propReview.hasreview">
-            <div class="row mb-3">
-              <h2>You have reserved this property before!</h2>
-              <h3>Tell us about your experience..</h3>
-            </div>
-          
-            <div class="row mb-3">
-              <div class="col-4">
-                <p>Choose your rating:</p>
-              </div>
-              <div class="col-8 d-flex align-items-center">
-                0
-                <input type="range" class="form-range mx-3" min="0" max="5" step="1" [(ngModel)]="rate" />
-                5
-              </div>
-            </div>
-          
-            <div class="row mb-3">
-              <div class="col">
-                <div class="form-floating">
-                  <textarea class="form-control" id="commentTextarea" [(ngModel)]="comment" placeholder="Add your comment.."></textarea>
-                  <label for="commentTextarea">Add your comment..</label>
-                </div>
-              </div>
-            </div>
-          
-            <div class="row mb-3">
-              <div class="col text-center">
-                <button class="btn btn-warning" style="width: 30%" (click)="sendReview()">Send your review</button>
-              </div>
-            </div>
-          </div> -->
-          
+            <label for="comment">Comment:</label>
+            <textarea id="comment" [(ngModel)]="review.comment" name="comment" required></textarea>
+  
+            <button type="submit">Submit Review</button>
+          </form>
+        </div>
+        <ng-template #notEligible>
+          <p>You are not eligible to add a review for this property.</p>
+        </ng-template>
       </div>
   
-      <div class="col-lg-4 col-sm-12">
-        <div
-          class="row"
-          style="
-            position: sticky;
-            top: 6rem;
-            left: 12rem;
-            border: lightgray solid 1px;
-            border-radius: 5px;
-            box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2),
-              0 6px 20px 0 rgba(0, 0, 0, 0.2);
-            margin-left: 4rem;
-            margin-top: 2rem;
-          "
-        >
-          <div class="row">
-            <div class="d-flex">
-              <h2 class="me-auto" style="display: inline">
-                ${{ dataDetails.appoinmentAvaiable[0]?.pricePerNight }} <span style="font-size: small">per night</span>
-              </h2>
-              <i style="display: inline" class="fas fa-star fs-5 fs-6 mt-2"></i>
-          
-  
-              <p
-                *ngIf="dataDetails.ratingOverroll === 0.0; else reserveNotZero"
-                class="fs-6 mt-2"
-                style="display: inline"
-              >
-                N/A |
-                <a>No reviews yet</a>
+      <div class="col-lg-4 col-sm-12 pop">
+        <div *ngIf="propertyIsAvalable; else notAvalable" 
+        class="col-lg-10 col-sm-12 pop mx-auto "
+        style="
+          position: sticky;
+          top: 6rem;
+          border: lightgray solid 1px;
+          border-radius: 5px;
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+          margin-top: 2rem;
+          padding: 2rem;
+          background-color: #fff;
+        "
+      >
+        <div class="row" >
+          <div class="d-flex justify-content-between align-items-center w-400">
+            <h2 style="margin: 0;">
+              ${{ dataDetails.appoinmentAvaiable[0]?.pricePerNight }} <span style="font-size: small">per night</span>
+            </h2>
+            <div>
+              <i class="fas fa-star fs-5 mt-2"></i>
+              <p *ngIf="dataDetails.ratingOverroll === 0.0; else reserveNotZero" class="fs-6 mt-2 d-inline">
+                N/A | <a>No reviews yet</a>
               </p>
               <ng-template #reserveNotZero>
-                <p class="fs-6 mt-2" style="display: inline">
-                  {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
+                <p class="fs-6 mt-2 d-inline">
+                  {{ dataDetails.ratingOverroll | number: '1.1-1' }} |
                   {{ dataDetails.numOfReview }} Reviews
                 </p>
               </ng-template>
             </div>
           </div>
-          <div class="row" style="margin: auto;">
-            <div class="col-md-6">
-              <label for="checkInDate" class="form-label">Check-In Date:</label>
-              <input id="checkInDate" type="date" class="form-control" [min]="minCheckInDate" [max]="maxCheckInDate" (change)="onCheckInDateChange($event)" [(ngModel)]="startDateString">
-            </div>
-            <div class="col-md-6">
-              <label for="checkOutDate" class="form-label">Check-Out Date:</label>
-              <input id="checkOutDate" type="date" class="form-control" [min]="minCheckOutDate" [max]="maxCheckOutDate" (change)="onCheckOutDateChange($event)" [(ngModel)]="endDateString">
-            </div>
-          </div>
-          
-  
-          <div class="row" style="margin: auto; margin-top: 2rem">
-            <div class="d-flex" style="border: black solid 1px; border-radius: 5px ; padding: 5px;">
-                <h4 class="me-auto mb-0">Guests</h4>
-                <button class="btn btn-primary me-2" [disabled]="isPDisabled" (click)="plusButton()">+</button>
-                <h4 class="mb-0 numogguest">{{ numOfGuests }}</h4>
-                <button class="btn btn-primary ms-2" [disabled]="isMDisabled" (click)="minusButton()">-</button>
-              </div>
-          </div>
-          <div class="row" style="margin: auto; margin-top: 1rem">
-            <button class="btn btn-color" (click)="openPopup()">Reserve</button>
-          </div>
-  
-          <div class="row">
-            <h6  class="m-2" >You won't be charged yet.</h6>
-            <p>
-              Price shown is the total trip price, including additional fees and
-              taxes.
-            </p>
-            <hr class="m-2" />
-          </div>
-          <div class="row">
-             <div class="d-flex">
-              <h2 class="me-auto">Total</h2>
-              <h3>${{ totalPrice }}</h3>
-            </div> 
+        </div>
+
+        <div class="row mt-3" >
+            <div class="col-md-6   position-relative">
+                <input
+                  id="checkInDate"
+                  type="text"
+                  class="form-control date-input"
+                  placeholder="Check-In"
+                  onfocus="(this.type='date')"
+                  onblur="(this.type='text')"
+                  [min]="minCheckInDate"
+                  [max]="maxCheckInDate"
+                  (change)="onCheckInDateChange($event)"
+                  [(ngModel)]="startDateString"
+                /><i class="fas fa-calendar-alt date-icon" (click)="openDatePicker('checkOutDate')"></i>
+   
+               </div>
+              <div class="col-md-6   position-relative">
+                <input
+                  id="checkOutDate"
+                  type="text"
+                  class="form-control date-input"
+                  placeholder="Check-Out "
+                  onfocus="(this.type='date')"
+                  onblur="(this.type='text')"
+                  [min]="minCheckOutDate"
+                  [max]="maxCheckOutDate"
+                  (change)="onCheckOutDateChange($event)"
+                  [(ngModel)]="endDateString"
+                /><i class="fas fa-calendar-alt date-icon" (click)="openDatePicker('checkOutDate')"></i>
+   
+                </div>
+        </div>
+        <div class="row my-3">
+          <div class="d-flex w-100 justify-content-center align-items-center" style="border: 1px solid black; border-radius: 5px; padding: 5px;">
+            <h4 class="me-auto mb-0">Guests</h4>
+            <button class="btn btn-primary me-2" [disabled]="isPDisabled" (click)="plusButton()">+</button>
+            <h4 class="mb-0 numogguest">{{ numOfGuests }}</h4>
+            <button class="btn btn-primary ms-2" [disabled]="isMDisabled" (click)="minusButton()">-</button>
           </div>
         </div>
+        <div class="row d-flex justify-content-center" style="margin-top: 1rem;">
+          <button class="btn btn-color" (click)="bookProperty()">Reserve</button>
+        </div>
+        <div class="row">
+          <h6 class="m-2">You won't be charged yet.</h6>
+          <p>
+            Price shown is the total trip price, including additional fees and
+            taxes.
+          </p>
+          <hr class="m-2" />
+        </div>
+        <div class="row">
+          <div class="d-flex">
+            <h2 class="me-auto">Total</h2>
+            <h3>${{ totalPrice }}</h3>
+          </div>
+        </div>
+      </div>
+      
+        <ng-template #notAvalable>
+            <div
+              class="col-lg-8 col-sm-12 pop"
+              style="
+                position: sticky;
+                top: 6rem;
+                left: 12rem;
+                border: lightgray solid 1px;
+                border-radius: 5px;
+                box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.2);
+                margin-left: 4rem;
+                margin-top: 2rem;
+                padding: 1rem;
+                background-color: #fff;
+              "
+            >
+              <div class="row">
+                <div class="d-flex justify-content-center w-800">
+                  <h2 class="text-center" style="margin: 0;">Sold Out</h2>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center" style="margin-top: 1rem;">
+                <button class="btn btn-gray" disabled>Request</button>
+              </div>
+            </div>
+          </ng-template>
+          
       </div>
     </div>
   </div>

@@ -23,3 +23,26 @@
     padding-top: 10px;
     font-size: 20px !important;
   }
+  .btn-gray {
+    background-color: #d3d3d3; /* Light gray background */
+    color: #808080; /* Gray text */
+    cursor: not-allowed; /* Indicate not-allowed cursor */
+    border: 1px solid #d3d3d3; /* Match border color to background */
+  }
+  
+  .date-input {
+    position: relative;
+    width: 100%;
+  }
+  
+  .date-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .date-input:focus + .date-icon {
+    display: none;
+  }
+  
