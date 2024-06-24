@@ -4,3 +4,8 @@ export interface Category {
   iconURL?: any;
   Desc?: string;
 }
+export interface CategoryFielsModel {
+  id: number;
+  name: string;
+  iconURL: any;
+}

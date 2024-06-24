@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import {
   PropertyData,
   propertyImageAdd,
 } from '../../../Models/PropertyControlModels/AllPropertyControlModels';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { Property } from '../../../Models/PropertyModels';
 
 @Injectable({
@@ -86,9 +86,17 @@ export class PropControlService {
   }
 
   getAllAppoinmentAvaiableForProperty(id) {
-    return this.http.get(
-      `${this.baseUrl}AppointmentAvailable/GetAllAppoinmentAvailable/${id}`
-    );
+    return this.http
+      .get(
+        `${this.baseUrl}AppointmentAvailable/GetAllAppoinmentAvailable/${id}`
+      )
+      .pipe(
+        map((response) => {
+          // Process the response if needed
+          return response;
+        }),
+        catchError(this.handleError)
+      );
   }
   updateAppoinmentAvaiable(id, updateAppoinment: AppoinmentAvailableAdd) {
     return this.http.put(
@@ -108,5 +116,11 @@ export class PropControlService {
     formData.append('file', file);
 
     return this.http.post<any>(`${this.baseUrl}Files/UploadImage`, formData);
+  }
+  // ---------------
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    // Log error in a real-world app
+    console.error('An error occurred:', error);
+    return throwError('Something went wrong; please try again later.');
   }
 }

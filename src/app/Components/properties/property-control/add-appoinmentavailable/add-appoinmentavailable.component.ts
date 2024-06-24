@@ -40,7 +40,7 @@ export class AddAppoinmentavailableComponent {
       from: ['', [Validators.required]],
       to: ['', [Validators.required]],
       pricePerNight: ['', [Validators.required]],
-      isAvailable: ['', [Validators.required]],
+      isAvailable: ['0', [Validators.required]],
     });
   }
   // ------------------------- Get All PropertyAmentity
@@ -65,32 +65,77 @@ export class AddAppoinmentavailableComponent {
         this.getAllPropertyAppoinemtnAvaialbe();
       });
   }
-
+  // --------------------- Select AppoinmentAvaiable To Update
+  AppoinmentStatus = 'Add';
+  selectedAppoinment: AppoinmentAvailableGet;
+  selectToUpdate(item: AppoinmentAvailableGet) {
+    this.selectedAppoinment = item;
+    this.AppoinmentStatus = 'Update';
+    this.AppoinmentAvailableData.reset({
+      propertyId: item.id,
+      from: new Date(item.from).toISOString().substring(0, 10),
+      to: new Date(item.to).toISOString().substring(0, 10),
+      pricePerNight: item.pricePerNight,
+      isAvailable: +item.isAvailable,
+    });
+    console.log(this.AppoinmentAvailableData.value);
+  }
   // ----------- Submit Function
   OnSubmit() {
     if (this.AppoinmentAvailableData.valid) {
-      this.propertyControlService
-        .addAppoinmentAvaiable(this.AppoinmentAvailableData.value)
-        .subscribe({
-          next: () => {
-            alert('Done');
-            this.getAllPropertyAppoinemtnAvaialbe();
-            const propertyId =
-              this.AppoinmentAvailableData.get('propertyId').value;
+      if (this.AppoinmentStatus === 'Add') {
+        // ----------------- Add
+        this.propertyControlService
+          .addAppoinmentAvaiable(this.AppoinmentAvailableData.value)
+          .subscribe({
+            next: () => {
+              alert('Done');
+              this.getAllPropertyAppoinemtnAvaialbe();
+              const propertyId =
+                this.AppoinmentAvailableData.get('propertyId').value;
 
-            this.AppoinmentAvailableData.reset({
-              propertyId: propertyId,
-              from: '',
-              to: '',
-              pricePerNight: '',
-              isAvailable: '',
-            });
-          },
-          error: (err) => {
-            console.log(this.AppoinmentAvailableData.value);
-            alert(err);
-          },
-        });
+              this.AppoinmentAvailableData.reset({
+                propertyId: propertyId,
+                from: '',
+                to: '',
+                pricePerNight: '',
+                isAvailable: '',
+              });
+            },
+            error: (err) => {
+              console.log(this.AppoinmentAvailableData.value);
+              alert(err);
+            },
+          });
+      } else {
+        // ----------------- Update
+        this.AppoinmentStatus = 'Add';
+        this.propertyControlService
+          .updateAppoinmentAvaiable(
+            this.selectedAppoinment.id,
+            this.AppoinmentAvailableData.value
+          )
+          .subscribe({
+            next: () => {
+              alert('Update Done');
+              this.getAllPropertyAppoinemtnAvaialbe();
+              const propertyId =
+                this.AppoinmentAvailableData.get('propertyId').value;
+
+              this.AppoinmentAvailableData.reset({
+                propertyId: propertyId,
+                from: '',
+                to: '',
+                pricePerNight: '',
+                isAvailable: '',
+              });
+            },
+            error: (err) => {
+              console.log(this.AppoinmentAvailableData.value);
+              alert(err);
+            },
+          });
+      }
     } else {
       alert('Form is invalid');
     }

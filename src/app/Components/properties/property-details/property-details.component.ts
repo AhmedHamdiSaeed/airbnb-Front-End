@@ -1,4 +1,10 @@
-import { Component, ElementRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { ProperiesService } from '../../../Services/PropertyServices/properies.service';
 import { ReviewsAddDto, RootDetails, Reviews,BookingAddDto, AvailabilityUpdateDto } from '../../../Models/PropertyDetials';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -39,6 +45,7 @@ export class PropertyDetailsComponent implements OnInit {
   isPDisabled: boolean = false;
   isMDisabled: boolean = false;
   totalPrice: number;
+
   userId: string;
   review: ReviewsAddDto = { propertyId: 0, rating: 0, comment: '' };
   canReview: boolean = false;
@@ -46,6 +53,7 @@ export class PropertyDetailsComponent implements OnInit {
   propertyIsAvalable: boolean = false;
   @Input() appStarRating: number;
   minDateString: string = this.minDate.toISOString().split('T')[0];
+
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -67,10 +75,11 @@ export class PropertyDetailsComponent implements OnInit {
     const stars = '&#9733;'.repeat(rating) + '&#9734;'.repeat(5 - rating);
     this.el.nativeElement.innerHTML = stars;
     this.el.nativeElement.style.fontSize = '1.5rem';
+
     this.el.nativeElement.querySelectorAll('.star').forEach((star: { style: { color: string } }) => {
       star.style.color = 'yellow';
     });
-  }
+ }
 
   formatDate(date: string): string {
     const d = new Date(date);
@@ -114,6 +123,7 @@ export class PropertyDetailsComponent implements OnInit {
     console.log('Selected Check-in Date:', this.startDate);
 
     if (this.dataDetails && this.dataDetails.appoinmentAvaiable) {
+
       const availableDates = this.dataDetails.appoinmentAvaiable.filter((appointment) => {
         const fromDate = new Date(appointment.from);
         const toDate = new Date(appointment.to);
@@ -123,8 +133,12 @@ export class PropertyDetailsComponent implements OnInit {
 
       if (availableDates.length > 0) {
         const availableFromDate = this.formatDate(availableDates[0].from);
-        const availableToDate = this.formatDate(availableDates[availableDates.length - 1].to);
-        console.log(`Available check-in dates: ${availableFromDate} to ${availableToDate}`);
+        const availableToDate = this.formatDate(
+          availableDates[availableDates.length - 1].to
+        );
+        console.log(
+          `Available check-in dates: ${availableFromDate} to ${availableToDate}`
+        );
         this.minCheckOutDate = this.formatDate(this.startDate.toISOString());
         this.maxCheckOutDate = availableToDate;
       } else {
@@ -149,10 +163,17 @@ openDatePicker(id: string) {
     console.log('Start Date:', this.startDate);
     console.log('End Date:', this.endDate);
 
-    if (this.startDate && this.endDate && this.dataDetails && this.dataDetails.appoinmentAvaiable[0].pricePerNight) {
+    if (
+      this.startDate &&
+      this.endDate &&
+      this.dataDetails &&
+      this.dataDetails.appoinmentAvaiable[0].pricePerNight
+    ) {
       const timeDifference = this.endDate.getTime() - this.startDate.getTime();
       const daysDifference = timeDifference / (1000 * 3600 * 24);
-      this.totalPrice = Math.round(daysDifference * this.dataDetails.appoinmentAvaiable[0].pricePerNight);
+      this.totalPrice = Math.round(
+        daysDifference * this.dataDetails.appoinmentAvaiable[0].pricePerNight
+      );
       console.log('Total Price:', this.totalPrice);
     } else {
       this.totalPrice = 0;
@@ -160,7 +181,7 @@ openDatePicker(id: string) {
     }
   }
 
-  plusButton(): void {
+  plusButton() {
     this.numOfGuests++;
     this.isMDisabled = false;
     if (this.numOfGuests >= this.dataDetails.numberOfGuest) {
@@ -181,6 +202,7 @@ openDatePicker(id: string) {
   openPopup(): void {
     console.log('Reserve button clicked!');
   }
+
 
   checkEligibility(): void {
     this.reviewService.checkReviewEligibility(this.userId, this.review.propertyId).subscribe(
@@ -271,4 +293,5 @@ openDatePicker(id: string) {
       }
     );
   }
+
 }

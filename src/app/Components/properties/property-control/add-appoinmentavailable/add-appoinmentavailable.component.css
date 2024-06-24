@@ -31,23 +31,6 @@ select {
   margin-bottom: 0;
 }
 
-@media (max-width: 768px) {
-  .cartona {
-    padding: 1rem;
-  }
-  .property-form {
-    width: 85%;
-  }
-}
-@media (max-width: 500px) {
-  .cartona {
-    padding: 2rem 0.2rem;
-  }
-  .property-form {
-    width: 100%;
-  }
-}
-
 .cartona table {
   width: 100%;
   border-collapse: collapse;
@@ -67,4 +50,28 @@ select {
 .cartona table td button.update {
   background-color: green;
   color: white;
+}
+@media (max-width: 992px) {
+  .cartona {
+    width: 100%;
+    padding: 1rem;
+  }
+  .property-form {
+    width: 100%;
+  }
+  .cartona .boxContainer {
+    width: 100%;
+  }
+  section {
+    padding: 0;
+  }
+  .cartona table th,
+  .cartona table td {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  .cartona table td button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
 }

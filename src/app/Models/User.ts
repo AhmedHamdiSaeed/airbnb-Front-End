@@ -18,3 +18,17 @@ export interface userToken {
   expiration: string;
   userId: string;
 }
+export interface userProfile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  phoneNumber: string;
+  image: string;
+}
+export interface currentUserModel {
+  displayName: string;
+  image: string;
+  email: string;
+  token: string;
+}

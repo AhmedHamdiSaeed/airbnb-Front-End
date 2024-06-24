@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProperiesService } from '../../Services/PropertyServices/properies.service';
 import { Property, RootProperty } from '../../Models/PropertyModels';
 import { Ceties } from '../../Models/CetiesModel';
 import { Categories } from '../../Models/CategoryModel';
+import { CategoryService } from '../../Services/CategoryServices/category.service';
+import { CategoryFielsModel } from '../../Models/Category';
 
 @Component({
   selector: 'app-properties',
@@ -23,9 +25,12 @@ export class PropertiesComponent implements OnInit {
   /**
    *
    */
-  constructor(private service: ProperiesService) {}
+  constructor(
+    private service: ProperiesService,
+    private cateService: CategoryService
+  ) {}
   pageNumber: number;
-  pageSize: number = 4;
+  pageSize: number = 8;
   cityId: number;
   cateId: number;
   Quantity: number;
@@ -63,19 +68,22 @@ export class PropertiesComponent implements OnInit {
     );
   }
   // Get All Categories
-  allCategories: Categories[];
+  allCategories: CategoryFielsModel[];
   GetAllCategories() {
-    this.service.GetAllCategory().subscribe((result: Categories[]) => {
-      this.allCategories = result;
-    });
+    this.cateService
+      .GetAllCategs()
+      .subscribe((result: CategoryFielsModel[]) => {
+        console.log(result);
+        this.allCategories = result;
+      });
   }
   selectCategory(selectedId) {
-    this.cateId = selectedId.target.value;
+    this.cateId = selectedId;
     this.GetAllPropertyForAllUsers(
       this.pageNumber,
       this.pageSize,
       this.cityId,
-      selectedId.target.value
+      selectedId
     );
   }
 
@@ -129,5 +137,14 @@ export class PropertiesComponent implements OnInit {
 
   setActive(index: number): void {
     this.activeIndex = index;
+  }
+  // -------------------------------------------------------- Category
+  @ViewChild('categoryNav', { read: ElementRef }) categoryNav: ElementRef<any>;
+  scrollLeft(): void {
+    this.categoryNav.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });
+  }
+  ifEnd: boolean = false;
+  scrollRight(): void {
+    this.categoryNav.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
   }
 }

@@ -1,0 +1,36 @@
+<section>
+  <div class="cartona">
+    <div class="box" *ngFor="let item of allBooking">
+      <div class="img">
+        <img [src]="item.propImage" alt="" />
+      </div>
+      <div class="content">
+        <strong
+          [ngClass]="{confirmed: item.bookingStatus == 1, pending: item.bookingStatus == 0, }"
+          >{{ item.bookingStatus == 1 ? "Confirmed" : "Pending" }}</strong
+        >
+        <h2>{{ item.propTitle }}</h2>
+        <p>Total Price: {{ item.totalPrice }}</p>
+        <div class="date">
+          <span
+            >Form:
+            {{ item.checkInDate.slice(0, item.checkInDate.indexOf("T")) }}</span
+          >
+          <br />
+          <span
+            >To:
+            {{
+              item.checkOutDate.slice(0, item.checkInDate.indexOf("T"))
+            }}</span
+          >
+        </div>
+        <div class="btns">
+          <button><i class="fa-solid fa-eye"></i></button>
+          <button *ngIf="item.bookingStatus == 1" class="payment">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

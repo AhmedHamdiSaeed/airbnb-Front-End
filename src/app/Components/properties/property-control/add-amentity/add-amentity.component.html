@@ -1,4 +1,8 @@
 <div class="cartona">
+  <h2 style="text-align: center; margin-bottom: 1rem">
+    {{ amentityStatus }} Amentity
+  </h2>
+
   <form
     [formGroup]="AmentityData"
     (ngSubmit)="OnSubmit()"
@@ -22,7 +26,7 @@
       />
     </div>
     <div class="form-group">
-      <button type="submit">Submit</button>
+      <button type="submit">{{ amentityStatus }}</button>
     </div>
   </form>
 </div>
@@ -32,7 +36,9 @@
       <ul>
         <li>{{ item.name }}</li>
         <li>{{ item.description }}</li>
-        <li><button class="update">Update</button></li>
+        <li>
+          <button class="update" (click)="selectToUpdate(item)">Update</button>
+        </li>
         <li>
           <button class="delete" (click)="DeletePropAmentity(item.id)">
             Delete

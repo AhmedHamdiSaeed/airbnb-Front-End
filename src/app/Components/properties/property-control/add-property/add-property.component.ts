@@ -5,6 +5,8 @@ import { ProperiesService } from '../../../../Services/PropertyServices/properie
 import { Ceties } from '../../../../Models/CetiesModel';
 import { Categories } from '../../../../Models/CategoryModel';
 import { ActivatedRoute } from '@angular/router';
+import { RootDetails } from '../../../../Models/PropertyDetials';
+import { Property } from '../../../../Models/PropertyModels';
 
 @Component({
   selector: 'app-add-property',
@@ -38,8 +40,8 @@ export class AddPropertyComponent implements OnInit {
       checkIn: ['', [Validators.required]],
       checkOut: ['', [Validators.required]],
       numberOfGuest: ['', [Validators.required]],
-      pets: ['', [Validators.required]],
-      takePhotos: ['', [Validators.required]],
+      pets: ['0', [Validators.required]],
+      takePhotos: ['0', [Validators.required]],
     });
   }
 
@@ -59,36 +61,115 @@ export class AddPropertyComponent implements OnInit {
       });
     }
   }
+  // ---------- GetAllHosterProperties
+  hosterProperties: Property[];
+  GetAllHosterProperties() {
+    this.propertyControlService
+      .GetAllHosterProperties()
+      .subscribe((result: Property[]) => {
+        this.hosterProperties = result;
+        console.log(this.hosterProperties);
+      });
+  }
+  //------------------------------ Get Property With Data
+  propertyStatus: string = 'Add';
+  SelectedProperty: RootDetails;
+  SelectedPropertyId: number;
 
+  SelectProperty(id) {
+    this.propertyStatus = 'Update';
+    this.SelectedPropertyId = id;
+    // Find Selected Property
+    this.propertyService
+      .GetPropertyDetailsById(id)
+      .subscribe((result: RootDetails) => {
+        this.SelectedProperty = result;
+        this.AddNewPropertyForm.reset({
+          name: this.SelectedProperty.name,
+          description: this.SelectedProperty.description,
+          adress: this.SelectedProperty.adress,
+          numberOfBedrooms: this.SelectedProperty.numberOfBedrooms,
+          numberOfBathrooms: this.SelectedProperty.numberOfBathrooms,
+          displayedImage: this.SelectedProperty.displayedImage,
+          beds: this.SelectedProperty.beds,
+          categoryId: '',
+          cityId: '',
+          checkIn: this.SelectedProperty.checkIn,
+          checkOut: this.SelectedProperty.checkOut,
+          numberOfGuest: this.SelectedProperty.numberOfGuest,
+          pets: +this.SelectedProperty.pets,
+          takePhotos: +this.SelectedProperty.takePhotos,
+        });
+      });
+    console.log(this.SelectedProperty);
+    // --------------------------------------
+  }
   // ----------------- Submit
   OnSubmit() {
     if (this.AddNewPropertyForm.valid) {
-      this.propertyControlService
-        .AddNewProperty(this.AddNewPropertyForm.value)
-        .subscribe({
-          next: () => {
-            console.log(this.AddNewPropertyForm.value);
-            this.AddNewPropertyForm.reset({
-              name: '',
-              description: '',
-              adress: '',
-              numberOfBedrooms: '',
-              numberOfBathrooms: '',
-              displayedImage: '',
-              beds: '',
-              categoryId: '',
-              cityId: '',
-              checkIn: '',
-              checkOut: '',
-              numberOfGuest: '',
-              pets: '',
-              takePhotos: '',
-            });
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
+      if (this.propertyStatus === 'Add') {
+        this.propertyControlService
+          .AddNewProperty(this.AddNewPropertyForm.value)
+          .subscribe({
+            next: () => {
+              console.log(this.AddNewPropertyForm.value);
+              this.GetAllHosterProperties();
+
+              this.AddNewPropertyForm.reset({
+                name: '',
+                description: '',
+                adress: '',
+                numberOfBedrooms: '',
+                numberOfBathrooms: '',
+                displayedImage: '',
+                beds: '',
+                categoryId: '',
+                cityId: '',
+                checkIn: '',
+                checkOut: '',
+                numberOfGuest: '',
+                pets: '',
+                takePhotos: '',
+              });
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+      } else {
+        this.propertyStatus = 'Add';
+        this.propertyControlService
+          .UpdateCurrentProperty(
+            this.SelectedPropertyId,
+            this.AddNewPropertyForm.value
+          )
+          .subscribe({
+            next: () => {
+              console.log(this.AddNewPropertyForm.value);
+              this.GetAllHosterProperties();
+
+              this.AddNewPropertyForm.reset({
+                name: '',
+                description: '',
+                adress: '',
+                numberOfBedrooms: '',
+                numberOfBathrooms: '',
+                displayedImage: '',
+                beds: '',
+                categoryId: '',
+                cityId: '',
+                checkIn: '',
+                checkOut: '',
+                numberOfGuest: '',
+                pets: '',
+                takePhotos: '',
+              });
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+      }
     } else {
       alert('Form is invalid');
       console.log('Form is invalid');
@@ -110,6 +191,7 @@ export class AddPropertyComponent implements OnInit {
   ngOnInit(): void {
     this.CreateNewProperty();
     this.getAllCeties();
+    this.GetAllHosterProperties();
     console.log(this.activeRouter.snapshot.url.toString());
   }
 }

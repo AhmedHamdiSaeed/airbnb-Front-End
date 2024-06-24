@@ -52,7 +52,7 @@ nav {
   position: relative;
 }
 .cartona .Welcome {
-  flex: 6;
+  flex: 3;
   position: relative;
   display: flex;
   text-align: left;
@@ -89,6 +89,9 @@ nav {
 .cartona .profile .SignIn:hover {
   background-color: var(--hover-main-color);
 }
+.cartona .Welcome p {
+  text-align: right !important;
+}
 .cartona .Welcome .logout:hover {
   background-color: var(--hover-main-color);
 }
@@ -112,13 +115,11 @@ nav {
 }
 @media (max-width: 1170px) {
   .cartona .links {
-    flex: 4;
+    flex: 6;
   }
-  .cartona .profile {
-    flex: 3;
-  }
+
   .cartona .Welcome {
-    flex: 5;
+    flex: 3;
   }
 }
 
@@ -186,6 +187,7 @@ nav {
     align-items: flex-start;
     justify-content: flex-start;
   }
+
   .cartona .Welcome p {
     margin-bottom: 1rem !important;
   }
@@ -215,4 +217,45 @@ ul {
   margin-left: 0 !important;
   margin-bottom: 0 !important;
   margin-right: 0 !important;
+}
+.wrap .Welcome {
+  position: relative;
+}
+.wrap .Welcome .userControl {
+  position: absolute;
+  top: 41px;
+  left: 30%;
+  width: 80%;
+  background-color: white;
+  display: none;
+
+  overflow: hidden;
+}
+.wrap .Welcome .userControl li {
+  cursor: pointer;
+  padding: 1rem;
+}
+.wrap .Welcome .userControl li:hover {
+  background-color: var(--secound-color);
+}
+@media (max-width: 1000px) {
+  .wrap .Welcome .userControl {
+    top: -10px;
+    left: 100%;
+    width: 60%;
+  }
+}
+.wrap .Welcome .userControl.active {
+  animation: showNav 0.2s;
+  overflow: visible;
+
+  display: block;
+}
+@keyframes showNav {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

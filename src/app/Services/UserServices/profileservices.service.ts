@@ -1,7 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { userLogin, userRegister, userToken } from '../../Models/User';
+
+import {
+  userLogin,
+  userProfile,
+  userRegister,
+  userToken,
+} from '../../Models/User';
 import { BehaviorSubject, Observable, ReplaySubject, map, of } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 
@@ -91,5 +97,24 @@ export class ProfileservicesService {
     return this.http.get(
       `${this.baseUrl}User/check-email-exist?email=${email}`
     );
+  }
+
+  // ------------------- uPDATE uSER dATA
+
+  updateUserProfileData(user: userProfile) {
+    return this.http.put(`${this.baseUrl}User/UpdateUser`, user);
+  }
+
+  //Uploade Image
+  private uploadUrl = '';
+  uploadFile(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<any>(`${this.baseUrl}Files/UploadImage`, formData);
+  }
+  //getCurrentUser
+  getUser() {
+    return this.http.get(`${this.baseUrl}User/get-current-user`);
   }
 }

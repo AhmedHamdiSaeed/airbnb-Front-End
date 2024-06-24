@@ -1,4 +1,7 @@
 <div class="cartona">
+  <h2 style="text-align: center; margin-bottom: 1rem">
+    {{ AppoinmentStatus }} Appoinment
+  </h2>
   <form
     [formGroup]="AppoinmentAvailableData"
     (ngSubmit)="OnSubmit()"
@@ -60,7 +63,11 @@
           <td>{{ item.pricePerNight }}</td>
           <td>{{ item.totalProice }}</td>
           <td>{{ item.isAvailable }}</td>
-          <td><button class="update">Update</button></td>
+          <td>
+            <button class="update" (click)="selectToUpdate(item)">
+              Update
+            </button>
+          </td>
           <td>
             <button
               (click)="DeletePropAppoinemtnAvaialbe(item.id)"

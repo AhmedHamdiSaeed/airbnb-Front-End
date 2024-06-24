@@ -1,1 +1,53 @@
-<p>userprofile works!</p>
+<section>
+  <div class="sideBar">
+    <!-- user information -->
+    <div class="user-data">
+      <div class="content">
+        <img
+          *ngIf="currentUserGet?.image"
+          [src]="currentUserGet.image"
+          alt=""
+        />
+        <p class="userName" *ngIf="currentUserGet?.displayName">
+          {{ currentUserGet.displayName }}
+        </p>
+      </div>
+    </div>
+    <!-- user information -->
+    <div class="dashboard">
+      <h2>Dashboard</h2>
+      <ul>
+        <li class="active" routerLink="/hosterPropereties">
+          <i class="fas fa-users fa-fw"></i> My Properties
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mainContent">
+    <h2>Update Profile</h2>
+    <form [formGroup]="userProfileData" (ngSubmit)="OnSubmit()">
+      <div class="box">
+        <input
+          type="text"
+          placeholder="First Name"
+          formControlName="firstName"
+        />
+        <input type="text" placeholder="Last Name" formControlName="lastName" />
+      </div>
+      <div class="box">
+        <input type="email" placeholder="Email" formControlName="email" />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          formControlName="phoneNumber"
+        />
+      </div>
+      <div class="box">
+        <input type="number" placeholder="Age" formControlName="age" />
+        <input type="file" (change)="onFileSelected($event)" />
+      </div>
+
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+</section>

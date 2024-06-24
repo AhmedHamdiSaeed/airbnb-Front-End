@@ -48,3 +48,33 @@
   background-color: green;
   color: white;
 }
+@media (max-width: 768px) {
+  .cartona {
+    width: 100%;
+  }
+  .cartona .boxContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cartona .boxContainer .box {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .cartona .boxContainer .box .img {
+    width: 100%;
+    margin: 1rem auto;
+  }
+  .cartona .boxContainer .box .img img {
+    width: 100%;
+  }
+
+  .cartona .boxContainer .box ul {
+    width: 100%;
+  }
+}
