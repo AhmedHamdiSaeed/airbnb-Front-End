@@ -38,3 +38,10 @@ export interface getBookingUserDetailsModel {
   propertyId: number;
   propertyName: string;
 }
+export interface PaymentBookingModel {
+  id: number;
+  userName: string;
+  totalPrice: number;
+  clientSecret: string;
+  paymentIntentId: string;
+}

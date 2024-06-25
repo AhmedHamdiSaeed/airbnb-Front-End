@@ -2,41 +2,54 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { AvailabilityUpdateDto, BookingAddDto } from '../../Models/PropertyDetials';
+
+import {
+  AvailabilityUpdateDto,
+  BookingAddDto,
+} from '../../Models/PropertyDetials';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs';
-import { addBookingModel, updateBookingModel } from '../../Models/Booking/bookingModels';
+import { BehaviorSubject, map } from 'rxjs';
+
+import {
+  PaymentBookingModel,
+  addBookingModel,
+  updateBookingModel,
+} from '../../Models/Booking/bookingModels';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookingService {
-  constructor(private http: HttpClient, private router: Router) { }
-  baseUrl = environment.baseUrl;
+  baseUrl = `${environment.baseUrl}Booking/`;
+  baseUrl2 = environment.baseUrl;
+  constructor(private http: HttpClient) {}
+
+  // ---------------------------------------------------------
 
   addBooking(userId: string, bookingDto: BookingAddDto): Observable<boolean> {
-    const url = `${this.baseUrl}Booking/AddBooking`; // Adjust endpoint as per your API
+    const url = `${this.baseUrl}AddBooking`; // Adjust endpoint as per your API
 
     return this.http.post<boolean>(url, { userId, ...bookingDto });
   }
 
-  updateAvailability(propertyId: number, updateDto: AvailabilityUpdateDto): Observable<AvailabilityUpdateDto> {
+  updateAvailability(
+    propertyId: number,
+    updateDto: AvailabilityUpdateDto
+  ): Observable<AvailabilityUpdateDto> {
     const dtoToSend = {
       ...updateDto,
       From: updateDto.From.toISOString(), // Convert Date to ISO string
-      To: updateDto.To.toISOString() // Convert Date to ISO string
+      To: updateDto.To.toISOString(), // Convert Date to ISO string
     };
-    return this.http.put<AvailabilityUpdateDto>(`${this.baseUrl}AppointmentAvailable/UpdateAppoinmentAvail/${propertyId}`, dtoToSend);
+    return this.http.put<AvailabilityUpdateDto>(
+      `${this.baseUrl2}AppointmentAvailable/UpdateAppoinmentAvail/${propertyId}`,
+      dtoToSend
+    );
   }
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
   // --------------------------------------- GetAllBookingForProperty
   GetAllBookingForProperty(propertyId: number) {
     return this.http
-      .get(`${this.baseUrl}Booking/GetAllBookingForProperty/${propertyId}`)
+      .get(`${this.baseUrl}GetAllBookingForProperty/${propertyId}`)
       .pipe(
         map((response) => {
           return response;
@@ -47,7 +60,7 @@ export class BookingService {
   // --------------------------------------- GetPropertyBookingDetails
   GetPropertyBookingDetails(bookingId: number) {
     return this.http
-      .get(`${this.baseUrl}Booking/GetPropertyBookingDetails/${bookingId}`)
+      .get(`${this.baseUrl}GetPropertyBookingDetails/${bookingId}`)
       .pipe(
         map((result) => {
           return result;
@@ -57,7 +70,7 @@ export class BookingService {
   // --------------------------------------- UpdateBooking
   UpdateBooking(bookingId: number, selectedBooking: updateBookingModel) {
     return this.http
-      .put(`${this.baseUrl}Booking/UpdateBooking/${bookingId}`, selectedBooking)
+      .put(`${this.baseUrl}UpdateBooking/${bookingId}`, selectedBooking)
       .pipe(
         map((result) => {
           return result;
@@ -66,7 +79,7 @@ export class BookingService {
   }
   // --------------------------------------- GetAllUserBooking
   GetAllUserBooking() {
-    return this.http.get(`${this.baseUrl}Booking/GetAllUserBooking`).pipe(
+    return this.http.get(`${this.baseUrl}GetAllUserBooking`).pipe(
       map((result) => {
         return result;
       })
@@ -89,5 +102,15 @@ export class BookingService {
         return result;
       })
     );
+  }
+  private BookingSource = new BehaviorSubject<PaymentBookingModel>(null);
+  basket$ = this.BookingSource.asObservable();
+  // ---------------------------------------------- Payment
+  createOrUpdatePaymentIntent(id: number): Observable<any> {
+    return this.http.post(`${this.baseUrl2}Payment/Payment/${id}`, {});
+  }
+
+  getBookingForPayment(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl2}Payment/getBookingForPayment/${id}`);
   }
 }

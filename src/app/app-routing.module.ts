@@ -21,13 +21,19 @@ import { HosterPropertyComponent } from './Components/properties/property-contro
 import { PropertyControlComponent } from './Components/properties/property-control/property-control.component';
 import { AlluserbookingComponent } from './Components/booking/alluserbooking/alluserbooking.component';
 import { UserBookingDetailsComponent } from './Components/booking/user-booking-details/user-booking-details.component';
+import { HosterBookingDetailsComponent } from './Components/booking/hoster-booking-details/hoster-booking-details.component';
+import { AdminDashbaordComponent } from './Components/admin-dashbaord/admin-dashbaord.component';
+import { CityControlComponent } from './Components/admin-dashbaord/city-control/city-control.component';
+import { CategoryControlComponent } from './Components/admin-dashbaord/category-control/category-control.component';
+import { CountryControlComponent } from './Components/admin-dashbaord/country-control/country-control.component';
+import { UserControlComponent } from './Components/admin-dashbaord/user-control/user-control.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent , pathMatch: 'full' },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'userprofile', component: UserprofileComponent },
-   {path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent },
   { path: 'property', component: PropertiesComponent },
   { path: 'hosterPropereties', component: HosterPropertyComponent },
   { path: 'addProperty', component: AddPropertyComponent },
@@ -47,12 +53,27 @@ const routes: Routes = [
   },
 
   { path: 'PropDetails/:id', component: PropertyDetailsComponent },
+  // ------------------------------------------------ Start Booking
   {
     path: 'Booking',
     component: BookingComponent,
     canActivate: [AuthGuard],
     data: { roles: ['User'] },
   },
+  {
+    path: 'BookingDetails/:id',
+    component: UserBookingDetailsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
+  {
+    path: 'hosterBookingDetails/:id',
+    component: HosterBookingDetailsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Host'] },
+  },
+  // ------------------------------------------------ End Booking
+
   {
     path: 'admin',
     loadChildren: () =>
@@ -66,7 +87,20 @@ const routes: Routes = [
   },
   { path: 'alluserBooking', component: AlluserbookingComponent },
   { path: 'userBookingDetails/:id', component: UserBookingDetailsComponent },
+  {
+    path: 'AdminDashbaord',
+    component: AdminDashbaordComponent,
 
+    children: [
+      { path: 'cityControl', component: CityControlComponent },
+      { path: 'categoryControl', component: CategoryControlComponent },
+      { path: 'countryControl', component: CountryControlComponent },
+      {
+        path: 'userControl',
+        component: UserControlComponent,
+      },
+    ],
+  },
   { path: '**', component: NotfoundComponent, pathMatch: 'full' },
 ];
 

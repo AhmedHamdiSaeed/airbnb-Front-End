@@ -30,7 +30,15 @@ section .cartona .box .content strong {
   text-align: center;
 }
 section .cartona .box .content strong.pending {
+  background-color: orange;
+  color: white;
+}
+section .cartona .box .content strong.cancel {
   background-color: red;
+  color: white;
+}
+section .cartona .box .content strong.Payment {
+  background-color: rgb(26, 56, 138);
   color: white;
 }
 section .cartona .box .content strong.confirmed {
@@ -108,6 +116,6 @@ button.btn-danger {
 .pagination-controls {
   margin-top: 20px;
 }
-.pag{
+.pag {
   margin-bottom: 100px;
 }
