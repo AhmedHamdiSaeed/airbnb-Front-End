@@ -30,7 +30,7 @@ export interface Booking{
   CheckOutDate:Data;
 }
 export interface Reviews {
-  id: number;
+  userId: string;
   reviewComment: string;
   Rate: number;
   UserName: string;
@@ -56,6 +56,7 @@ export interface AppoinmentAvaiable {
   isAvailable: boolean;
 }
 export interface ReviewsAddDto {
+ 
   propertyId: number;
   rating: number;
   comment: string;
@@ -65,10 +66,14 @@ export interface BookingAddDto {
   CheckInDate: Date;
   CheckOutDate: Date;
   TotalPrice: number;
- 
+  // Statues:number;
 }
 export interface AvailabilityUpdateDto {
   From: Date;
   To: Date;
   IsAvailable: boolean;
+}
+export interface ReviewStatus {
+  hasReview: boolean;
+  bookingId: number | null;
 }

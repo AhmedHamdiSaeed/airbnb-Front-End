@@ -35,6 +35,7 @@ export class PropertyDetailsComponent implements OnInit {
   IdNumber: number;
   startDate: Date;
   endDate: Date;
+  hasSubmittedReview: boolean = false;
   startDateString: string;
   endDateString: string;
   minDate: Date = new Date();
@@ -46,9 +47,10 @@ export class PropertyDetailsComponent implements OnInit {
   isPDisabled: boolean = false;
   isMDisabled: boolean = false;
   totalPrice: number;
-
+  hasReview: boolean = false;
+  bookingId: number | null = null;
   userId: string;
-  review: ReviewsAddDto = { propertyId: 0, rating: 0, comment: '' };
+  review: ReviewsAddDto = { propertyId: 0, rating: 0, comment: ''};
   canReview: boolean = false;
   userImageUrl: string; // Property to hold user image URL
   propertyIsAvalable: boolean = false;
@@ -62,7 +64,7 @@ export class PropertyDetailsComponent implements OnInit {
     });
     this.userId = this.profileService.getUserId();
     this.review.propertyId = this.IdNumber;
-
+    
     this.GetPropertyDetailsById(this.IdNumber);
   }
 
@@ -91,7 +93,9 @@ export class PropertyDetailsComponent implements OnInit {
     this.service.GetPropertyDetailsById(IdNumber).subscribe(
       (result: RootDetails) => {
         this.dataDetails = result;
-        this.checkEligibility();
+        this.checkReviewEligibility();
+        this.checkReviewSubmission(); 
+      
         console.log('Property details:', result);
 
         if (result && result.appoinmentAvaiable) {
@@ -200,49 +204,49 @@ openDatePicker(id: string) {
     this.updateTotalPrice();
   }
 
-  openPopup(): void {
-    console.log('Reserve button clicked!');
-  }
 
 
-  checkEligibility(): void {
-    this.reviewService.checkReviewEligibility(this.userId, this.review.propertyId).subscribe(
+  checkReviewEligibility(): void {
+    this.reviewService.checkReviewEligibility(this.userId, this.IdNumber).subscribe(
       (result) => {
-        this.canReview = result;
+        this.hasReview = result.hasReview;
+        this.bookingId = result.bookingId;
+        console.log('Eligibility check result:', result);
+        
       },
       (error) => {
         console.error('Error checking eligibility:', error);
       }
     );
   }
-
+  
   submitReview(): void {
-    if (!this.canReview) {
-      console.error('User is not eligible to add a review.');
-      return;
-    }
-
+  
     this.reviewService.addReview(this.userId, this.review).subscribe(
       (result) => {
         if (result) {
           console.log('Review added successfully!');
+          this.hasSubmittedReview = true; 
+          // Fetch user image after review is successfully added
           this.profileService.getUserImage().subscribe(
             (imageUrl) => {
+              // Add review details to dataDetails.reviews
               this.dataDetails.reviews.push({
-                id: Date.now(),
+                userId: this.userId,
                 reviewComment: this.review.comment,
                 Rate: this.review.rating,
                 UserName: this.authService.getUserName(),
                 Userimage: imageUrl
               });
+              this.checkReviewSubmission();  
             },
             (error) => {
               console.error('Error fetching user image:', error);
               // Handle error fetching user image
             }
           );
-
-          // Reset the form
+  
+          // Reset the review form after successful submission
           this.review.rating = 0;
           this.review.comment = '';
         } else {
@@ -254,6 +258,7 @@ openDatePicker(id: string) {
       }
     );
   }
+  
   ////
   bookProperty(): void {
     const bookingAddDto: BookingAddDto = {
@@ -295,5 +300,11 @@ openDatePicker(id: string) {
       }
     );
   }
-
+  checkReviewSubmission() {
+    // Check if the current user has already submitted a review
+    if (this.dataDetails.reviews.some(review => review.userId === this.userId)) {
+      this.hasSubmittedReview = true;
+      console.log(this.hasSubmittedReview)
+    }
+  }
 }

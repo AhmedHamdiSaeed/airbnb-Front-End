@@ -39,7 +39,10 @@ export class AlluserbookingComponent implements OnInit {
         this.allBooking = result;
       });
   }
-
+  removeUserBooking() {
+    this.bookingService
+     
+  }
   // ----------------------------------------
  
   dataSource: any[] = []; // Populate this with your data

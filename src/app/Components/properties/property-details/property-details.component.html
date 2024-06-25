@@ -136,29 +136,32 @@
             </div>
           </div>
         </div>
-        <!-- Review Form -->
-        <div *ngIf="canReview; else notEligible">
-          <form (ngSubmit)="submitReview()">
-            <label for="rating">Rating:</label>
-            <input
-              id="rating"
-              type="number"
-              [(ngModel)]="review.rating"
-              name="rating"
-              min="1"
-              max="5"
-              required
-            />
-  
-            <label for="comment">Comment:</label>
-            <textarea id="comment" [(ngModel)]="review.comment" name="comment" required></textarea>
-  
-            <button type="submit">Submit Review</button>
-          </form>
-        </div>
-        <ng-template #notEligible>
-          <p>You are not eligible to add a review for this property.</p>
-        </ng-template>
+       <!-- Review Form -->
+  <div class="review-form-container" *ngIf="!hasReview; else nothasReview">
+    <form (ngSubmit)="submitReview()">
+      <label for="rating">Rating:</label>
+      <input
+        id="rating"
+        type="number"
+        [(ngModel)]="review.rating"
+        name="rating"
+        min="1"
+        max="5"
+        required
+      />
+
+      <label for="comment">Comment:</label>
+      <textarea id="comment" [(ngModel)]="review.comment" name="comment" required></textarea>
+
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
+
+  <ng-template #nothasReview>
+    <div class="not-eligible-message">
+      <p>You are not eligible to add a review for this property.</p>
+    </div>
+  </ng-template>
       </div>
   
       <div class="col-lg-4 col-sm-12 pop">
