@@ -13,11 +13,13 @@ import { AuthService } from '../../../Services/UserServices/auth.service';
 import { ProfileservicesService } from '../../../Services/UserServices/profileservices.service';
 import { BookingService } from '../../../Services/BookingServices/booking.service';
 import { switchMap } from 'rxjs';
+import { AppStarRatingDirective } from './AppStarRatingDirective';
 
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
   styleUrls: ['./property-details.component.css'],
+ 
 })
 export class PropertyDetailsComponent implements OnInit {
   constructor(
@@ -53,7 +55,7 @@ export class PropertyDetailsComponent implements OnInit {
   canReview: boolean = false;
   userImageUrl: string; // Property to hold user image URL
   propertyIsAvalable: boolean = false;
-  @Input() appStarRating: number;
+  
   minDateString: string = this.minDate.toISOString().split('T')[0];
 
 
@@ -66,22 +68,6 @@ export class PropertyDetailsComponent implements OnInit {
     
     this.GetPropertyDetailsById(this.IdNumber);
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['appStarRating']) {
-      this.updateStarRating(this.appStarRating);
-    }
-  }
-
-  updateStarRating(rating: number): void {
-    const stars = '&#9733;'.repeat(rating) + '&#9734;'.repeat(5 - rating);
-    this.el.nativeElement.innerHTML = stars;
-    this.el.nativeElement.style.fontSize = '1.5rem';
-
-    this.el.nativeElement.querySelectorAll('.star').forEach((star: { style: { color: string } }) => {
-      star.style.color = 'yellow';
-    });
- }
 
   formatDate(date: string): string {
     const d = new Date(date);
@@ -96,7 +82,7 @@ export class PropertyDetailsComponent implements OnInit {
        
       
         console.log('Property details:', result);
-
+        console.log('review name:', result.reviews[0].userName);
         if (result && result.appoinmentAvaiable) {
           const availableDates = result.appoinmentAvaiable.filter((appointment) => appointment.isAvailable);
 
@@ -225,17 +211,16 @@ openDatePicker(id: string) {
       (result) => {
         if (result) {
           console.log('Review added successfully!');
-        
-          // Fetch user image after review is successfully added
-          this.profileService.getUserImage().subscribe(
+
+           this.profileService.getUserImage().subscribe(
             (imageUrl) => {
-              // Add review details to dataDetails.reviews
+              console.log('Fetched user image URL:', imageUrl);
               this.dataDetails.reviews.push({
                 userId: this.userId,
                 reviewComment: this.review.comment,
-                Rate: this.review.rating,
-                UserName: this.authService.getUserName(),
-                Userimage: imageUrl
+                rate: this.review.rating,
+                userName: this.authService.getUserName(),
+                userimage: imageUrl
               });
              
             },

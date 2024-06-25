@@ -102,4 +102,26 @@
     border: 1px solid #f5c6cb;
     border-radius: 5px;
   }
+  .star {
+    color: #ffc107;
+    text-shadow: 1px 1px #999;
+  }
   
+  .star.full {
+    color: #ffc107;
+    text-shadow: 1px 1px yellow;
+  }
+  
+  .star .fa:before {
+    content: "\f005";
+    /* Font Awesome star icon */
+    font-family: FontAwesome;
+    font-size: 24px;
+    color: #ccc;
+    /* unselected star color */
+  }
+  
+  .star .fa.selected:before {
+    color: #ffc107;
+    /* selected star color */
+  }

@@ -50,9 +50,16 @@ a {
 section {
   padding: 3em 1em;
 }
-img {
+.img {
   max-width: 100%;
   vertical-align: middle;
+}
+
+.img-size {
+  width: 240px; 
+  height: 200px; 
+  vertical-align: middle;
+  object-fit: cover; 
 }
 
 /* --------------------- filtration ----------------- */

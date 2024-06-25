@@ -81,11 +81,15 @@ export class ProfileservicesService {
   getUserId(): string {
     return localStorage.getItem('userId');
   }
-  public getUserImage(): Observable<string> {
+  getUserImage(): Observable<string> {
     return this.http.get<any>(`${this.baseUrl}User/get-current-user`).pipe(
-      map(response => response.imageUrl as string)
+      map(response => {
+        console.log('Server response:', response);
+        return response.imageUrl as string;
+      })
     );
   }
+  
   LogOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');

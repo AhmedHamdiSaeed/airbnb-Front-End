@@ -32,9 +32,9 @@ export interface Booking{
 export interface Reviews {
   userId: string;
   reviewComment: string;
-  Rate: number;
-  UserName: string;
-  Userimage: string;
+  rate: number;
+  userName: string; 
+  userimage: string;
 }
 export interface ImageUrl {
   id: number;

@@ -35,12 +35,14 @@ import { HosterPropertyComponent } from './Components/properties/property-contro
 import { AlluserbookingComponent } from './Components/booking/alluserbooking/alluserbooking.component';
 import { UserBookingDetailsComponent } from './Components/booking/user-booking-details/user-booking-details.component';
 import { HosterBookingDetailsComponent } from './Components/booking/hoster-booking-details/hoster-booking-details.component';
+import { AppStarRatingDirective } from './Components/properties/property-details/AppStarRatingDirective';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 @NgModule({
   declarations: [
+    AppStarRatingDirective ,
     AppComponent,
     FooterComponent,
     HeaderComponent,
