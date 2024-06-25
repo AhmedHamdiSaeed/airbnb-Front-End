@@ -35,7 +35,6 @@ export class PropertyDetailsComponent implements OnInit {
   IdNumber: number;
   startDate: Date;
   endDate: Date;
-  hasSubmittedReview: boolean = false;
   startDateString: string;
   endDateString: string;
   minDate: Date = new Date();
@@ -94,7 +93,7 @@ export class PropertyDetailsComponent implements OnInit {
       (result: RootDetails) => {
         this.dataDetails = result;
         this.checkReviewEligibility();
-        this.checkReviewSubmission(); 
+       
       
         console.log('Property details:', result);
 
@@ -226,7 +225,7 @@ openDatePicker(id: string) {
       (result) => {
         if (result) {
           console.log('Review added successfully!');
-          this.hasSubmittedReview = true; 
+        
           // Fetch user image after review is successfully added
           this.profileService.getUserImage().subscribe(
             (imageUrl) => {
@@ -238,7 +237,7 @@ openDatePicker(id: string) {
                 UserName: this.authService.getUserName(),
                 Userimage: imageUrl
               });
-              this.checkReviewSubmission();  
+             
             },
             (error) => {
               console.error('Error fetching user image:', error);
@@ -300,11 +299,5 @@ openDatePicker(id: string) {
       }
     );
   }
-  checkReviewSubmission() {
-    // Check if the current user has already submitted a review
-    if (this.dataDetails.reviews.some(review => review.userId === this.userId)) {
-      this.hasSubmittedReview = true;
-      console.log(this.hasSubmittedReview)
-    }
-  }
+ 
 }
