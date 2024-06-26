@@ -30,7 +30,15 @@ section .cartona .box .content strong {
   text-align: center;
 }
 section .cartona .box .content strong.pending {
+  background-color: orange;
+  color: white;
+}
+section .cartona .box .content strong.cancel {
   background-color: red;
+  color: white;
+}
+section .cartona .box .content strong.Payment {
+  background-color: rgb(26, 56, 138);
   color: white;
 }
 section .cartona .box .content strong.confirmed {
@@ -108,6 +116,143 @@ button.btn-danger {
 .pagination-controls {
   margin-top: 20px;
 }
-.pag{
+.pag {
   margin-bottom: 100px;
+}
+.cartona {
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Add space between table and pagination controls */
+}
+
+thead {
+  background-color: #f4f4f4;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  font-weight: bold;
+}
+
+td img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+td strong {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+td strong.confirmed {
+  background-color: #28a745;
+}
+
+td strong.pending {
+  background-color: #ffc107;
+}
+
+td strong.cancel {
+  background-color: #dc3545;
+}
+
+td strong.Payment {
+  background-color: #17a2b8;
+}
+
+td button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+td button i {
+  font-size: 1.2em;
+  color: #007bff;
+}
+
+td button.payment i {
+  color: #28a745;
+}
+
+td button:hover i {
+  opacity: 0.7;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-controls {
+  text-align: center;
+}
+
+.pagination-controls ngb-pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 0;
+  border-radius: 0.25rem;
+}
+
+.pagination-controls ul {
+  display: inline-flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+
+.pagination-controls li {
+  display: inline;
+}
+
+.pagination-controls a {
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+.pagination-controls a:hover {
+  background-color: #e9ecef;
+  color: #0056b3;
+}
+.cancel{
+  color: #dc3545 !important;
+}
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it appears above other content */
 }

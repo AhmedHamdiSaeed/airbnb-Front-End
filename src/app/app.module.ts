@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgxPaginationModule } from 'ngx-pagination';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './Components/Header/header/header.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotfoundComponent } from './Components/notFound/notfound/notfound.component';
 import { LoginComponent } from './Components/Login/login/login.component';
 import { UserprofileComponent } from './Components/user-profile/userprofile/userprofile.component';
@@ -35,14 +35,25 @@ import { HosterPropertyComponent } from './Components/properties/property-contro
 import { AlluserbookingComponent } from './Components/booking/alluserbooking/alluserbooking.component';
 import { UserBookingDetailsComponent } from './Components/booking/user-booking-details/user-booking-details.component';
 import { HosterBookingDetailsComponent } from './Components/booking/hoster-booking-details/hoster-booking-details.component';
+
 import { AppStarRatingDirective } from './Components/properties/property-details/AppStarRatingDirective';
+
+import { PaymentComponent } from './Components/payment/payment.component';
+import { AdminDashbaordComponent } from './Components/admin-dashbaord/admin-dashbaord.component';
+import { CategoryControlComponent } from './Components/admin-dashbaord/category-control/category-control.component';
+import { CityControlComponent } from './Components/admin-dashbaord/city-control/city-control.component';
+import { CountryControlComponent } from './Components/admin-dashbaord/country-control/country-control.component';
+import { UserControlComponent } from './Components/admin-dashbaord/user-control/user-control.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrModule } from 'ngx-toastr';
+import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 @NgModule({
   declarations: [
-    AppStarRatingDirective ,
+    AppStarRatingDirective,
     AppComponent,
     FooterComponent,
     HeaderComponent,
@@ -65,12 +76,21 @@ export function tokenGetter() {
     AlluserbookingComponent,
     UserBookingDetailsComponent,
     HosterBookingDetailsComponent,
+    PaymentComponent,
+    AdminDashbaordComponent,
+    UserControlComponent,
+    CityControlComponent,
+    CategoryControlComponent,
+    CountryControlComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
-    NgxPaginationModule ,
     BrowserModule,
+    NgxPaginationModule,
     AppRoutingModule,
     FormsModule,
+    ToastrModule.forRoot(),
+  
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -88,7 +108,6 @@ export function tokenGetter() {
         ], // Replace with your auth route
       },
     }),
-    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

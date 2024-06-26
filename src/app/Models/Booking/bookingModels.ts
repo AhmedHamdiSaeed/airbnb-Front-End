@@ -12,6 +12,7 @@ export interface updateBookingModel {
 }
 export interface getAllBookingModel {
   id: number;
+  propertyId:number,
   checkInDate: string;
   checkOutDate: string;
   totalPrice: number;
@@ -37,4 +38,11 @@ export interface getBookingUserDetailsModel {
   totalPrice: number;
   propertyId: number;
   propertyName: string;
+}
+export interface PaymentBookingModel {
+  id: number;
+  userName: string;
+  totalPrice: number;
+  clientSecret: string;
+  paymentIntentId: string;
 }

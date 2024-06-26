@@ -1,1 +1,42 @@
-<p>hoster-booking-details works!</p>
+<div class="booking-card" *ngIf="bookingDetails">
+  <div class="user-info">
+    <img [src]="bookingDetails.userImage" alt="User Image" class="user-image" />
+    <div class="user-details">
+      <h2>{{ bookingDetails.userName }}</h2>
+      <p>Phone: {{ bookingDetails.userPhone }}</p>
+    </div>
+  </div>
+  <div class="booking-info">
+    <h3>Property: {{ bookingDetails.propertyName }}</h3>
+    <p>
+      Check-in Date:
+      {{
+        bookingDetails.checkInDate.slice(
+          0,
+          bookingDetails.checkInDate.indexOf("T")
+        )
+      }}
+    </p>
+    <p>
+      Check-out Date:
+      {{
+        bookingDetails.checkOutDate.slice(
+          0,
+          bookingDetails.checkOutDate.indexOf("T")
+        )
+      }}
+    </p>
+    <p>Total Price: {{ bookingDetails.totalPrice }}</p>
+  </div>
+  <div class="btns">
+    <button
+      (click)="UpdateBooking('waitForPayment', bookingDetails.id)"
+      class="waitForPayment"
+    >
+      Aprove To Payment
+    </button>
+    <button (click)="UpdateBooking('cancel', bookingDetails.id)" class="cancel">
+      Cancel
+    </button>
+  </div>
+</div>

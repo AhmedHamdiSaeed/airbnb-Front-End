@@ -30,6 +30,7 @@ export class UserBookingDetailsComponent implements OnInit {
     this.bookingService
       .GetUserBookingetails(bookingId)
       .subscribe((result: getBookingUserDetailsModel) => {
+        console.log(result);
         this.bookingDetialsForUser = result;
       });
   }

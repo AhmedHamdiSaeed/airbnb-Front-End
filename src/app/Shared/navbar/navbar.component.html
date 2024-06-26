@@ -68,6 +68,16 @@
             >My Booking</a
           >
         </li>
+        <!-- Admin -->
+        <li *ngIf="userRole === 'Admin'">
+          <a
+            routerLink="/AdminDashbaord"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Dash Baord</a
+          >
+        </li>
+        <!-- Admin -->
         <li *ngIf="userRole === 'User'">
           <a href="#" routerLinkActive="active">Online Experience</a>
         </li>
@@ -92,7 +102,6 @@
           </li>
         </ul>
       </div>
-      
     </div>
   </div>
 </nav>

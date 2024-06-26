@@ -3,6 +3,7 @@ import { ProperiesService } from '../../../../Services/PropertyServices/properie
 import { PropControlService } from '../prop-control.service';
 import { Property } from '../../../../Models/PropertyModels';
 import { ActivatedRoute } from '@angular/router';
+import { BookingService } from '../../../../Services/BookingServices/booking.service';
 
 @Component({
   selector: 'app-hoster-property',
@@ -13,7 +14,8 @@ export class HosterPropertyComponent implements OnInit {
   constructor(
     private propertyService: ProperiesService,
     private activeRouter: ActivatedRoute,
-    private propertyControlService: PropControlService
+    private propertyControlService: PropControlService,
+    private bookingService: BookingService
   ) {}
 
   // ---------------------------------------------------
@@ -29,6 +31,7 @@ export class HosterPropertyComponent implements OnInit {
   ngOnInit(): void {
     this.GetAllHosterProperties();
   }
+
   // GetAllHosterProperties
   hosterProperties: Property[];
   GetAllHosterProperties() {
@@ -39,4 +42,6 @@ export class HosterPropertyComponent implements OnInit {
         console.log(this.hosterProperties);
       });
   }
+
+  // ---------------------- Check If THERE bOOKING
 }

@@ -10,17 +10,19 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  constructor(private router:Router,private accoutService: ProfileservicesService) {}
-  showFooter=true;
+  constructor(
+    private router: Router,
+    private accoutService: ProfileservicesService
+  ) {}
+  showFooter = true;
   ngOnInit(): void {
     this.currentUser$ = this.accoutService.currentUser$;
     this.loadCurrentUser();
-    this.router.events.subscribe(e=>{
-      if(e instanceof NavigationEnd)
-        {
-          this.showFooter=!e.url.includes("/admin");
-        }
-    })
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.showFooter = !e.url.includes('/admin');
+      }
+    });
   }
   /**
    *

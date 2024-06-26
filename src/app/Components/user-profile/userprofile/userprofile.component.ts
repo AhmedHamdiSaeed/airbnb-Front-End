@@ -9,6 +9,7 @@ import { ProfileservicesService } from '../../../Services/UserServices/profilese
 import { currentUserModel, userProfile } from '../../../Models/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../Services/UserServices/auth.service';
 interface Root {
   success: boolean;
   message: string;
@@ -27,6 +28,7 @@ export class UserprofileComponent implements OnInit {
    */
   constructor(
     private userService: ProfileservicesService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
     private activateRouter: ActivatedRoute
@@ -75,6 +77,14 @@ export class UserprofileComponent implements OnInit {
   getCurrentUser() {
     this.userService.getUser().subscribe((result: currentUserModel) => {
       this.currentUserGet = result;
+      this.userProfileData.reset({
+        email: this.currentUserGet.email,
+        firstName: this.currentUserGet.firstName,
+        lastName: this.currentUserGet.lastName,
+        age: this.currentUserGet.age,
+        phoneNumber: this.currentUserGet.phoneNumber,
+        image: this.currentUserGet.image,
+      });
       console.log(result);
     });
   }
@@ -98,5 +108,8 @@ export class UserprofileComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentUser();
     this.CreateUserUpdate();
+    this.authService.getUserName();
   }
+
+  // --------------------------------------
 }

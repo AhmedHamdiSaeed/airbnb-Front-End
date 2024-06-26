@@ -27,6 +27,10 @@ export interface userProfile {
   image: string;
 }
 export interface currentUserModel {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  age: number;
   displayName: string;
   image: string;
   email: string;
