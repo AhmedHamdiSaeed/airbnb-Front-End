@@ -6,7 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ProperiesService } from '../../../Services/PropertyServices/properies.service';
-import { ReviewsAddDto, RootDetails, Reviews,BookingAddDto, AvailabilityUpdateDto } from '../../../Models/PropertyDetials';
+import { ReviewsAddDto, RootDetails, Reviews,BookingAddDto, AvailabilityUpdateDto, BookingGetDetailsUserDtos } from '../../../Models/PropertyDetials';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ReviewService } from '../../../Services/ReviewServies/review.service';
 import { AuthService } from '../../../Services/UserServices/auth.service';
@@ -37,6 +37,7 @@ export class PropertyDetailsComponent implements OnInit {
   IdNumber: number;
   startDate: Date;
   endDate: Date;
+  canSubmitReview: boolean = false;
   startDateString: string;
   endDateString: string;
   minDate: Date = new Date();
@@ -51,11 +52,11 @@ export class PropertyDetailsComponent implements OnInit {
   hasReview: boolean = false;
   bookingId: number | null = null;
   userId: string;
-  review: ReviewsAddDto = { propertyId: 0, rating: 0, comment: ''};
+  review: ReviewsAddDto = { propertyId: 0, rating: 0, comment: '',bookingId:0};
   canReview: boolean = false;
   userImageUrl: string; // Property to hold user image URL
   propertyIsAvalable: boolean = false;
-  
+  bookings: BookingGetDetailsUserDtos[] = [];
   minDateString: string = this.minDate.toISOString().split('T')[0];
 
 
@@ -67,6 +68,8 @@ export class PropertyDetailsComponent implements OnInit {
     this.review.propertyId = this.IdNumber;
     
     this.GetPropertyDetailsById(this.IdNumber);
+   this.checkReviewEligibility();
+   this.GetBokingPropertyDetails(this.IdNumber)
   }
 
   formatDate(date: string): string {
@@ -74,6 +77,17 @@ export class PropertyDetailsComponent implements OnInit {
     return d.toISOString().split('T')[0];
   }
 
+  GetBokingPropertyDetails(IdNumber: number): void {
+    this.bookingService.GetAllBookingForProperty(IdNumber).subscribe(
+      (data: BookingGetDetailsUserDtos[]) => {
+        this.bookings = data;
+        console.log(this.bookings);
+      },
+      (error) => {
+        console.error('Error fetching bookings:', error);
+      }
+    );
+  }
   GetPropertyDetailsById(IdNumber: number): void {
     this.service.GetPropertyDetailsById(IdNumber).subscribe(
       (result: RootDetails) => {
@@ -197,22 +211,25 @@ openDatePicker(id: string) {
         this.hasReview = result.hasReview;
         this.bookingId = result.bookingId;
         console.log('Eligibility check result:', result);
-        
+        if (this.hasReview) {
+          this.review.propertyId = this.IdNumber;
+          this.review.bookingId =  this.bookingId; // Set the bookingId from the status
+        }
       },
-      (error) => {
+        (error) => {
         console.error('Error checking eligibility:', error);
       }
     );
   }
   
   submitReview(): void {
-  
+    console.log(this.review);
     this.reviewService.addReview(this.userId, this.review).subscribe(
       (result) => {
-        if (result) {
-          console.log('Review added successfully!');
-
-           this.profileService.getUserImage().subscribe(
+        if (result === 'Added Successfully') {  // Adjusted to check the response correctly
+          console.log('Review added successfully:', result);
+  
+          this.profileService.getUserImage().subscribe(
             (imageUrl) => {
               console.log('Fetched user image URL:', imageUrl);
               this.dataDetails.reviews.push({
@@ -222,7 +239,6 @@ openDatePicker(id: string) {
                 userName: this.authService.getUserName(),
                 userimage: imageUrl
               });
-             
             },
             (error) => {
               console.error('Error fetching user image:', error);
@@ -243,23 +259,24 @@ openDatePicker(id: string) {
     );
   }
   
+  
   ////
   bookProperty(): void {
     const bookingAddDto: BookingAddDto = {
       PropertyId: this.IdNumber,
       CheckInDate: this.startDate, 
       CheckOutDate: this.endDate, 
-      TotalPrice: this.totalPrice
+      TotalPrice: this.totalPrice,
+      userID: this.userId,
     };
 
     const userId = this.profileService.getUserId();
 
-    this.bookingService.addBooking(userId, bookingAddDto).pipe(
-      switchMap(response => {
-        console.log('Booking successful:', response);
-       
+    this.bookingService.adddBooking(userId, bookingAddDto).pipe(
+      switchMap((bookingId: number) => {
+        this.bookingId = bookingId; // Store the booking ID
+        console.log('Booking ID:', bookingId);
 
-        // Calculate the new availability period dynamically
         const newFrom = new Date(this.endDate); 
         newFrom.setDate(newFrom.getDate() + 1);
 

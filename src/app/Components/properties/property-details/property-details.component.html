@@ -147,7 +147,7 @@
         </div>
         
        <!-- Review Form -->
-  <div class="review-form-container" *ngIf="!hasReview; else nothasReview">
+  <div class="review-form-container" *ngIf="hasReview; else nothasReview">
     <form (ngSubmit)="submitReview()">
       <label for="rating">Rating:</label>
       <input

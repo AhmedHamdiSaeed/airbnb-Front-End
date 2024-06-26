@@ -56,7 +56,7 @@ export interface AppoinmentAvaiable {
   isAvailable: boolean;
 }
 export interface ReviewsAddDto {
- 
+  bookingId: number,
   propertyId: number;
   rating: number;
   comment: string;
@@ -66,6 +66,7 @@ export interface BookingAddDto {
   CheckInDate: Date;
   CheckOutDate: Date;
   TotalPrice: number;
+  userID: string;
   // Statues:number;
 }
 export interface AvailabilityUpdateDto {
@@ -75,5 +76,13 @@ export interface AvailabilityUpdateDto {
 }
 export interface ReviewStatus {
   hasReview: boolean;
-  bookingId: number | null;
+  bookingId: number ;
+}
+export interface BookingGetDetailsUserDtos {
+  id: number;
+  checkInDate: Date;
+  checkOutDate: Date;
+  totalPrice: number;
+  propertyId: number;
+  propertyName: string;
 }

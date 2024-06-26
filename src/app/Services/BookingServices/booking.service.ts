@@ -14,10 +14,10 @@ export class BookingService {
   constructor(private http: HttpClient, private router: Router) { }
   baseUrl = environment.baseUrl;
 
-  addBooking(userId: string, bookingDto: BookingAddDto): Observable<boolean> {
-    const url = `${this.baseUrl}Booking/AddBooking`; // Adjust endpoint as per your API
+  adddBooking(userId: string, bookingDto: BookingAddDto): Observable<number> {
+    const url = `${this.baseUrl}Booking/AdddBooking`; 
 
-    return this.http.post<boolean>(url, { userId, ...bookingDto });
+    return this.http.post<number>(url, { userId, ...bookingDto });
   }
 
   updateAvailability(propertyId: number, updateDto: AvailabilityUpdateDto): Observable<AvailabilityUpdateDto> {
@@ -84,7 +84,7 @@ export class BookingService {
   }
   // --------------------------------------- AddBooking
   AddBooking(booking: addBookingModel) {
-    return this.http.post(`${this.baseUrl}AddBooking`, { booking }).pipe(
+    return this.http.post(`${this.baseUrl}Booking/AddBooking`, { booking }).pipe(
       map((result) => {
         return result;
       })
