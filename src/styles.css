@@ -1,3 +1,6 @@
+/* Import Toastr CSS */
+@import "../node_modules/ngx-toastr/toastr.css";
+
 :root {
   --main-color: #151515;
   --hover-main-color: #303030;
