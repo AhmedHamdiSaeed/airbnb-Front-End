@@ -47,6 +47,7 @@ import { UserControlComponent } from './Components/admin-dashbaord/user-control/
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
+import { AdminProprtycontrolComponent } from './Components/admin-dashbaord/admin-proprtycontrol/admin-proprtycontrol.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -83,6 +84,7 @@ export function tokenGetter() {
     CategoryControlComponent,
     CountryControlComponent,
     ConfirmationDialogComponent,
+    AdminProprtycontrolComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,7 @@ export function tokenGetter() {
     AppRoutingModule,
     FormsModule,
     ToastrModule.forRoot(),
-  
+
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,

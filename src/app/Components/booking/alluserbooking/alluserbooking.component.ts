@@ -36,22 +36,24 @@ export class AlluserbookingComponent implements OnInit, AfterViewInit {
   ) {}
   async ngOnInit() {
     this.GetAllUserBooking();
-      // Initialize dataSource with your data
-      this.GetAllUserBooking();
-      this.filteredData = this.dataSource;
-      this.route.queryParams.subscribe(params => {
-        const totalPrice = params['totalPrice'];
-        console.log('Total Price:', totalPrice);
-      });
+    // Initialize dataSource with your data
+    this.GetAllUserBooking();
+    this.filteredData = this.dataSource;
+    this.route.queryParams.subscribe((params) => {
+      const totalPrice = params['totalPrice'];
+      console.log('Total Price:', totalPrice);
+    });
   }
 
   // ---------------------------------- GetAllUserBooking
 
   GetAllUserBooking() {
-    this.bookingService.GetAllUserBooking().subscribe((result: getAllBookingModel[]) => {
-      console.log(result);
-      this.allBooking = result;
-    });
+    this.bookingService
+      .GetAllUserBooking()
+      .subscribe((result: getAllBookingModel[]) => {
+        console.log(result);
+        this.allBooking = result;
+      });
   }
   openConfirmationDialog(bookingId: number): void {
     this.bookingIdToDelete = bookingId;
@@ -68,30 +70,40 @@ export class AlluserbookingComponent implements OnInit, AfterViewInit {
         },
         error: (err) => {
           console.error('Error deleting booking:', err);
-          this.toastr.error('Failed to delete booking. Please try again later.');
-        }
+          this.toastr.error(
+            'Failed to delete booking. Please try again later.'
+          );
+        },
       });
     }
   }
   // ----------------------------------------
- 
+
   dataSource: any[] = [];
   filteredData: any[] = [];
-  displayedColumns: string[] = ['propertyName', 'hostName', 'checkInDate', 'checkOutDate', 'totalPrice', 'status', 'Action'];
-  p: number = 1; 
-
+  displayedColumns: string[] = [
+    'propertyName',
+    'hostName',
+    'checkInDate',
+    'checkOutDate',
+    'totalPrice',
+    'status',
+    'Action',
+  ];
+  p: number = 1;
 
   applyFilter(event: any): void {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
-    this.filteredData = this.dataSource.filter(item => 
-      item.propertyName.toLowerCase().includes(filterValue) ||
-      item.hostName.toLowerCase().includes(filterValue)
+    this.filteredData = this.dataSource.filter(
+      (item) =>
+        item.propertyName.toLowerCase().includes(filterValue) ||
+        item.hostName.toLowerCase().includes(filterValue)
     );
   }
 
   sortData(column: string): void {
     const sortedData = this.filteredData.sort((a, b) => {
-      const isAsc = true; 
+      const isAsc = true;
       return this.compare(a[column], b[column], isAsc);
     });
     this.filteredData = sortedData;

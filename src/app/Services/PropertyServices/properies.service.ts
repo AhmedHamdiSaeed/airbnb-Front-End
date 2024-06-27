@@ -48,6 +48,6 @@ export class ProperiesService {
   }
   // GetAllCategory
   GetAllCategory() {
-    return this.http.get(`${this.baseUrl}Categories/GetAllCategories`);
+    return this.http.get(`${this.baseUrl}Categories/GetAll`);
   }
 }

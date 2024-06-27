@@ -1,1 +1,39 @@
-<p>category-control works!</p>
+<div class="cartona">
+  <form
+    [formGroup]="CategoryDataForm"
+    (ngSubmit)="OnSubmit()"
+    class="property-form"
+  >
+    <div class="form-group">
+      <input type="text" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+    <div class="form-group">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+<section>
+  <div class="cartona">
+    <div class="box" *ngFor="let item of AllCategories">
+      <div class="img">
+        <img [src]="item.iconURL" [alt]="item.id" />
+      </div>
+      <ul>
+        <li>{{ item.id }}</li>
+        <li>{{ item.name }}</li>
+        <li>
+          <button class="update" (click)="selectToUpdate(item)">Update</button>
+        </li>
+
+        <li>
+          <button class="delete" (click)="DeleteCategory(item.id)">
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

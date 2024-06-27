@@ -1,4 +1,3 @@
-
 section .cartona {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -137,7 +136,8 @@ thead {
   background-color: #f4f4f4;
 }
 
-th, td {
+th,
+td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -171,6 +171,7 @@ td strong.pending {
 
 td strong.cancel {
   background-color: #dc3545;
+  color: white !important;
 }
 
 td strong.Payment {
@@ -240,7 +241,7 @@ td button:hover i {
   background-color: #e9ecef;
   color: #0056b3;
 }
-.cancel{
+.cancel {
   color: #dc3545 !important;
 }
 .confirmation-overlay {

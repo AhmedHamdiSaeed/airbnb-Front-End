@@ -75,6 +75,9 @@
           <h1>{{ item.name }}</h1>
           <p>{{ item.description }}</p>
         </div>
+        <button class="confirm" (click)="UpdateProperty(item.id)">
+          Confirm
+        </button>
       </div>
     </div>
   </div>

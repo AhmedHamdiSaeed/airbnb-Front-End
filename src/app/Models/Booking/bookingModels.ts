@@ -12,13 +12,13 @@ export interface updateBookingModel {
 }
 export interface getAllBookingModel {
   id: number;
-  propertyId:number,
   checkInDate: string;
   checkOutDate: string;
   totalPrice: number;
   bookingStatus: number;
   propImage: string;
   propTitle: string;
+  propertyId: number;
 }
 export interface getPropertyBookingDetailsModel {
   id: number;

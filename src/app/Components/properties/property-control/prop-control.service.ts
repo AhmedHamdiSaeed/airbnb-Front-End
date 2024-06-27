@@ -39,6 +39,9 @@ export class PropControlService {
     return this.http.get(`${this.baseUrl}Property/GetHosterProperties`);
   }
 
+  DeletePropertyByHoster(id) {
+    return this.http.delete(`${this.baseUrl}Property/DeletePropertyById/${id}`);
+  }
   //------------------------------------------------------- PropertyImage
   // Add Property Image
   addNewPropImage(newImage: propertyImageAdd) {

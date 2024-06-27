@@ -16,7 +16,7 @@
     </svg>
     <!--  -->
     <div class="logo">
-      <a routerLink="/">
+      <a routerLink="/home">
         <img src="../../../assets/Airbnb-logo-2048x1152.png" alt=""
       /></a>
     </div>
@@ -71,10 +71,10 @@
         <!-- Admin -->
         <li *ngIf="userRole === 'Admin'">
           <a
-            routerLink="/AdminDashbaord"
+            routerLink="/AdminDashbaord/adminPropControl"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Dash Baord</a
+            >Dashbaord</a
           >
         </li>
         <!-- Admin -->

@@ -111,41 +111,62 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of allBooking | paginate: { itemsPerPage: 5, currentPage: p }">
+        <tr
+          *ngFor="
+            let item of allBooking
+              | paginate : { itemsPerPage: 5, currentPage: p }
+          "
+        >
           <td>
             <img [src]="item.propImage" alt="" />
           </td>
           <td>
-            <strong [ngClass]="{
-              confirmed: item.bookingStatus == 2,
-              pending: item.bookingStatus == 0,
-              cancel: item.bookingStatus == 3,
-              Payment: item.bookingStatus == 1
-            }">
+            <strong
+              [ngClass]="{
+                confirmed: item.bookingStatus == 2,
+                pending: item.bookingStatus == 0,
+                cancel: item.bookingStatus == 3,
+                Payment: item.bookingStatus == 1
+              }"
+            >
               {{
-                item.bookingStatus == 2 ? "Confirmed" :
-                item.bookingStatus == 3 ? "Canceled" :
-                item.bookingStatus == 1 ? "WaitForPayment" :
-                "Pending"
+                item.bookingStatus == 2
+                  ? "Confirmed"
+                  : item.bookingStatus == 3
+                  ? "Canceled"
+                  : item.bookingStatus == 1
+                  ? "WaitForPayment"
+                  : "Pending"
               }}
             </strong>
           </td>
           <td>{{ item.propTitle }}</td>
           <td>{{ item.totalPrice }}</td>
-          <td>{{ item.checkInDate.slice(0, item.checkInDate.indexOf('T')) }}</td>
-          <td>{{ item.checkOutDate.slice(0, item.checkInDate.indexOf('T')) }}</td>
+          <td>
+            {{ item.checkInDate.slice(0, item.checkInDate.indexOf("T")) }}
+          </td>
+          <td>
+            {{ item.checkOutDate.slice(0, item.checkInDate.indexOf("T")) }}
+          </td>
           <td>{{ item.propertyId }}</td>
           <td>
-            <button [routerLink]="['/PropDetails/', item.propertyId]">
+            <button [routerLink]="['/PropDetails', item.propertyId]">
               <i class="fa-solid fa-eye"></i>
             </button>
-            <button (click)="pay(item.totalPrice, item.id)" *ngIf="item.bookingStatus == 1" class="payment">
+            <button
+              (click)="pay(item.totalPrice, item.id)"
+              *ngIf="item.bookingStatus == 1"
+              class="payment"
+            >
               <i class="fa-solid fa-cart-shopping"></i>
             </button>
             <!-- <button (click)="deleteBooking(item.id)" *ngIf="item.bookingStatus !== 3" class="cancel">
               <i class="fa-solid fa-times cancel"></i>
             </button> -->
-            <button class="btn btn-danger" (click)="openConfirmationDialog(item.id)">
+            <button
+              class="btn btn-danger"
+              (click)="openConfirmationDialog(item.id)"
+            >
               <i class="fa-solid fa-trash cancel"></i> Delete
             </button>
           </td>
@@ -164,5 +185,3 @@
     ></app-confirmation-dialog>
   </div>
 </section>
-
-

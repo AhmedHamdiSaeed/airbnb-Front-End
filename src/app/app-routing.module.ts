@@ -27,6 +27,7 @@ import { CityControlComponent } from './Components/admin-dashbaord/city-control/
 import { CategoryControlComponent } from './Components/admin-dashbaord/category-control/category-control.component';
 import { CountryControlComponent } from './Components/admin-dashbaord/country-control/country-control.component';
 import { UserControlComponent } from './Components/admin-dashbaord/user-control/user-control.component';
+import { AdminProprtycontrolComponent } from './Components/admin-dashbaord/admin-proprtycontrol/admin-proprtycontrol.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -98,6 +99,10 @@ const routes: Routes = [
       {
         path: 'userControl',
         component: UserControlComponent,
+      },
+      {
+        path: 'adminPropControl',
+        component: AdminProprtycontrolComponent,
       },
     ],
   },

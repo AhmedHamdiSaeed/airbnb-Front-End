@@ -185,12 +185,28 @@ export class AddPropertyComponent implements OnInit {
       this.allCeties = result;
     });
   }
+  allCate: Categories[];
+
+  getAllCategory() {
+    this.propertyService.GetAllCategory().subscribe((result: Categories[]) => {
+      this.allCate = result;
+    });
+  }
 
   //Hooks
+  DeletePropertyByHoster(id) {
+    this.propertyControlService
+      .DeletePropertyByHoster(id)
+      .subscribe((result) => {
+        this.GetAllHosterProperties();
 
+        alert('Deleted Successfuly');
+      });
+  }
   ngOnInit(): void {
     this.CreateNewProperty();
     this.getAllCeties();
+    this.getAllCategory();
     this.GetAllHosterProperties();
     console.log(this.activeRouter.snapshot.url.toString());
   }

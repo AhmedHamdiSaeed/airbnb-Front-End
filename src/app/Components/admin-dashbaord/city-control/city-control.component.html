@@ -1,1 +1,35 @@
-<p>city-control works!</p>
+<div class="cartona">
+  <h2 style="text-align: center; margin-bottom: 1rem">{{ cityStatus }} City</h2>
+
+  <form
+    [formGroup]="CityDataForm"
+    (ngSubmit)="OnSubmit()"
+    class="property-form"
+  >
+    <div class="form-group">
+      <input type="text" formControlName="name" placeholder="Name" />
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="countryId" placeholder="Country Id" />
+    </div>
+    <div class="form-group">
+      <button type="submit">{{ cityStatus }}</button>
+    </div>
+  </form>
+</div>
+<section>
+  <div class="cartona">
+    <div class="box" *ngFor="let item of AllCities">
+      <ul>
+        <li>{{ item.name }}</li>
+        <li>{{ item.countryId }}</li>
+        <li>
+          <button class="update" (click)="selectToUpdate(item)">Update</button>
+        </li>
+        <li>
+          <button class="delete" (click)="DeleteCity(item.id)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

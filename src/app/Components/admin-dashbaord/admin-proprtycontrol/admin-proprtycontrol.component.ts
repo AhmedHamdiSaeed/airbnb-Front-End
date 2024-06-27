@@ -1,19 +1,18 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ProperiesService } from '../../Services/PropertyServices/properies.service';
-import { Property, RootProperty } from '../../Models/PropertyModels';
-import { Ceties } from '../../Models/CetiesModel';
-import { Categories } from '../../Models/CategoryModel';
-import { CategoryService } from '../../Services/CategoryServices/category.service';
-import { CategoryFielsModel } from '../../Models/Category';
+import { Property, RootProperty } from '../../../Models/PropertyModels';
+import { AdminService } from '../admin.service';
+import { cityModelGet } from '../../../Models/Amin/AdminModels';
+import { CategoryFielsModel } from '../../../Models/Category';
+import { Ceties } from '../../../Models/CetiesModel';
 
 @Component({
-  selector: 'app-properties',
-  templateUrl: './properties.component.html',
-  styleUrl: './properties.component.css',
+  selector: 'app-admin-proprtycontrol',
+  templateUrl: './admin-proprtycontrol.component.html',
+  styleUrl: './admin-proprtycontrol.component.css',
 })
-export class PropertiesComponent implements OnInit {
+export class AdminProprtycontrolComponent implements OnInit {
   ngOnInit(): void {
-    this.GetAllPropertyForAllUsers(
+    this.GetAllPropertyForAdmin(
       this.pageNumber,
       this.pageSize,
       this.cityId,
@@ -22,13 +21,10 @@ export class PropertiesComponent implements OnInit {
     this.GetAllCeties();
     this.GetAllCategories();
   }
-  /**
-   *
-   */
-  constructor(
-    private service: ProperiesService,
-    private cateService: CategoryService
-  ) {}
+
+  constructor(private adminService: AdminService) {}
+
+  // -------------------------- Get All Property Fo Admin
   pageNumber: number;
   pageSize: number = 8;
   cityId: number;
@@ -37,30 +33,45 @@ export class PropertiesComponent implements OnInit {
   properties: Property[];
 
   numberOfPages: number;
-  GetAllPropertyForAllUsers(pageNumber, pageSize, cityId, cateId) {
-    this.service
-      .GetAllPropertyForAllUsers(pageNumber, pageSize, cityId, cateId)
+  GetAllPropertyForAdmin(pageNumber, pageSize, cityId, cateId) {
+    this.adminService
+      .GetAllPropertyForAdmin(pageNumber, pageSize, cityId, cateId)
       .subscribe((result: RootProperty) => {
         this.properties = result.properties;
         this.Quantity = result.quantity;
-        this.numberOfPages = Math.ceil(this.Quantity / pageSize);
+        this.numberOfPages = Math.floor(this.Quantity / pageSize);
         if (this.numberOfPages == 0) this.numberOfPages = 1;
         console.log(this.numberOfPages);
         console.log(result);
       });
   }
-
+  UpdateProperty(id) {
+    this.adminService.UpdateProperty(id, { PropertStatus: 2 }).subscribe({
+      next: () => {
+        this.GetAllPropertyForAdmin(
+          this.pageNumber,
+          this.pageSize,
+          this.cityId,
+          this.cateId
+        );
+        alert('Updated Successfuly');
+      },
+      error: (err) => {
+        alert(err);
+      },
+    });
+  }
   // Get All Cities
   allCeties: Ceties[];
   GetAllCeties() {
-    this.service.GetAllCity().subscribe((result: Ceties[]) => {
+    this.adminService.GetAllCity().subscribe((result: Ceties[]) => {
       this.allCeties = result;
     });
   }
   selectCity(selectedId) {
     this.cityId = selectedId.target.value;
 
-    this.GetAllPropertyForAllUsers(
+    this.GetAllPropertyForAdmin(
       this.pageNumber,
       this.pageSize,
       selectedId.target.value,
@@ -70,8 +81,8 @@ export class PropertiesComponent implements OnInit {
   // Get All Categories
   allCategories: CategoryFielsModel[];
   GetAllCategories() {
-    this.cateService
-      .GetAllCategs()
+    this.adminService
+      .GetAllCategory()
       .subscribe((result: CategoryFielsModel[]) => {
         console.log(result);
         this.allCategories = result;
@@ -79,7 +90,7 @@ export class PropertiesComponent implements OnInit {
   }
   selectCategory(selectedId) {
     this.cateId = selectedId;
-    this.GetAllPropertyForAllUsers(
+    this.GetAllPropertyForAdmin(
       this.pageNumber,
       this.pageSize,
       this.cityId,
@@ -94,7 +105,7 @@ export class PropertiesComponent implements OnInit {
     this.cityId = null;
     this.cateId = null;
     this.searchInput.nativeElement.value = '';
-    this.GetAllPropertyForAllUsers(
+    this.GetAllPropertyForAdmin(
       this.pageNumber,
       this.pageSize,
       this.cityId,
@@ -109,7 +120,7 @@ export class PropertiesComponent implements OnInit {
   selectPageNumber(event) {
     this.pageNumber = parseInt(event.target.innerHTML);
 
-    this.GetAllPropertyForAllUsers(
+    this.GetAllPropertyForAdmin(
       this.pageNumber,
       this.pageSize,
       this.cityId,
@@ -123,7 +134,7 @@ export class PropertiesComponent implements OnInit {
         x.name.toLowerCase().startsWith(value.target.value)
       );
     } else {
-      this.GetAllPropertyForAllUsers(
+      this.GetAllPropertyForAdmin(
         this.pageNumber,
         this.pageSize,
         this.cityId,

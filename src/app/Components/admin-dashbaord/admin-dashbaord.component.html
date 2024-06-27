@@ -1,2 +1,44 @@
-<p>admin-dashbaord works!</p>
-<router-outlet></router-outlet>
+<div class="cartona">
+  <div class="navigator">
+    <ul>
+      <li
+        routerLink="adminPropControl"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Properties
+      </li>
+      <li
+        routerLink="cityControl"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        City
+      </li>
+      <li
+        routerLink="categoryControl"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Category
+      </li>
+      <li
+        routerLink="countryControl"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Country
+      </li>
+      <!-- <li
+        routerLink="userControl"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Users
+      </li> -->
+    </ul>
+  </div>
+  <div class="content">
+    <router-outlet> </router-outlet>
+  </div>
+</div>
