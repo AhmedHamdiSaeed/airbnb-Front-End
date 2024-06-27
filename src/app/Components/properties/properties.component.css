@@ -56,10 +56,10 @@ section {
 }
 
 .img-size {
-  width: 240px; 
-  height: 200px; 
+  width: 240px;
+  height: 200px;
   vertical-align: middle;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 /* --------------------- filtration ----------------- */
@@ -202,53 +202,6 @@ section.filtration {
   background-color: var(--secound-color);
 }
 /* End paggination-buttons  */
-@media (min-width: 768px) {
-  .property .container {
-    width: 100%;
-  }
-  .filtration .cartona .sameStyleFilter {
-    padding: 0.5rem 0.9rem;
-    width: 100%;
-  }
-  .paggination-buttons {
-    width: 100%;
-  }
-}
-@media (max-width: 768px) {
-  .filtration .cartona {
-    flex-flow: column;
-    width: 100%;
-  }
-  .filtration .cartona .sameStyleFilter {
-    width: 100%;
-  }
-  .paggination-buttons {
-    width: 100%;
-  }
-}
-@media (min-width: 992px) {
-  .property .container {
-    width: 960px;
-  }
-  .filtration .cartona {
-    width: 960px;
-  }
-  .paggination-buttons {
-    width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .property .container {
-    width: 1140px;
-  }
-  .filtration .cartona {
-    width: 1140px;
-  }
-  .paggination-buttons {
-    width: 1140px;
-  }
-}
 
 /* ------------------  -------------------------- category*/
 .category-nav-container {
@@ -309,4 +262,65 @@ section.filtration {
 }
 .scroll-btn.end {
   background-color: red;
+}
+.property .contain .box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column;
+  gap: 0.4rem;
+}
+@media (min-width: 768px) {
+  .property .container {
+    width: 100%;
+  }
+
+  .filtration .cartona .sameStyleFilter {
+    padding: 0.5rem 0.9rem;
+    width: 100%;
+  }
+  .paggination-buttons {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .filtration .cartona {
+    flex-flow: column;
+    width: 100%;
+  }
+  .property .contain .box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+  }
+  .filtration .cartona .sameStyleFilter {
+    width: 100%;
+  }
+  .paggination-buttons {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .property .container {
+    width: 960px;
+  }
+  .filtration .cartona {
+    width: 960px;
+  }
+  .paggination-buttons {
+    width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .property .container {
+    width: 1140px;
+  }
+  .filtration .cartona {
+    width: 1140px;
+  }
+  .paggination-buttons {
+    width: 1140px;
+  }
 }
