@@ -43,5 +43,16 @@ export class HosterPropertyComponent implements OnInit {
       });
   }
 
-  // ---------------------- Check If THERE bOOKING
+  // ---------------------- Delete Property
+  DeletePropertyByHoster(id: number) {
+    this.propertyControlService.DeletePropertyByHoster(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.GetAllHosterProperties();
+      },
+      error: (err) => {
+        this.GetAllHosterProperties();
+      },
+    });
+  }
 }

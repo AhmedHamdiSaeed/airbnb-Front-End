@@ -48,6 +48,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 import { AdminProprtycontrolComponent } from './Components/admin-dashbaord/admin-proprtycontrol/admin-proprtycontrol.component';
+import { NoAuthGuard } from './Guard/noauth.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -114,6 +115,7 @@ export function tokenGetter() {
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    NoAuthGuard,
   ],
   bootstrap: [AppComponent],
 })

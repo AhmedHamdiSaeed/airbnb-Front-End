@@ -43,6 +43,7 @@ export class HosterBookingDetailsComponent implements OnInit {
         .UpdateBooking(bookingId, { bookingStatus: 2 })
         .subscribe({
           next: () => {
+            this.GetPropertyBookingDetails(bookingId);
             alert('Booking Confirmed');
           },
           error: (err) => {
@@ -55,6 +56,7 @@ export class HosterBookingDetailsComponent implements OnInit {
         .UpdateBooking(bookingId, { bookingStatus: 3 })
         .subscribe({
           next: () => {
+            this.GetPropertyBookingDetails(bookingId);
             alert('Booking Cnaceld');
           },
           error: (err) => {

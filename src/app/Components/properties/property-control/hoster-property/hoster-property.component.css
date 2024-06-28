@@ -36,6 +36,10 @@
   flex: 10;
 }
 .cartona .boxContainer .box ul li {
+  flex: 3;
+}
+.cartona .boxContainer .box ul li.btn {
+  flex: 1;
 }
 .cartona .boxContainer .box ul li button {
   padding: 0.6rem 1.2rem;
@@ -48,7 +52,7 @@
   background-color: green;
   color: white;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .cartona {
     width: 100%;
   }
@@ -75,6 +79,14 @@
   }
 
   .cartona .boxContainer .box ul {
+    width: 100%;
+    flex-flow: column;
+  }
+  .cartona .boxContainer .box ul li {
+    width: 100%;
+    text-align: center;
+  }
+  .cartona .boxContainer .box ul li button {
     width: 100%;
   }
 }

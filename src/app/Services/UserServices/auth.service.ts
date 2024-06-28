@@ -41,8 +41,7 @@ export class AuthService {
     }
     return null;
   }
-  
-     
+
   public getUserEmail(): string | null {
     const claims = this.getUserClaims();
     if (claims) {

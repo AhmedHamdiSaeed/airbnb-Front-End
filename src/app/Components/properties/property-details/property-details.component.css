@@ -26,8 +26,18 @@ h6 {
 .PropertiesImages .cartona .img:first-of-type {
   grid-row: span 2;
   grid-column: span 2;
+  overflow: hidden;
+  max-height: 376px;
 }
+.PropertiesImages .cartona .img:not(:first-of-type) {
+  max-height: 180px;
+  overflow: hidden;
+}
+.PropertiesImages .cartona .img img {
+  position: relative;
 
+  vertical-align: top;
+}
 /* ---------------------------------------- */
 .devide .cartona {
   align-items: flex-start;

@@ -10,7 +10,7 @@
           <li>{{ item.id }}</li>
           <li>{{ item.name }}</li>
           <li>{{ item.description }}</li>
-          <li>
+          <li class="btn">
             <button
               class="update"
               routerLink="/propertyControl/updateProperty"
@@ -19,7 +19,7 @@
               Update
             </button>
           </li>
-          <li>
+          <li class="btn">
             <button
               class="Booking"
               [routerLink]="['/hosterBookingDetails', item.id]"
@@ -27,7 +27,11 @@
               Booking
             </button>
           </li>
-          <li><button class="delete">Delete</button></li>
+          <li class="btn">
+            <button class="delete" (click)="DeletePropertyByHoster(item.id)">
+              Delete
+            </button>
+          </li>
         </ul>
       </div>
     </div>

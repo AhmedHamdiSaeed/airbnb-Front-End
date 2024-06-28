@@ -30,6 +30,7 @@ export interface getPropertyBookingDetailsModel {
   userAge: number;
   userImage: string;
   userPhone: any;
+  status: number;
 }
 export interface getBookingUserDetailsModel {
   id: number;

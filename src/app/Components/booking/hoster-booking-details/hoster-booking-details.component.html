@@ -1,4 +1,4 @@
-<section *ngIf="bookingDetails && bookingDetails.length > 0">
+<section class="cartona" *ngIf="bookingDetails && bookingDetails.length > 0">
   <div class="booking-card" *ngFor="let bookingDetailsitem of bookingDetails">
     <div class="user-info">
       <img
@@ -33,7 +33,7 @@
       </p>
       <p>Total Price: {{ bookingDetailsitem.totalPrice }}</p>
     </div>
-    <div class="btns">
+    <div class="btns" *ngIf="bookingDetailsitem.status == 0">
       <button
         (click)="UpdateBooking('waitForPayment', bookingDetailsitem.id)"
         class="waitForPayment"
@@ -46,6 +46,15 @@
       >
         Cancel
       </button>
+    </div>
+    <div class="btns" *ngIf="bookingDetailsitem.status == 1">
+      <button disabled class="waitForPayment">Wating For Payment</button>
+    </div>
+    <div class="btns" *ngIf="bookingDetailsitem.status == 2">
+      <button disabled class="confirm">Confirmed</button>
+    </div>
+    <div class="btns" *ngIf="bookingDetailsitem.status == 3">
+      <button disabled class="cancel">Canceled</button>
     </div>
   </div>
 </section>

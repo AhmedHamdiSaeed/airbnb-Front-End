@@ -28,12 +28,17 @@ import { CategoryControlComponent } from './Components/admin-dashbaord/category-
 import { CountryControlComponent } from './Components/admin-dashbaord/country-control/country-control.component';
 import { UserControlComponent } from './Components/admin-dashbaord/user-control/user-control.component';
 import { AdminProprtycontrolComponent } from './Components/admin-dashbaord/admin-proprtycontrol/admin-proprtycontrol.component';
+import { NoAuthGuard } from './Guard/noauth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'signin', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'userprofile', component: UserprofileComponent },
+  { path: 'signin', component: LoginComponent, canActivate: [NoAuthGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [NoAuthGuard] },
+  {
+    path: 'userprofile',
+    component: UserprofileComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'home', component: HomeComponent },
   { path: 'property', component: PropertiesComponent },
   { path: 'hosterPropereties', component: HosterPropertyComponent },
