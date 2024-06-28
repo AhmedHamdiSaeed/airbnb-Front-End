@@ -41,7 +41,12 @@ const routes: Routes = [
   },
   { path: 'home', component: HomeComponent },
   { path: 'property', component: PropertiesComponent },
-  { path: 'hosterPropereties', component: HosterPropertyComponent },
+  {
+    path: 'hosterPropereties',
+    component: HosterPropertyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Host'] },
+  },
   { path: 'addProperty', component: AddPropertyComponent },
   { path: 'profile', component: UserprofileComponent },
   {

@@ -1,5 +1,5 @@
 .property-form {
-  width: 80%;
+  width: 100%;
   padding: 2rem;
   border-radius: 4px;
   border: 2px solid #2b34991a;
@@ -36,7 +36,9 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  width: 50%;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 2px solid var(--secound-color);
   margin: 0 auto;
 }
 .cartona .box .img {

@@ -36,7 +36,7 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
 }
 .cartona .box .img {
@@ -47,6 +47,9 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 2px solid var(--secound-color);
 }
 .cartona .box ul li {
   flex: 1;

@@ -35,9 +35,11 @@ select {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  width: 50%;
   margin: 0 auto;
+
+  width: 70%;
+  padding: 1rem;
+  border-bottom: 2px solid var(--secound-color);
 }
 .cartona .box .img {
   width: 80px;
@@ -46,7 +48,10 @@ select {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 auto;
   gap: 1rem;
+
+  width: 100%;
 }
 .cartona .box ul li button {
   padding: 0.6rem 1.2rem;

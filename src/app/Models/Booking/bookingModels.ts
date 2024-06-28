@@ -47,3 +47,8 @@ export interface PaymentBookingModel {
   clientSecret: string;
   paymentIntentId: string;
 }
+export interface AddReviewModel {
+  rating: string;
+  propertyId: string;
+  comment: string;
+}

@@ -251,8 +251,59 @@ td button:hover i {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-  display: flex;
+
   justify-content: center;
   align-items: center;
   z-index: 999; /* Ensure it appears above other content */
+}
+.popUp {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.popUp .content {
+  width: 450px;
+  height: 300px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  overflow: hidden;
+}
+.popUp .content p {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+.popUp .content input {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: block;
+}
+.popUp .content textarea {
+  width: 100%;
+  padding: 1rem;
+}
+.popUp .content input[type="submit"] {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.popUp.active {
+  display: flex;
+}
+.close {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
 }

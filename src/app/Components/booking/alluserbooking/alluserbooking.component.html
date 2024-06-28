@@ -169,6 +169,12 @@
             >
               <i class="fa-solid fa-trash cancel"></i> Delete
             </button>
+            <button
+              *ngIf="item.bookingStatus == 2"
+              (click)="ShowPopUp(item.id, item.propertyId)"
+            >
+              <i class="fa-solid fa-comments"></i>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -185,3 +191,23 @@
     ></app-confirmation-dialog>
   </div>
 </section>
+<div class="popUp" [ngClass]="{ active: popUpStatus }">
+  <h1 class="close" (click)="popUpStatus = false">
+    <i class="fa-solid fa-xmark"></i>
+  </h1>
+  <div class="content">
+    <p>Rate From 1 To 10</p>
+    <input type="range" #rating1 max="10" />
+    <textarea #comment></textarea>
+    <input
+      type="submit"
+      (click)="
+        AddReview(itemId, {
+          rating: rating1.value,
+          propertyId: propId,
+          comment: comment.value
+        })
+      "
+    />
+  </div>
+</div>

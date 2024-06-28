@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, map } from 'rxjs';
 
 import {
+  AddReviewModel,
   PaymentBookingModel,
   addBookingModel,
   updateBookingModel,
@@ -116,5 +117,10 @@ export class BookingService {
 
   deleteBooking(bookingId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}DeleteBooking/${bookingId}`);
+  }
+
+  // ------------------------------------------ Add Review
+  AddReview(id: number, Obj: AddReviewModel) {
+    return this.http.post(`${this.baseUrl2}Review/AddReview?id=${id}`, Obj);
   }
 }

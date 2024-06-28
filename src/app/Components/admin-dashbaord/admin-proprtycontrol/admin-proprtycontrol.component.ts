@@ -4,6 +4,7 @@ import { AdminService } from '../admin.service';
 import { cityModelGet } from '../../../Models/Amin/AdminModels';
 import { CategoryFielsModel } from '../../../Models/Category';
 import { Ceties } from '../../../Models/CetiesModel';
+import { PropControlService } from '../../properties/property-control/prop-control.service';
 
 @Component({
   selector: 'app-admin-proprtycontrol',
@@ -22,7 +23,10 @@ export class AdminProprtycontrolComponent implements OnInit {
     this.GetAllCategories();
   }
 
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService,
+    private propertyControlService: PropControlService
+  ) {}
 
   // -------------------------- Get All Property Fo Admin
   pageNumber: number;
@@ -39,7 +43,7 @@ export class AdminProprtycontrolComponent implements OnInit {
       .subscribe((result: RootProperty) => {
         this.properties = result.properties;
         this.Quantity = result.quantity;
-        this.numberOfPages = Math.floor(this.Quantity / pageSize);
+        this.numberOfPages = Math.ceil(this.Quantity / pageSize);
         if (this.numberOfPages == 0) this.numberOfPages = 1;
         console.log(this.numberOfPages);
         console.log(result);
@@ -157,5 +161,28 @@ export class AdminProprtycontrolComponent implements OnInit {
   ifEnd: boolean = false;
   scrollRight(): void {
     this.categoryNav.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
+  }
+
+  // ---------------------
+  DeletePropertyByAdmin(id: number) {
+    this.propertyControlService.DeletePropertyByHoster(id).subscribe({
+      next: (response) => {
+        alert('Property Canceld');
+        this.GetAllPropertyForAdmin(
+          this.pageNumber,
+          this.pageSize,
+          this.cityId,
+          this.cateId
+        );
+      },
+      error: (err) => {
+        this.GetAllPropertyForAdmin(
+          this.pageNumber,
+          this.pageSize,
+          this.cityId,
+          this.cateId
+        );
+      },
+    });
   }
 }

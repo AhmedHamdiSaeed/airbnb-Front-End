@@ -31,24 +31,19 @@ select {
   margin-bottom: 0;
 }
 
-.cartona .box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 50%;
-  margin: 0 auto;
-}
-.cartona .box .img {
-  width: 80px;
-}
 .cartona .box ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  padding: 1rem;
+  border-bottom: 2px solid var(--secound-color);
+  margin: 0 auto;
+  width: 80%;
 }
+
 .cartona .box ul li {
+  margin-bottom: 1rem;
   flex: 1;
   text-align: center;
 }

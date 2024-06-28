@@ -75,9 +75,14 @@
           <h1>{{ item.name }}</h1>
           <p>{{ item.description }}</p>
         </div>
-        <button class="confirm" (click)="UpdateProperty(item.id)">
-          Confirm
-        </button>
+        <div class="btns">
+          <button class="confirm" (click)="UpdateProperty(item.id)">
+            Confirm
+          </button>
+          <button class="Cancel" (click)="DeletePropertyByAdmin(item.id)">
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   </div>

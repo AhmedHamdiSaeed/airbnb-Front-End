@@ -355,6 +355,8 @@ export class PropertyDetailsComponent implements OnInit {
       this.PropertyId = params['id'];
     });
     this.GetPropertyFullData(this.PropertyId);
+    this.UserRole = this.authService.getUserRole();
+    console.log(this.UserRole);
   }
 
   PropFullData: LastPropModel;
@@ -396,4 +398,5 @@ export class PropertyDetailsComponent implements OnInit {
       },
     });
   }
+  UserRole: string;
 }

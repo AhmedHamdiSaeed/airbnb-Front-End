@@ -311,8 +311,23 @@ section.filtration {
 .scroll-btn.end {
   background-color: red;
 }
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
 .confirm {
   background-color: green;
+  padding: 0.7rem 0;
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: white;
+}
+.Cancel {
+  background-color: red;
   padding: 0.7rem 0;
   display: block;
   width: 100%;

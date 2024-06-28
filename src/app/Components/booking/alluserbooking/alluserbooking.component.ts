@@ -7,7 +7,10 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { BookingService } from '../../../Services/BookingServices/booking.service';
-import { getAllBookingModel } from '../../../Models/Booking/bookingModels';
+import {
+  AddReviewModel,
+  getAllBookingModel,
+} from '../../../Models/Booking/bookingModels';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
@@ -176,5 +179,24 @@ export class AlluserbookingComponent implements OnInit, AfterViewInit {
       window.document.body.appendChild(s);
     }
   }
+
   // ----------------------------------------
+  AddReview(id: number, obj: AddReviewModel) {
+    this.bookingService.AddReview(id, obj).subscribe({
+      next: () => {
+        alert('Review Added Successfuly');
+      },
+      error: (err) => {
+        alert(err);
+      },
+    });
+  }
+  ItemId: number;
+  propId: string;
+  popUpStatus: boolean = false;
+  ShowPopUp(id, prid) {
+    this.popUpStatus = true;
+    this.itemId = id;
+    this.propId = prid;
+  }
 }

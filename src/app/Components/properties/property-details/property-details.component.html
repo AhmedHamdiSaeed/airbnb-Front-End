@@ -88,7 +88,9 @@
             </div>
             <p>Price Per Night: {{ item.pricePerNight }}</p>
             <p>Total Price: {{ item.totalProice }}</p>
-            <button (click)="AddBooking(item)">Book Now</button>
+            <button (click)="AddBooking(item)" [disabled]="UserRole != 'User'">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
