@@ -1,42 +1,54 @@
-<div class="booking-card" *ngIf="bookingDetails">
-  <div class="user-info">
-    <img [src]="bookingDetails.userImage" alt="User Image" class="user-image" />
-    <div class="user-details">
-      <h2>{{ bookingDetails.userName }}</h2>
-      <p>Phone: {{ bookingDetails.userPhone }}</p>
+<section *ngIf="bookingDetails && bookingDetails.length > 0">
+  <div class="booking-card" *ngFor="let bookingDetailsitem of bookingDetails">
+    <div class="user-info">
+      <img
+        [src]="bookingDetailsitem.userImage"
+        alt="User Image"
+        class="user-image"
+      />
+      <div class="user-details">
+        <h2>{{ bookingDetailsitem.userName }}</h2>
+        <p>Phone: {{ bookingDetailsitem.userPhone }}</p>
+      </div>
+    </div>
+    <div class="booking-info">
+      <h3>Property: {{ bookingDetailsitem.propertyName }}</h3>
+      <p>
+        Check-in Date:
+        {{
+          bookingDetailsitem.checkInDate.slice(
+            0,
+            bookingDetailsitem.checkInDate.indexOf("T")
+          )
+        }}
+      </p>
+      <p>
+        Check-out Date:
+        {{
+          bookingDetailsitem.checkOutDate.slice(
+            0,
+            bookingDetailsitem.checkOutDate.indexOf("T")
+          )
+        }}
+      </p>
+      <p>Total Price: {{ bookingDetailsitem.totalPrice }}</p>
+    </div>
+    <div class="btns">
+      <button
+        (click)="UpdateBooking('waitForPayment', bookingDetailsitem.id)"
+        class="waitForPayment"
+      >
+        Aprove To Payment
+      </button>
+      <button
+        (click)="UpdateBooking('cancel', bookingDetailsitem.id)"
+        class="cancel"
+      >
+        Cancel
+      </button>
     </div>
   </div>
-  <div class="booking-info">
-    <h3>Property: {{ bookingDetails.propertyName }}</h3>
-    <p>
-      Check-in Date:
-      {{
-        bookingDetails.checkInDate.slice(
-          0,
-          bookingDetails.checkInDate.indexOf("T")
-        )
-      }}
-    </p>
-    <p>
-      Check-out Date:
-      {{
-        bookingDetails.checkOutDate.slice(
-          0,
-          bookingDetails.checkOutDate.indexOf("T")
-        )
-      }}
-    </p>
-    <p>Total Price: {{ bookingDetails.totalPrice }}</p>
-  </div>
-  <div class="btns">
-    <button
-      (click)="UpdateBooking('waitForPayment', bookingDetails.id)"
-      class="waitForPayment"
-    >
-      Aprove To Payment
-    </button>
-    <button (click)="UpdateBooking('cancel', bookingDetails.id)" class="cancel">
-      Cancel
-    </button>
-  </div>
-</div>
+</section>
+<section *ngIf="bookingDetails && bookingDetails.length == 0">
+  <h1>No Booking</h1>
+</section>

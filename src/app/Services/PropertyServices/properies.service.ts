@@ -50,4 +50,12 @@ export class ProperiesService {
   GetAllCategory() {
     return this.http.get(`${this.baseUrl}Categories/GetAll`);
   }
+  UpdateAppoinmentAvailable(id) {
+    return this.http.put(
+      `${this.baseUrl}AppointmentAvailable/UpdateAppoinmentAvail/${id}`,
+      {
+        isAvailable: false,
+      }
+    );
+  }
 }

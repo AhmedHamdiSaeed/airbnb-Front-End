@@ -27,18 +27,24 @@ export class BookingService {
   // ---------------------------------------------------------
 
   adddBooking(userId: string, bookingDto: BookingAddDto): Observable<number> {
-    const url = `${this.baseUrl2}Booking/AdddBooking`; 
+    const url = `${this.baseUrl2}Booking/AdddBooking`;
 
     return this.http.post<number>(url, { userId, ...bookingDto });
   }
 
-  updateAvailability(propertyId: number, updateDto: AvailabilityUpdateDto): Observable<AvailabilityUpdateDto> {
+  updateAvailability(
+    propertyId: number,
+    updateDto: AvailabilityUpdateDto
+  ): Observable<AvailabilityUpdateDto> {
     const dtoToSend = {
       ...updateDto,
       From: updateDto.From.toISOString(), // Convert Date to ISO string
-      To: updateDto.To.toISOString() // Convert Date to ISO string
+      To: updateDto.To.toISOString(), // Convert Date to ISO string
     };
-    return this.http.put<AvailabilityUpdateDto>(`${this.baseUrl2}AppointmentAvailable/UpdateAppoinmentAvail/${propertyId}`, dtoToSend);
+    return this.http.put<AvailabilityUpdateDto>(
+      `${this.baseUrl2}AppointmentAvailable/UpdateAppoinmentAvail/${propertyId}`,
+      dtoToSend
+    );
   }
   // --------------------------------------- GetAllBookingForProperty
   GetAllBookingForProperty(propertyId: number) {
@@ -91,7 +97,7 @@ export class BookingService {
   }
   // --------------------------------------- AddBooking
   AddBooking(booking: addBookingModel) {
-    return this.http.post(`${this.baseUrl}Booking/AddBooking`, { booking }).pipe(
+    return this.http.post(`${this.baseUrl}AddBooking`, booking).pipe(
       map((result) => {
         return result;
       })

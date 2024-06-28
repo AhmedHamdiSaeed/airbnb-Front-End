@@ -21,6 +21,14 @@ import { ProfileservicesService } from '../../../Services/UserServices/profilese
 import { BookingService } from '../../../Services/BookingServices/booking.service';
 import { switchMap } from 'rxjs';
 import { AppStarRatingDirective } from './AppStarRatingDirective';
+import {
+  LastAmentityModel,
+  LastAppoinmentAvaiableModel,
+  LastImageUrlModel,
+  LastPropModel,
+  LastReviewModel,
+} from './DetailsPropModelData';
+import { addBookingModel } from '../../../Models/Booking/bookingModels';
 
 @Component({
   selector: 'app-property-details',
@@ -38,6 +46,9 @@ export class PropertyDetailsComponent implements OnInit {
     private authService: AuthService,
     private bookingService: BookingService
   ) {}
+
+  /* Old Code
+
 
   dataDetails: RootDetails;
   IdNumber: number;
@@ -66,7 +77,7 @@ export class PropertyDetailsComponent implements OnInit {
   };
   canReview: boolean = false;
   userImageUrl: string; // Property to hold user image URL
-  propertyIsAvalable: boolean = false;
+  propertyIsAvalable: boolean = true;
   bookings: BookingGetDetailsUserDtos[] = [];
   minDateString: string = this.minDate.toISOString().split('T')[0];
 
@@ -336,5 +347,53 @@ export class PropertyDetailsComponent implements OnInit {
     } else {
       this.router.navigate(['/signin']);
     }
+  }
+  */
+  PropertyId: number;
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.PropertyId = params['id'];
+    });
+    this.GetPropertyFullData(this.PropertyId);
+  }
+
+  PropFullData: LastPropModel;
+  PropImgsUrl: LastImageUrlModel[];
+  PropAmentity: LastAmentityModel[];
+  PropAppoinmentAvailable: LastAppoinmentAvaiableModel[];
+  PropReviews: LastReviewModel[];
+
+  GetPropertyFullData(id: number) {
+    this.service
+      .GetPropertyDetailsById(id)
+      .subscribe((result: LastPropModel) => {
+        this.PropFullData = result;
+        this.PropImgsUrl = result.imageUrl;
+        this.PropAmentity = result.amentities;
+        this.PropAppoinmentAvailable = result.appoinmentAvaiable;
+        this.PropReviews = result.reviews;
+        console.log(this.PropFullData);
+      });
+  }
+  updateAppoinmentAv(id) {
+    this.service.UpdateAppoinmentAvailable(id).subscribe({
+      next: () => {
+        this.GetPropertyFullData(this.PropertyId);
+      },
+      error: (err) => {
+        alert('Error ' + err);
+      },
+    });
+  }
+  AddBooking(booking: addBookingModel) {
+    this.bookingService.AddBooking(booking).subscribe({
+      next: () => {
+        alert('Add Booking Successfuly');
+        this.updateAppoinmentAv(booking.id);
+      },
+      error: (err) => {
+        alert('Error In Add New Booking' + err);
+      },
+    });
   }
 }

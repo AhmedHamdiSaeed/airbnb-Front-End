@@ -1,347 +1,112 @@
-<div *ngIf="dataDetails" class="container">
-  <div class="row">
-    <h1 class="col-sm-12">{{ dataDetails.name }}</h1>
-    <div>
-      <i
-        class="fas fa-star star"
-        style="display: inline; font-size: 1.1rem"
-      ></i>
-      <p
-        *ngIf="dataDetails.ratingOverroll === 0.0; else topNotZero"
-        class="fs-6 colo-sm-12"
-        style="display: inline"
-      >
-        N/A | <a>No reviews yet</a> | {{ dataDetails.cityName }},
-        {{ dataDetails.adress }}
-      </p>
-      <ng-template #topNotZero>
-        <p class="fs-6 colo-sm-12" style="display: inline">
-          {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
-          <a>{{ dataDetails.numOfReview }} Reviews</a> |
-          {{ dataDetails.cityName }}, {{ dataDetails.adress }},
-        </p>
-      </ng-template>
-    </div>
+<section *ngIf="PropFullData">
+  <div class="cartona">
+    <h2 class="head">
+      Residence in the {{ PropFullData.name }} of its owner,
+      {{ PropFullData.userName }}
+    </h2>
   </div>
-
-  <div class="row mt-3">
-    <div class="col" *ngFor="let i of dataDetails.imageUrl">
-      <div class="d-flex justify-content-center flex-wrap m-2">
-        <img
-          [src]="i.imageUrl"
-          class="rounded"
-          style="height: 15rem; width: 25rem"
-        />
+  <!-- ------------------------------------------------------------------- -->
+  <section class="PropertiesImages">
+    <div class="cartona">
+      <div class="img" *ngFor="let item of PropImgsUrl">
+        <img [src]="item.imageUrl" alt="" />
       </div>
     </div>
-  </div>
-  <hr />
+  </section>
+  <!-- ------------------------------------------------------------------- -->
+  <section class="devide">
+    <div class="cartona flex">
+      <!--  -->
 
-  <div class="row">
-    <div class="col-lg-8 colo-sm-12">
-      <div class="row mb-4">
-        <div class="colo-sm-12 mb-3 d-flex justify-content-between">
-          <div>
-            <h1>Hosted by: {{ dataDetails.userName }}</h1>
-            <p class="fs-6" style="display: inline">
-              Maximum of {{ dataDetails.numberOfGuest }} Guests |
-              {{ dataDetails.numberOfBedrooms }} BedRooms |
-              {{ dataDetails.numberOfBathrooms }} BathRooms
-            </p>
-          </div>
-          <img
-            src="{{ dataDetails.userImage }}"
-            class="rounded-circle"
-            style="height: 4rem; width: 4rem"
-          />
+      <!--  -->
+      <div class="mainData">
+        <!-- ------------------ -->
+        <div class="PropertyData padding">
+          <h3>
+            <strong
+              >{{ PropFullData.cityName }}, {{ PropFullData.adress }}</strong
+            >, {{ PropFullData.categoryName }}
+          </h3>
+          <span>{{ PropFullData.numberOfGuest }} Guest Number</span>
+          <span>{{ PropFullData.numberOfBathrooms }} Bathrooms,</span> &nbsp;
+          <span>{{ PropFullData.numberOfBedrooms }} Bedrooms, </span>&nbsp;
+          <span>{{ PropFullData.beds }} Beds, </span>&nbsp;
         </div>
-        <hr />
-      </div>
-
-      <div class="row">
-        <div class="col-11">
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-user-circle fs-2 me-2"></i>
-            <div>
-              <h4 class="fw-bold mb-0">
-                {{ dataDetails.userName }} is a Superhost
-              </h4>
-              <p class="ms-2 mb-0">
-                Superhosts are experienced, highly rated hosts who are committed
-                to providing great stays for guests.
-              </p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-map-marker-alt fs-2 me-2"></i>
-            <div>
-              <h4 class="fw-bold mb-0">Great location</h4>
-              <p class="ms-2 mb-0">
-                100% of recent guests gave the location a 5-star rating.
-              </p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="fas fa-key fs-2 me-2"></i>
-            <div>
-              <h4 class="fw-bold mb-0">Great check-in experience</h4>
-              <p class="ms-2 mb-0">
-                100% of recent guests gave the check-in process a 5-star rating.
-              </p>
-            </div>
+        <!-- ------------------ -->
+        <div class="UserInfo flex padding">
+          <div class="img"><img [src]="PropFullData.userImage" alt="" /></div>
+          <h3>Hoster: {{ PropFullData.userName }}</h3>
+        </div>
+        <!-- ------------------ -->
+        <div class="amentities padding">
+          <h2>Amenteties</h2>
+          <div class="box" *ngFor="let item of PropAmentity">
+            <h3>
+              <strong>{{ item.name }}</strong>
+            </h3>
+            <p>{{ item.description }}</p>
           </div>
         </div>
-      </div>
-      <hr />
-      <div>
-        <h1 class="fs-2"><span style="color: red">air</span>cover</h1>
-        <p>
-          Every booking includes free protection from Host cancellations,
-          listing inaccuracies, and other issues like trouble checking in.
-        </p>
-      </div>
-      <hr />
-      <div>
-        <p class="fs-6">
-          Westin Kaanapali Ocean Resort Villas North timeshare - Pay resort:
-          $14-20/day, stays under 7 night $38/res - Inquire about availability,
-          I review then offer/approve if available :) - READ "The Space" for
-          cleaning/etc AND brief explanation about timeshare reservations - Want
-          guaranteed view for additional cost? Must be weekly rental, other
-          restrictions - Wheelchair accessible / ADA, call resort directly to
-          ensure U receive. If U need ADA U MUST inform us BEFORE booking.
-        </p>
-      </div>
-      <hr />
-
-      <h2 class="fw-bold">What this place offers</h2>
-      <div *ngFor="let a of dataDetails.amentities">
-        <p style="display: inline" class="fs-3">{{ a.name }}</p>
-      </div>
-      <div class=""></div>
-      <hr />
-      <div>
-        <i class="fas fa-star fs-5 star"></i>
-        <p
-          *ngIf="dataDetails.ratingOverroll === 0.0; else notZero"
-          class="fs-5"
-          style="display: inline"
-        >
-          N/A | No reviews yet
-        </p>
-        <ng-template #notZero>
-          <p class="fs-5" style="display: inline">
-            {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
-            {{ dataDetails.numOfReview }} Reviews
-          </p>
-        </ng-template>
-      </div>
-      <div class="row d-flex justify-content-start flex-wrap">
-        <div class="col-6 mt-3" *ngFor="let review of dataDetails.reviews">
-          <div class="row">
-            <div class="col-3">
-              <img
-                [src]="review.userimage"
-                class="rounded-circle"
-                style="height: 3rem; width: 3rem"
-              />
-            </div>
-            <div class="col-6">
-              <h3 class="fw-bold" style="display: inline">
-                {{ review.userName }}
-              </h3>
-              <h1 class="star" [appStarRating]="review.rate"></h1>
-            </div>
-          </div>
-          <div class="row">
-            <p>{{ review.reviewComment }}</p>
-          </div>
+        <!-- ------------------ -->
+        <div class="description padding">
+          <h2>Description</h2>
+          <p>{{ PropFullData.description }}</p>
         </div>
-      </div>
+        <!-- ------------------ -->
+        <div class="Rules padding">
+          <h2>Home Rules</h2>
 
-      <!-- Review Form -->
-      <div class="review-form-container" *ngIf="hasReview; else nothasReview">
-        <form (ngSubmit)="submitReview()">
-          <label for="rating">Rating:</label>
-          <input
-            id="rating"
-            type="number"
-            [(ngModel)]="review.rating"
-            name="rating"
-            min="1"
-            max="5"
-            required
-          />
-
-          <label for="comment">Comment:</label>
-          <textarea
-            id="comment"
-            [(ngModel)]="review.comment"
-            name="comment"
-            required
-          ></textarea>
-
-          <button type="submit">Submit Review</button>
-        </form>
-      </div>
-
-      <ng-template #nothasReview>
-        <!-- <div class="not-eligible-message">
-    <p>You are not eligible to add a review for this property.</p>
-  </div> -->
-      </ng-template>
-    </div>
-
-    <div class="col-lg-4 col-sm-12 pop">
-      <div
-        *ngIf="propertyIsAvalable; else notAvalable"
-        class="col-lg-10 col-sm-12 pop mx-auto"
-        style="
-          position: sticky;
-          top: 6rem;
-          border: lightgray solid 1px;
-          border-radius: 5px;
-          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2),
-            0 6px 20px 0 rgba(0, 0, 0, 0.2);
-          margin-top: 2rem;
-          padding: 2rem;
-          background-color: #fff;
-        "
-      >
-        <div class="row">
-          <div class="d-flex justify-content-between align-items-center w-400">
-            <h2 style="margin: 0">
-              ${{ dataDetails.appoinmentAvaiable[0]?.pricePerNight }}
-              <span style="font-size: small">per night</span>
-            </h2>
-            <div>
-              <i class="fas fa-star fs-5 mt-2 star"></i>
-              <p
-                *ngIf="dataDetails.ratingOverroll === 0.0; else reserveNotZero"
-                class="fs-6 mt-2 d-inline"
-              >
-                N/A | <a>No reviews yet</a>
-              </p>
-              <ng-template #reserveNotZero>
-                <p class="fs-6 mt-2 d-inline">
-                  {{ dataDetails.ratingOverroll | number : "1.1-1" }} |
-                  {{ dataDetails.numOfReview }} Reviews
-                </p>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-3">
-          <div class="col-md-6 position-relative">
-            <input
-              id="checkInDate"
-              type="text"
-              class="form-control date-input"
-              placeholder="Check-In"
-              onfocus="(this.type='date')"
-              onblur="(this.type='text')"
-              [min]="minCheckInDate"
-              [max]="maxCheckInDate"
-              (change)="onCheckInDateChange($event)"
-              [(ngModel)]="startDateString"
-            /><i
-              class="fas fa-calendar-alt date-icon"
-              (click)="openDatePicker('checkOutDate')"
-            ></i>
-          </div>
-          <div class="col-md-6 position-relative">
-            <input
-              id="checkOutDate"
-              type="text"
-              class="form-control date-input"
-              placeholder="Check-Out "
-              onfocus="(this.type='date')"
-              onblur="(this.type='text')"
-              [min]="minCheckOutDate"
-              [max]="maxCheckOutDate"
-              (change)="onCheckOutDateChange($event)"
-              [(ngModel)]="endDateString"
-            /><i
-              class="fas fa-calendar-alt date-icon"
-              (click)="openDatePicker('checkOutDate')"
-            ></i>
-          </div>
-        </div>
-        <div class="row my-3">
-          <div
-            class="d-flex w-100 justify-content-center align-items-center"
-            style="border: 1px solid black; border-radius: 5px; padding: 5px"
-          >
-            <h4 class="me-auto mb-0">Guests</h4>
-            <button
-              class="btn btn-primary me-2"
-              [disabled]="isPDisabled"
-              (click)="plusButton()"
-            >
-              +
-            </button>
-            <h4 class="mb-0 numogguest">{{ numOfGuests }}</h4>
-            <button
-              class="btn btn-primary ms-2"
-              [disabled]="isMDisabled"
-              (click)="minusButton()"
-            >
-              -
-            </button>
-          </div>
-        </div>
-        <div class="row d-flex justify-content-center" style="margin-top: 1rem">
-          <button class="btn btn-color" (click)="bookProperty()">
-            Reserve
-          </button>
-        </div>
-        <div class="row">
-          <h6 class="m-2">You won't be charged yet.</h6>
+          <p>- Arrive Time {{ PropFullData.checkIn }}</p>
+          <p>- Check out {{ PropFullData.checkOut }}</p>
+          <p>- {{ PropFullData.numberOfGuest }} A Maximum</p>
+          <p>- Pets: {{ PropFullData.pets ? "Allow" : "Not Allow" }}</p>
           <p>
-            Price shown is the total trip price, including additional fees and
-            taxes.
+            - Take Photos: {{ PropFullData.takePhotos ? "Allow" : "Not Allow" }}
           </p>
-          <hr class="m-2" />
         </div>
-        <div class="row">
-          <div class="d-flex">
-            <h2 class="me-auto">Total</h2>
-            <h3>${{ totalPrice }}</h3>
+        <!-- ------------------ -->
+
+        <!-- ------------------ -->
+        <!-- ------------------ -->
+        <!-- ------------------ -->
+        <!-- ------------------ -->
+      </div>
+      <!-- AppoinmentAvailable -->
+      <div class="AppoinmentAvailable padding">
+        <div class="box" *ngFor="let item of PropFullData.appoinmentAvaiable">
+          <div class="condition" *ngIf="item.isAvailable">
+            <div class="date">
+              <span
+                ><strong>From:</strong>
+                {{ item.from.slice(0, item.from.indexOf("T")) }}</span
+              >
+              <br />
+              <span
+                ><strong>To: </strong>
+                {{ item.to.slice(0, item.from.indexOf("T")) }}</span
+              >
+            </div>
+            <p>Price Per Night: {{ item.pricePerNight }}</p>
+            <p>Total Price: {{ item.totalProice }}</p>
+            <button (click)="AddBooking(item)">Book Now</button>
           </div>
         </div>
       </div>
-
-      <ng-template #notAvalable>
-        <div
-          class="col-lg-8 col-sm-12 pop"
-          style="
-            position: sticky;
-            top: 6rem;
-            left: 12rem;
-            border: lightgray solid 1px;
-            border-radius: 5px;
-            box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2),
-              0 6px 20px 0 rgba(0, 0, 0, 0.2);
-            margin-left: 4rem;
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: #fff;
-          "
-        >
-          <div class="row">
-            <div class="d-flex justify-content-center w-800">
-              <h2 class="text-center" style="margin: 0">Sold Out</h2>
-            </div>
-          </div>
-          <div
-            class="row d-flex justify-content-center"
-            style="margin-top: 1rem"
-          >
-            <button class="btn btn-gray" disabled>Request</button>
-          </div>
-        </div>
-      </ng-template>
     </div>
-  </div>
-</div>
+  </section>
+  <section>
+    <div class="cartona">
+      <div class="reviews padding flex">
+        <div class="box" *ngFor="let item of PropReviews">
+          <div class="userData flex">
+            <div class="img">
+              <img [src]="item.reviewUserImage" alt="" />
+            </div>
+            <p>{{ item.reviewUserName }}</p>
+          </div>
+          <div class="comment">{{ item.reviewComment }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

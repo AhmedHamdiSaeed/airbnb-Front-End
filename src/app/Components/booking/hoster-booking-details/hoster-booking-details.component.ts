@@ -27,11 +27,11 @@ export class HosterBookingDetailsComponent implements OnInit {
     this.GetPropertyBookingDetails(this.id);
   }
 
-  bookingDetails: getPropertyBookingDetailsModel;
+  bookingDetails: getPropertyBookingDetailsModel[];
   GetPropertyBookingDetails(id) {
     this.bookingServie
       .GetPropertyBookingDetails(id)
-      .subscribe((result: getPropertyBookingDetailsModel) => {
+      .subscribe((result: getPropertyBookingDetailsModel[]) => {
         this.bookingDetails = result;
         console.log(result);
       });
